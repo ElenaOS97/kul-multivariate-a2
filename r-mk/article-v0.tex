@@ -16,8 +16,8 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-  \setmainfont[]{cochineal}
-    \setsansfont[]{Linux Biolinum O}
+  \setmainfont[]{Arial}
+    \setsansfont[]{Quicksand}
               \fi
   % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -38,7 +38,8 @@
 \makeatother
     \usepackage{xcolor}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+%\urlstyle{same} % disable monospaced font for URLs
+\usepackage{url}
       \usepackage[margin=1in]{geometry}
                                           \setlength{\emergencystretch}{3em} % prevent overfull lines
       \providecommand{\tightlist}{%
@@ -161,7 +162,8 @@ Template},
                   urlcolor=blue,
                   linkcolor=magenta,
                   pdfborder={0 0 0}}
-                  \urlstyle{same}  % don't use monospace font for urls
+                  \usepackage{url}
+                  %\urlstyle{same}  % don't use monospace font for urls
 
 % Add an option for endnotes. -----
 
@@ -250,9 +252,18 @@ massa.}
 
 \vskip -8.5pt
 
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
 
  % removetitleabstract
 
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
 
 \setlength{\parindent}{16pt}
 \setlength{\parskip}{0pt}

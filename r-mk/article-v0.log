@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.29)  29 NOV 2020 15:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.29)  30 NOV 2020 00:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -14,14 +14,14 @@ Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
 o
 File: size11.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count171
-\c@section=\count172
-\c@subsection=\count173
-\c@subsubsection=\count174
-\c@paragraph=\count175
-\c@subparagraph=\count176
-\c@figure=\count177
-\c@table=\count178
+\c@part=\count175
+\c@section=\count176
+\c@subsection=\count177
+\c@subsubsection=\count178
+\c@paragraph=\count179
+\c@subparagraph=\count180
+\c@figure=\count181
+\c@table=\count182
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
@@ -100,13 +100,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 .sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count179
+\inf@bad=\count183
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count180
-\leftroot@=\count181
+\uproot@=\count184
+\leftroot@=\count185
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count182
-\DOTSCASE@=\count183
+\classnum@=\count186
+\DOTSCASE@=\count187
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -115,15 +115,15 @@ LaTeX Info: Redefining \cdots on input line 620.
 \big@size=\dimen141
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count184
-\c@MaxMatrixCols=\count185
+\macc@depth=\count188
+\c@MaxMatrixCols=\count189
 \dotsspace@=\muskip16
-\c@parentequation=\count186
-\dspbrk@lvl=\count187
+\c@parentequation=\count190
+\dspbrk@lvl=\count191
 \tag@help=\toks17
-\row@=\count188
-\column@=\count189
-\maxfields@=\count190
+\row@=\count192
+\column@=\count193
+\maxfields@=\count194
 \andhelp@=\toks18
 \eqnshift@=\dimen142
 \alignsep@=\dimen143
@@ -150,110 +150,158 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 ex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/u
-nicode-math.sty
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.s
+ty
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+))
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.
+sty
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
+)
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.
+sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upquot
+e.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/micr
+otype.sty
+Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyva
+l.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+\MT@toks=\toks24
+\MT@count=\count195
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen148
+LaTeX Info: Redefining \textmicrotypecontext on input line 1354.
+\MT@listname@count=\count196
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/micr
+otype-pdftex.def
+File: microtype-pdftex.def 2019/11/18 v2.7d Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 914.
+LaTeX Info: Redefining \lslig on input line 914.
+\MT@outer@space=\skip52
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/micr
+otype.cfg
+File: microtype.cfg 2019/11/18 v2.7d microtype main configuration file (RS)
+))
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.
+sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/c
+olor.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/p
+dftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geome
+try.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex
+.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count197
+\Gm@cntv=\count198
+\c@Gm@tempcnt=\count199
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks25
+)
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kantlipsum/kan
+tlipsum.sty
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3
 .sty
 Package: expl3 2020-10-27 L3 programming layer (loader) 
 
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3ba
-ckend-xetex.def
-File: l3backend-xetex.def 2020-09-24 L3 backend support: XeTeX
-\g__graphics_track_int=\count191
+ckend-pdftex.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count266
 \l__pdf_internal_box=\box49
-\g__pdf_backend_object_int=\count192
-\g__pdf_backend_annotation_int=\count193
 ))
-Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
-
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/u
-nicode-math-xetex.sty
-Package: unicode-math-xetex 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLa
-TeX
-
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xpa
 rse/xparse.sty
 Package: xparse 2020-10-27 L3 Experimental document command parser
 
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xpa
 rse/xparse-generic.tex))
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3k
-eys2e/l3keys2e.sty
-Package: l3keys2e 2020-10-27 LaTeX2e option processing using LaTeX3 keys
+Package: kantlipsum 2019/07/23 v0.8 Generate text in Kantian style
+\l__kgl_start_int=\count267
+\l__kgl_end_int=\count268
+
+Package kantlipsum Info: The package provides paragraphs 1 to 164. Values
+(kantlipsum)             outside this range will be ignored.
+
 )
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fonts
-pec.sty
-Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
-
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fonts
-pec-xetex.sty
-Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
-X
-\l__fontspec_script_int=\count194
-\l__fontspec_language_int=\count195
-\l__fontspec_strnum_int=\count196
-\l__fontspec_tmp_int=\count197
-\l__fontspec_tmpa_int=\count198
-\l__fontspec_tmpb_int=\count199
-\l__fontspec_tmpc_int=\count266
-\l__fontspec_em_int=\count267
-\l__fontspec_emdef_int=\count268
-\l__fontspec_strong_int=\count269
-\l__fontspec_strongdef_int=\count270
-\l__fontspec_tmpa_dim=\dimen148
-\l__fontspec_tmpb_dim=\dimen149
-\l__fontspec_tmpc_dim=\dimen150
-
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.s
-ty
-Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/abstract/abstr
+act.sty
+Package: abstract 2009/06/08 v1.2a configurable abstracts
+\abstitleskip=\skip53
+\absleftindent=\skip54
+\absrightindent=\skip55
+\absparindent=\skip56
+\absparsep=\skip57
 )
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fonts
-pec.cfg)))
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fix-cm.st
-y
-Package: fix-cm 2015/01/14 v1.1t fixes to LaTeX
 
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.de
-f
-File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
-))
-\g__um_fam_int=\count271
-\g__um_fonts_used_int=\count272
-\l__um_primecount_int=\count273
-\g__um_primekern_muskip=\muskip17
+! LaTeX Error: Missing \begin{document}.
 
-(c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/u
-nicode-math-table.tex)))
-
-! Package fontspec Error: The font "cochineal" cannot be found.
-
-For immediate help type H <return>.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.20     \setsansfont
-                     []{Linux Biolinum O} 
+l.107 M
+       iller\vspace{0.05in} \newline\normalsize\emph{Clemson 
 Here is how much of TeX's memory you used:
- 7197 strings out of 479393
- 153390 string characters out of 5877617
- 636530 words of memory out of 5000000
- 26605 multiletter control sequences out of 15000+600000
- 535104 words of font info for 31 fonts, out of 8000000 for 9000
+ 4549 strings out of 481433
+ 68472 string characters out of 5918475
+ 723002 words of memory out of 5000000
+ 21293 multiletter control sequences out of 15000+600000
+ 538378 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,0n,98p,304b,154s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,0n,73p,242b,100s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-No pages of output.
-
-! name = cochineal, rootname = cochineal, pointsize = 
-! mktexmf: empty or non-existent rootfile!
-
-! kpathsea: Running mktexmf cochineal.mf
-
-! The command name is C:\Users\HD-Aharon\AppData\Roaming\TinyTeX\bin\win32\mktexmf
-! Cannot find cochineal.mf.
-
-! kpathsea: Running mktextfm cochineal
-
-! The command name is C:\Users\HD-Aharon\AppData\Roaming\TinyTeX\bin\win32\mktextfm
-! kpathsea: Appending font creation commands to missfont.log.
+!  ==> Fatal error occurred, no output PDF file produced!

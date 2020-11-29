@@ -201,7 +201,8 @@ $endif$
 $endif$
   \usepackage{xcolor}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+%\urlstyle{same} % disable monospaced font for URLs
+\usepackage{url}
 $if(verbatim-in-note)$
   \VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
@@ -467,7 +468,8 @@ $endif$
                   urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
                   linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
                   pdfborder={0 0 0}}
-                  \urlstyle{same}  % don't use monospace font for urls
+                  \usepackage{url}
+                  %\urlstyle{same}  % don't use monospace font for urls
 
 % Add an option for endnotes. -----
 
