@@ -470,7 +470,7 @@ $endif$
                   pdfborder={0 0 0}}
                   \usepackage{url}
                   %\urlstyle{same}  % don't use monospace font for urls
-
+	       \usepackage{hanging}
 % Add an option for endnotes. -----
 
 $if(endnotes)$
@@ -489,8 +489,11 @@ $endif$
 $if(natbib)$ 
 \renewcommand\bibsection{%
    \section*{References}%
-   \markboth{\MakeUppercase{\refname}}{\MakeUppercase{\refname}}%
-  }%
+
+
+   \markboth{\MakeUppercase{\refname}}{\MakeUppercase{\refname}} %
+  }% 
+
 $else$
 $endif$
 
@@ -506,11 +509,10 @@ $header-includes$
 $endfor$
 
 \newtheorem{hypothesis}{Hypothesis}
-
 \begin{document}
 
-% \textsf{\textbf{This is sans-serif bold text.}}
-% \textbf{\textsf{This is bold sans-serif text.}}
+%\textsf{\textbf{This is sans-serif bold text.}}
+%\textbf{\textsf{This is bold sans-serif text.}}
 
 
 $if(removetitleabstract)$
@@ -624,7 +626,6 @@ $endif$
 $if(has-frontmatter)$
 \mainmatter
 $endif$
-
 $if(pandocparas)$
 $else$
 \setlength{\parindent}{16pt}
@@ -632,7 +633,6 @@ $else$
 $endif$
 
 $body$
-
 $if(has-frontmatter)$
 \backmatter
 $endif$
@@ -656,6 +656,7 @@ $endif$
 
 $endif$
 $endif$
+
 $if(biblatex)$
 $if(beamer)$
 \begin{frame}[allowframebreaks]{$biblio-title$}
@@ -665,11 +666,10 @@ $if(beamer)$
 $else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
-
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
 $for(include-after)$
 $include-after$
-
 $endfor$
 \end{document}
 

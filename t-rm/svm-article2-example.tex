@@ -16,9 +16,8 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-  \setmainfont[]{Arial}
-    \setsansfont[]{Quicksand}
-              \fi
+  \setmainfont[]{Times New Roman}
+                \fi
   % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -49,16 +48,18 @@
                         \ifluatex
           \usepackage{selnolig}  % disable illegal ligatures
           \fi
-                                                                          
+                                          \usepackage[]{natbib}
+              \bibliographystyle{apsr}
+                                                              
                                 \title{Another Pandoc Markdown Article
 Starter and Template\thanks{Replication files are available on the
 author's Github account
 (\url{http://github.com/svmiller/svm-r-markdown-templates}).
-\textbf{Current version}: September 11, 2020; \textbf{Corresponding
+\textbf{Current version}: November 30, 2020; \textbf{Corresponding
 author}:
 \href{mailto:steven.v.miller@gmail.com}{\nolinkurl{steven.v.miller@gmail.com}}.}}
                                                   \author{true \and true \and true}
-                  \date{September 11, 2020}
+                  \date{November 30, 2020}
                                       
                     % Jesus, okay, everything above this comment is default Pandoc LaTeX template. -----
                     % ----------------------------------------------------------------------------------
@@ -96,7 +97,7 @@ author}:
 Article Starter and Template\thanks{Replication files are available on
 the author's Github account
 (\url{http://github.com/svmiller/svm-r-markdown-templates}).
-\textbf{Current version}: September 11, 2020; \textbf{Corresponding
+\textbf{Current version}: November 30, 2020; \textbf{Corresponding
 author}:
 \href{mailto:steven.v.miller@gmail.com}{\nolinkurl{steven.v.miller@gmail.com}}.}  }
                    
@@ -164,13 +165,20 @@ Template},
                   pdfborder={0 0 0}}
                   \usepackage{url}
                   %\urlstyle{same}  % don't use monospace font for urls
-
+	       \usepackage{hanging}
 % Add an option for endnotes. -----
 
 
 
 % This will better treat References as a section when using natbib
 % https://tex.stackexchange.com/questions/49962/bibliography-title-fontsize-problem-with-bibtex-and-the-natbib-package
+ 
+\renewcommand\bibsection{%
+   \section*{References}%
+
+
+   \markboth{\MakeUppercase{\refname}}{\MakeUppercase{\refname}} %
+  }% 
 
 
 
@@ -252,18 +260,8 @@ massa.}
 
 \vskip -8.5pt
 
-{
-\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{2}
-\tableofcontents
-}
 
  % removetitleabstract
-
-{
-\setcounter{tocdepth}{2}
-\tableofcontents
-}
 
 \setlength{\parindent}{16pt}
 \setlength{\parskip}{0pt}

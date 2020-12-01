@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.29)  30 NOV 2020 00:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.29)  1 DEC 2020 00:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,6 +251,8 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks25
 )
+\cslhangindent=\skip53
+
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kantlipsum/kan
 tlipsum.sty
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3
@@ -280,11 +282,11 @@ Package kantlipsum Info: The package provides paragraphs 1 to 164. Values
 (c:/Users/HD-Aharon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/abstract/abstr
 act.sty
 Package: abstract 2009/06/08 v1.2a configurable abstracts
-\abstitleskip=\skip53
-\absleftindent=\skip54
-\absrightindent=\skip55
-\absparindent=\skip56
-\absparsep=\skip57
+\abstitleskip=\skip54
+\absleftindent=\skip55
+\absrightindent=\skip56
+\absparindent=\skip57
+\absparsep=\skip58
 )
 
 ! LaTeX Error: Missing \begin{document}.
@@ -293,13 +295,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.107 M
-       iller\vspace{0.05in} \newline\normalsize\emph{Clemson 
+l.102 F
+       ernandez\vspace{0.05in} \newline\normalsize\emph{KU LEUVEN}  } 
 Here is how much of TeX's memory you used:
- 4549 strings out of 481433
- 68472 string characters out of 5918475
- 723002 words of memory out of 5000000
- 21293 multiletter control sequences out of 15000+600000
+ 4550 strings out of 481433
+ 68501 string characters out of 5918475
+ 722764 words of memory out of 5000000
+ 21294 multiletter control sequences out of 15000+600000
  538378 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  65i,0n,73p,242b,100s stack positions out of 5000i,500n,10000p,200000b,80000s

@@ -1,0 +1,237 @@
+---
+title: "Multivariate Statistics - Assignment 2 "
+author:
+  - Elena 
+  - Damiano
+  - Xierui
+  - Aharon
+date: "12/1/2020"
+output:
+  pdf_document: 
+    toc: yes
+    toc_depth: 3
+    latex_engine: xelatex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+#where I can find my data sources
+base_url <- './src/'
+#list.files('./src/', all.files=FALSE, full.names = FALSE, recursive = TRUE)
+```
+
+\newpage
+
+# Assignment 2 Multivariate Statistics 
+
+This document ...
+
+# Task 1 
+```{r Task_1_setup, include=FALSE}
+#Load dwvs
+library(candisc)
+library(car)
+load("C:/Users/HD-Aharon/Documents/GitHub/kul-multivariate-a2/src/dwvs.Rdata")
+```
+
+
+## Introduction 
+  In the present part of the report, we will investigate to what extent we will be able to classify respondents in their country, and then we will compare the performance of different classifiers.
+
+## Data 
+  The data have been obtained from the 6th Wave of the World Value Survey, which was carried out between 2010 and 2013. The data include the standardized scores of 3929 respondents of 3 countries on 32 variables, that have been summarized with 7 factors obtained using exploratory factor analysis with oblique rotation. 
+The 7 factors related to the 32 variables are: 
+
+
+1.	**Rights**, that it’s related to homosexuality, prostitution, abortion, divorce, sex before marriage, suicide;
+2.	**Steal** that it’s related to claiming benefits, avoiding fare, stealing property, cheating taxes, accept a bribe;
+3.	**Crime** that it’s related to robberies, alcohol, police-military, racist behavior, drug sale;
+4.	**Religion** that it’s related to: attend religious services, pray, the importance of God;
+5.	**Realize self** that it’s related to creative, rich, spoil oneself, be successful, exciting life;
+6.	**Do good** that it’s related to security, do good, behave properly, protect environment, tradition;
+7.	**Violence** that it’s related to beat wife, parents beating children, violence.
+
+
+## Methodology
+
+  To investigate the possibility to classify the respondents in their country based on the 7 factors we have used the canonical discriminant analysis. We have applied the linear regression function with 7 predictors and 1 dependent variable, the Country. Then to the output, we have applied the Canonical Discriminant Analysis.
+
+
+```{r Task_1_1}
+
+lm.out<-lm(cbind(F_rights, F_steal, F_crime,F_religion,F_realizeself,F_dogood ,F_violence)~as.factor(country), data=dwvs)
+candisc.out<-candisc(lm.out)
+print (candisc.out)
+
+
+```
+
+As we can see both the Square Canonical Correlation are significant, but the discriminating power to separate between the groups is higher for the first than for the second discriminant function: 0.81 and 0.38 respectively.
+The LR test indicates that the discriminant analysis is meaningful. The first test’s null hypothesis is H0: λ1=λ2=0 and this hypothesis as we can see from the P-value is rejected. The null hypothesis of the first test it’s equivalent to the test for H0: μNetherlands=μNigeria=μPhilippines.
+The second LR test indicates that **H0:λ2=0**, and also this null hypothesis is rejected. So even if the second discriminant function has less discriminant power cannot be omitted and it’s statistically meaningful. 
+On our analysis, we have also applied two different tests for centroids and to test the equal covariance. 
+To see if the three-country has different centroids and confirm the results of the canonical discriminant analysis we have applied on the linear regression the function Manova:
+
+```{r Task_1_2}
+summary(Manova(lm.out), test="Wilks")
+
+```
+
+The p-value is small and the test confirms that the analysis is meaningful and that at least there is a pair of centroids that differs significantly. The function Manova in r doing the Wilks Lambda test uses the Rao approximation. 
+To test the assumption on equal population covariance we have applied to the linear regression the function boxM: 
+
+
+```{r Task_1_3}
+boxM(lm.out)
+
+```
+
+### Plot
+
+To complete the Canonical Discriminant analysis we have plotted the three countries and the 7 variables. 
+
+```{r Task_1_4}
+plot(candisc.out,col=c("red","blue","black"),pch=c(1,2,3),cex=1.2)
+
+```
+
+We can see that the group of individuals in red are Netherland citizens, the group of individuals in green are Nigerians citizens and the group of individuals in black are Philippines citizens. In blue we can see the 7 explanatory variables. The plot shows a clear separation between Netherland and the other two countries on the first discriminant function while the second discriminant function could help to separate Nigeria and the Philippines. 
+The first discriminant function especially correlates with the factors: rights, religion, realize self, and do good; whereas the second discriminant function correlates with the factors: steal and realize self. The two-factor crime and violence has a lower correlation on the two factors and so has in this analysis lower importance on separate the 3 countries.
+
+The test of Box indicates that H0 of equal covariance matrices across groups is not supported by data. So the Linear discriminant Analysis will not work correctly in that case. 
+
+\newpage
+# Task 2
+```{r Task_2_setup, include=FALSE}
+
+library(tree)
+library(randomForest)
+library(gbm)
+library(pdp)
+library("MASS")
+library(heplots)
+library(candisc)
+
+load("C:/Users/HD-Aharon/Documents/GitHub/kul-multivariate-a2/src/spamdata.Rdata")
+```
+## Introduction
+
+  For task 2, we are going to deal with a dataset containing information about 4601 webmails. We have 48 variables describing the frequency of some specific words like “remove” in each observation, 6 variables describing the frequency of some specific chars like “$” in one observation, and three variables, **capital_run_length_longest**, **capital_run_length_average** and **capital_run_length_total**, describing the length of the longest uninterrupted sequence of capital letters, the average length of uninterrupted sequences of capital letters, and the total number of capital letters in each observation respectively. We also have a variable called spam, which indicates whether this webmail is a spam with 0 and 1, where 1 for spam, and 0 for not spam. Here all our variables are numeric type.
+
+Our task is to use these 57 attribute variables to classify whether a webmail is spam.
+
+
+## Methodology
+
+  In order to validate the accuracy of our methods, we firstly divide our dataset into a train set, which contains 2500 observations, and a test set, which contains 2101 observations. We use the train set to train our models, and then apply it to the test set to validate it’s accuracy.
+
+
+## Results
+
+### Classification Trees
+  In this part, we are going to discuss the results obtained by complex tree model and pruned tree model.
+  
+  We begin with construct a complex tree model by dividing our observation into small non-overlapping regions according to some numerical criteria. Here we split our dataset until each leaf of our classification tree contains only less then 2 observations. The method used here is recursive binary splitting.
+```{r Task_2_1, include=FALSE}
+
+spamdata$spam<-factor(ifelse(spamdata$spam==1,"1_yes","0_no"))
+
+#create train and test set
+set.seed(0829539)
+trainsize<-2500
+train = sample(nrow(spamdata), trainsize)
+data.train<-spamdata[train,]
+data.test<-spamdata[-train,]
+
+```
+
+
+```{r Task_2_2}
+
+#grow complex tree using deviance as criterion
+tree.mod <-tree(spam~., data.train, control=tree.control(nobs=2500, minsize=2, mincut=1), 
+                split="deviance")
+summary(tree.mod)
+
+```
+
+### Tree Plots
+
+```{r Task_2_3, echo=FALSE}
+plot(tree.mod)
+text(tree.mod, pretty=0, cex=1.4)
+```
+
+We can see clearly here that criterias concerning the frequency of “$”, “remove”,  “!”,  “hp”,  “our”,  “free”,  “edu” as well as the length of the longest uninterrupted sequence of capital letters are used for splitting. It’s actually quite reasonable, because from our own experience, spam webmails are always advertisements on money related topics or education related topics, and are always fulled with words in capital letters, together with exclamation symbols, to draw attention.
+
+Since the process of recursive binary splitting may lead to overfitting, where we obtain a complex tree with a good fit on the training data, but with a poor performance on test data, we introduce the process of tree pruning. Actually, a smaller tree with fewer splits may have a lower variance at the cost of acceptable little bias.
+In order to decide the optimal tuning parameter which leads to both much lower variance and acceptable bias, we use cross-validation to make a selection. In fact, the least cross-validation error implies the least probability of overfitting, as it’s also a train-test process.
+
+
+
+```{r Task_2_4}
+#use cross-validation to select tuning parameter for pruning the tree
+set.seed(0829539)
+cv.out=cv.tree(tree.mod,K=5)
+par(cex=1.4)
+plot(cv.out$size,cv.out$dev,type='b')
+
+```
+
+However, in this specific task, we can see that the cross-validation error is monotonously decreasing, so the optimal fold number is the original fold number. We choose best size=12 here such that the pruned tree model here is exactly the same as our complex tree model.
+
+```{r Task_2_5}
+#prune the tree
+prune.mod=prune.tree(tree.mod,best=12)
+plot(prune.mod)
+text(prune.mod,pretty=0)
+
+```
+
+Now we validate the accuracy of our classification tree model with the test data.
+
+
+
+
+
+```{r Task_2_6}
+#make predictions on training and test set using the unpruned tree
+pred.train<-predict(tree.mod,newdata=data.train)
+classif.train<-ifelse(pred.train[,2]>=pred.train[,1],1,0)
+#err(data.train$spam,classif.train)
+pred.test<-predict(tree.mod,newdata=data.test)
+classif.test<-ifelse(1*pred.test[,2]>=pred.test[,1],1,0)
+#err(data.test$spam,classif.test)
+```
+
+
+```{r Task_2_7}
+#make predictions on training and test set using the pruned tree
+pred.train<-predict(prune.mod,newdata=data.train)
+classif.train<-ifelse(pred.train[,2]>=pred.train[,1],1,0)
+#err(data.train$spam,classif.train)
+pred.test<-predict(prune.mod,newdata=data.test)
+classif.test<-ifelse(1*pred.test[,2]>=pred.test[,1],1,0)
+#err(data.test$spam,classif.test)
+```
+
+We can conclude that our classification model performs very well. since the complex tree is the same as pruned tree here, we can see that the test error is just very slightly higher than the train error. There is not much overfitting here.
+
+
+```{r Task_2_8}
+#make predictions on training and test set using the pruned tree
+pred.train<-predict(prune.mod,newdata=data.train)
+classif.train<-ifelse(pred.train[,2]>=pred.train[,1],1,0)
+#err(data.train$spam,classif.train)
+pred.test<-predict(prune.mod,newdata=data.test)
+classif.test<-ifelse(1*pred.test[,2]>=pred.test[,1],1,0)
+#err(data.test$spam,classif.test)
+```
+

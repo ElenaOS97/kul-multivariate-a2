@@ -1,0 +1,73 @@
+---
+title: RESEARCH PROPOSAL PROFILES OF TOLERANCE AND RESPECT FOR THE RIGHTS OF DIVERSE
+author:
+- affiliation: KU LEUVEN
+  name:  Pamela Inostroza Fernandez
+date: "November 30, 2020"
+output:
+  pdf_document:
+    dev: cairo_pdf
+    keep_tex: yes
+    template: svm-latex-article2.tex
+    toc: yes
+    fig_caption: yes
+  html_document:
+    toc: yes
+    df_print: paged
+endnote: no
+fontsize: 11pt
+geometry: margin=1in
+keywords: latent class analysis, large scale assessment, r, categorical analysis, latent profile analysis
+mainfont: Times New Roman
+biblio-style: apalike
+bibliography: ExportedItems.bib
+sansfont: Quicksand
+sansitup: yes
+thanks: 
+abstract: kdnkdnfke
+nocite: |
+  @munck_measurement_2018, @sandoval-hernandez_measurement_2018, @isac_indicators_2019
+---
+
+# INTRODUCTION  
+
+The development of civic values and attitudes of tolerance and respect for the rights of diverse social groups among youth are essential for sustainable democratic societies. These values are strongly promoted by families, educational systems and international organizations across the world. The measurements and comparison of these attitudes among youth can provide valuable information about their development in different societies and over time.  
+\newline  
+Same international studies such as the International Civic and Citizenship Education Study (ICCS) provide extensive comparative information regarding these aspects. The ICCS study is a large-scale assessment (survey) applied in more than 25 educational systems during the last three cycles and focused on secondary education (representative samples of 8th graders, 14-year-olds in each country) addressing topics such as citizenship, diversity and social interactions at school. The study produces internationally comparative data collected via student, school and teacher questionnaires. Data from different waves of the ICCS survey is publicly available to researchers. The first time this study was applied was in 1999 to 28 countries and it was called CIVED, the second wave started using the name ICCS and was implemented in 2009 in 38 countries, the last study was performed in 2016 to 24 countries. The next cycle is scheduled for 2022 and 25 countries will participate.  
+\newline 
+Previous research using ICCS data has been largely focused on average country comparisons of attitudinal measures such as attitudes toward equal rights for immigrants, ethnic minorities and women, norms of good citizenship behaviour and political participation. Most of these studies employed variable-centered analyses. Nevertheless, recent studies started to show the usefulness of person-centered approaches (i.e. latent class analysis, hereafter LCA) aimed at identifying profiles of young people’s attitudes. For example, using ICCS 2009 data, [@hooghe_comparative_2016] compare profiles of good citizenship norms across 38 countries and distinguished distinctive subgroups of the population that share a common understanding of what constitutes good citizenship were identified (e.g. who express either engaged or duty-based citizenship norms).  
+\newline 
+Another study focused their research on changes over time (where the research design and data gathering methods are strictly comparable) [@hooghe_rise_2015]. For this, CIVED 1999 and ICCS 2009 was used. The scope of the analysis was threefold. First, distinct profiles of good citizenship norms were identified in both cycles. Second, trends over time were investigated and finally, differences between countries and/over time were analysed in detail. Nevertheless, most of these studies employing LCA with ICCS data focused on patterns within a particular type of attitude described by individual items (e.g. citizenship norms) leaving space for investigations that aim to capture a wider set of attitudinal measures described by scores on different variables.  
+\newline 
+To address this gap, this research will approach the topic of tolerance and respect for the rights of diverse social groups operationalized as a multifaceted set of attitudes toward equal rights for immigrants, ethnic minorities and women. This topic was addressed by previous studies aimed at comparing these attitudinal measures mostly in isolation across countries and over time. However, to date, no studies addressed the potential interdependence of these three attitudinal dimensions among different subgroups of people (e.g. highly tolerant, highly intolerant regarding all aspects, etc.). Therefore, the current study aims to fill this gap by addressing the following research questions:    
+\newline
+1. What profiles of tolerance and respect for the rights of diverse social groups are observed among adolescents in different countries?  
+2. Are these profiles comparable across countries and over time?    
+3. What individual and contextual factors are associated with profile membership? Do they vary depending on the context of the country or the cohort?   
+
+# DATA  
+
+Multiple countries had participated in the ICCS study during the last three cycles (detailed participation of the selected countries can be found in Table 1 in the Annex). Some of the participating countries can be classified by the following grouping^[The exact amount of countries and cycles will be defined during the thesis project development. The same will occur for the amount of scales and variables that will be included]:    
+\newline 
+a)	Nordic Countries: Denmark, Finland, Norway, Sweden.  
+b)	Western European Countries: Belgium (Flemish), The Netherlands.  
+c)	Central and Eastern European Countries: Bulgaria, Estonia, Latvia, Lithuania, Croatia, Slovenia.  
+d)	Southern European Countries: Italy, Malta.  
+e)	Latin American Countries: Chile, Peru, Colombia, Dominican Republic, Mexico  
+\newline 
+Each student participating in the study was received a test tapping into his civic knowledge and skills and obtained a score^[Scores were calculated through multiple imputation for ICCS 2009 and ICCS 2016, this means five plausible values are available.]. Moreover, background questionnaires were administered to capture students’ perceptions and attitudes toward civic and citizenship, including attitudes toward equal rights for immigrants, ethnic minorities and women. Databases include not only the responses to individual items but also indexes for the scales that were constructed. This research will be focused in three indexes called in the last cycle as “Attitudes toward equal rights for immigrants”, “Attitudes toward gender equality” and “Attitudes toward equal rights for all ethnic/racial groups”. Each item and the respective construct evaluated is detailed in Table 2, Table 3 and Table 4 for each cycle.
+
+# METHODS  
+
+All cycles of ICCS (CIVED) have been validated through variable-centred analysis, this means that latent constructs and the invariance across countries have been consistently validated thoroughly using CFA. On the contrary, not many research has been done using person-centred approaches, as Latent Profile Analysis (LPA) and Latent Class analysis (LCA).  
+\newline 
+The latent class model assumes the existence of a latent categorical variable such that the observed response variables are conditionally independent, given that variable. LCA treat a contingency table as a finite mixture of unobserved tables generated under a conditional independence structure of a latent variable [@agresti_categorical_2013]. In other words, LCA can directly assess the theory that distinctive groups of people share specific attitudes. Depending on the response variable in the model the analysis is called Latent Profile Analysis if is Continuous (Normal) and Latent Class Analysis if the response variable is Categorical (Multinomial).  
+\newline 
+In LCA, studying measurement invariance is necessary to determine whether the number and nature of the latent profiles are the same across the different observed groups [@olivera-aguilar_assessing_2018]. For this, multiple group LCA models are computed, and the relative fit of the unconstrained and semi-constrained models are compared using the LRT, AIC, BIC, and aBIC measures. Also is needed to review any kind of response bias, the most common refers to “a systematic tendency to respond to a range of questionnaire items on some basis other than the specific item content” for example e.g. extreme or agree/disagree [@kankaras_measurement_2011].  
+\newline 
+In order to assess the cross-national and cross-cohort comparability using CFA, new scales should be created that fit across all countries and cohorts analysed, rather than using the ones already created by the consortium^[In CIVED 1999 index MINORMLE was not include in the datasets.] [@barber_profiles_2020].  
+\newline 
+Descriptive and main analysis can be performed in R software using lavaan  and poLCA/lcca packages (Robertson and Kaptein 2016). Most complex analysis could be implemented in LEM. If necessary, it may be possible to access to a licence for MPLUS or Latent Gold software.
+
+\newpage  
+# REFERENCES  
