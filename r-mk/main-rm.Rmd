@@ -5,7 +5,7 @@ author:
   - Damiano
   - Xierui
   - Aharon
-date: "12/1/2020"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document: 
     toc: yes
@@ -13,6 +13,7 @@ output:
     latex_engine: xelatex
 editor_options: 
   chunk_output_type: console
+institute: "University Katholique of Leuven"
 ---
 
 ```{r setup, include=FALSE}
@@ -24,6 +25,7 @@ knitr::opts_chunk$set(
 
 #where I can find my data sources
 base_url <- '~/GitHub/kul-multivariate-a2/src/'
+library(equatiomatic)
 #list.files('./src/', all.files=FALSE, full.names = FALSE, recursive = TRUE)
 ```
 
@@ -33,84 +35,11 @@ base_url <- '~/GitHub/kul-multivariate-a2/src/'
 
 This document ...
 
-# Task 1 
-```{r Task_1_setup, include=FALSE}
-#Load dwvs
-library(candisc)
-library(car)
-load(paste0(base_url,"dwvs.Rdata"))
-```
 
-
-## Introduction 
-  In the present part of the report, we will investigate to what extent we will be able to classify respondents in their country, and then we will compare the performance of different classifiers.
-
-## Data 
-  The data have been obtained from the 6th Wave of the World Value Survey, which was carried out between 2010 and 2013. The data include the standardized scores of 3929 respondents of 3 countries on 32 variables, that have been summarized with 7 factors obtained using exploratory factor analysis with oblique rotation. 
-The 7 factors related to the 32 variables are: 
-
-
-1.	**Rights**, that it’s related to homosexuality, prostitution, abortion, divorce, sex before marriage, suicide;
-2.	**Steal** that it’s related to claiming benefits, avoiding fare, stealing property, cheating taxes, accept a bribe;
-3.	**Crime** that it’s related to robberies, alcohol, police-military, racist behavior, drug sale;
-4.	**Religion** that it’s related to: attend religious services, pray, the importance of God;
-5.	**Realize self** that it’s related to creative, rich, spoil oneself, be successful, exciting life;
-6.	**Do good** that it’s related to security, do good, behave properly, protect environment, tradition;
-7.	**Violence** that it’s related to beat wife, parents beating children, violence.
-
-
-## Methodology
-
-  To investigate the possibility to classify the respondents in their country based on the 7 factors we have used the canonical discriminant analysis. We have applied the linear regression function with 7 predictors and 1 dependent variable, the Country. Then to the output, we have applied the Canonical Discriminant Analysis.
-
-
-```{r Task_1_1}
-
-lm.out<-lm(cbind(F_rights, F_steal, F_crime,F_religion,F_realizeself,F_dogood ,F_violence)~as.factor(country), data=dwvs)
-candisc.out<-candisc(lm.out)
-print (candisc.out)
-
-
-```
-
-As we can see both the Square Canonical Correlation are significant, but the discriminating power to separate between the groups is higher for the first than for the second discriminant function: 0.81 and 0.38 respectively.
-The LR test indicates that the discriminant analysis is meaningful. The first test’s null hypothesis is H0: λ1=λ2=0 and this hypothesis as we can see from the P-value is rejected. The null hypothesis of the first test it’s equivalent to the test for H0: μNetherlands=μNigeria=μPhilippines.
-The second LR test indicates that **H0:λ2=0**, and also this null hypothesis is rejected. So even if the second discriminant function has less discriminant power cannot be omitted and it’s statistically meaningful. 
-On our analysis, we have also applied two different tests for centroids and to test the equal covariance. 
-To see if the three-country has different centroids and confirm the results of the canonical discriminant analysis we have applied on the linear regression the function Manova:
-
-```{r Task_1_2}
-summary(Manova(lm.out), test="Wilks")
-
-```
-
-The p-value is small and the test confirms that the analysis is meaningful and that at least there is a pair of centroids that differs significantly. The function Manova in r doing the Wilks Lambda test uses the Rao approximation. 
-To test the assumption on equal population covariance we have applied to the linear regression the function boxM: 
-
-
-```{r Task_1_3}
-boxM(lm.out)
-
-```
-
-### Plot
-
-To complete the Canonical Discriminant analysis we have plotted the three countries and the 7 variables. 
-
-```{r Task_1_4}
-plot(candisc.out,col=c("red","blue","black"),pch=c(1,2,3),cex=1.2)
-
-```
-
-We can see that the group of individuals in red are Netherland citizens, the group of individuals in green are Nigerians citizens and the group of individuals in black are Philippines citizens. In blue we can see the 7 explanatory variables. The plot shows a clear separation between Netherland and the other two countries on the first discriminant function while the second discriminant function could help to separate Nigeria and the Philippines. 
-The first discriminant function especially correlates with the factors: rights, religion, realize self, and do good; whereas the second discriminant function correlates with the factors: steal and realize self. The two-factor crime and violence has a lower correlation on the two factors and so has in this analysis lower importance on separate the 3 countries.
-
-The test of Box indicates that H0 of equal covariance matrices across groups is not supported by data. So the Linear discriminant Analysis will not work correctly in that case. 
 
 \newpage
 # Task 2
 ```{r Task_2_setup, include=FALSE}
-
 library(tree)
 library(randomForest)
 library(gbm)
@@ -466,4 +395,116 @@ We arrange all the training errors and test errors into a whole table below, and
 We can see that as we claimed at the beginning, Linear Discriminant Analysis performs the worst in both scenarios, Random Forests performs the best in scenario a), where we have different prior probabilities but equal classification costs, and Gradient Boosting performs the best in scenario b), where we have different prior probabilities and unequal classification costs. Generally, for scenario a), the performance of Random Forests and Gradient Boosting is equally good, and Bagging also performs good, just with slightly higher test error than Random Forests and Gradient Boosting. However, for scenario b), the accuracy of Random Forests decreases much faster than Bagging. 
 
 What’s more, as is expected, in scenario b), since missclassifying a not spam webmail into spam ones costs much more than missclassifying a spam webmail into not spam ones, our models all tend to classify more cases as not spam ones to minimize the cost. As a result, the false positive rate is very low or all models, but the accuracy and sensitivity decreases significantly for all models, since a number of real positive cases are classified as not spam webmails. Gradient Boosting and Bagging are relatively more stable here compared with the other two models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+# Task 5
+```{r Task_5_setup, include=FALSE}
+install.packages("smacof")
+library(smacof)
+load(paste0(base_url,"confusion.Rdata"))
+```
+
+# Introduction
+In a study on Morse code signals Rothkopf (1957) asked 598 subjects to indicate for each
+pair of signals (acoustically presented after each other) whether the two signals were equal.
+Note that each signal consists of a sequence of short beeps (0.05 sec) and long beeps (0.15
+sec) separated by a silence (0.05 sec).
+The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of
+signals included in the study. The signals in the subsequent rows of the confusing matrix are
+the letters of the alphabet A, B, C… in alphabetical order and the numbers
+1,2,3,4,5,6,7,8,9,0.
+The value in cell (i,j) of the matrix represents the percentage of subjects who indicated that
+signal i was equal to signal j, when signal j was presented after signal i.
+ 
+We compute a symmetric matrix of similarities by taking the average of corresponding
+elements in the confusion matrix above and below the diagonal, 
+next we convert the matrix
+of similarities into a matrix of dissimilarities, and finally we put all diagonal elements of the
+dissimilarity matrix equal to 0:
+
+```{r Task_5_1, include=FALSE}
+sim<-(confusion+t(confusion))/2 #similarity
+dissim <- 100-sim #dissimilarity
+for (i in 1:36){
+  dissim[i,i]<-0   #diagonal 0
+} 
+
+str(sim) 
+```
+
+
+## Question 1 
+1. Use smacofSym() to conduct MDS with 2 dimensions and assuming different
+measurement levels (i.e., ratio, interval, mspline, ordinal) for the observed
+dissimilarities.
+
+1.1 ratio
+```{r Task_5_11, include=FALSE}
+m1 <- smacofSym(delta=confusion, ndim=2, type="ratio", init="torgerson")
+
+```
+1.2 interval 
+```{r Task_5_12, include=FALSE}
+m2 <- smacofSym(delta=confusion, ndim=2, type="interval", init="torgerson")
+```
+
+1.3 mspline
+```{r Task_5_13, include=FALSE}
+m3<-smacofSym(delta=confusion, ndim=2, type="mspline", spline.degree =4, spline.intKnots = 4, init="torgerson")
+```
+
+1.4 ordinal
+```{r Task_5_14, include=FALSE}
+m4 <- smacofSym(delta=confusion, ndim=2, type="ordinal", init="torgerson")
+
+round(c(m1$stress,m2$stress,m3$stress,m4$stress),3)
+
+par(mfrow=c(2,2))
+
+plot(m3,plot.type="resplot",main="residual plot ordinal MDS")
+plot(m3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
+plot(m4,plot.type="resplot",main="residual plot spline MDS")
+plot(m4,plot.type="Shepard",main="Shepard diagram spline MDS")
+#configuration ordinal MDS
+plot(m3,plot.type="conf")
+
+```
+
+## Question 2
+2. Evaluate the goodness of fit of solutions with different measurement levels using stress-1, and by computing stress norms with the functions randomstress() and permutation(). Discuss which solution you would select. Investigate the stability of the selected solution using the Jackknife.
+
+
+
+
+## Question 3
+
+3. Construct a data set of external variables that describe the signals (e.g. length of the signal, proportion of short beeps in the signal, etc.). Use an MDSbiplot to project the external variables in the configuration plot of the selected solution, and interpret the results of the analysis. 
+
+
 

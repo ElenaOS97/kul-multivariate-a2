@@ -1,0 +1,18 @@
+---
+title: "index"
+author: "A.V. Zúñiga"
+date: "12/21/2020"
+output: pdf_document
+rmd_files:
+  latex: ["1_chap.Rmd", "index.Rmd"]
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preface {-}
+
+In this book, we will introduce an interesting
+method.
