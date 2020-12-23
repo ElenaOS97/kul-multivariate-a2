@@ -1,6 +1,5 @@
 ---
 title: "Task 2"
-date: "12/21/2020"
 output: 
   pdf_document: 
     latex_engine: xelatex
@@ -10,6 +9,28 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1 
+```{r Task_2_setup, include=FALSE}
+base_url <- '~/GitHub/kul-multivariate-a2/src/'
+library(tree)
+library(randomForest)
+library(gbm)
+library(pdp)
+library("MASS")
+library(heplots)
+library(candisc)
+load(paste0(base_url,"spamdata.Rdata"))
+
+#error function
+err<-function(observed,predicted){
+  tab<-table(observed,predicted)
+  print(tab)
+  err<-1-sum(diag(tab))/sum(tab)
+  return(err)
+}
+
 ```
 
 # Introduction
@@ -25,10 +46,293 @@ In order to validate the accuracy of our methods, we firstly divide our dataset 
 ### Classification Trees
 In this part, we are going to discuss the results obtained by complex tree model and pruned tree model.
 We begin with construct a complex tree model by dividing our observation into small non-overlapping regions according to some numerical criteria. Here we split our dataset until each leaf of our classification tree contains only less then 2 observations. The method used here is recursive binary splitting.
-     
+
+```{r Task_2_0,  include=FALSE}
+#create train and test set
+set.seed(0829539)
+trainsize<-2500
+train = sample(nrow(spamdata), trainsize)
+data.train<-spamdata[train,]
+data.test<-spamdata[-train,]
+```
+
+```{r Task_2_1, comment=NA, out.width='90%' , results='asis'}
+    #grow complex tree using deviance as criterion
+tree.mod=tree(spam~.,data.train,control=tree.control(nobs=2500,minsize=2,mincut=1),split="deviance")
+summary(tree.mod)
+
+#plot tree
+plot(tree.mod)
+text(tree.mod,pretty=0,cex=0.8)
+```
  
-We can see clearly here that criteria concerning the frequency of “$”, “remove”, “!”,  “hp”, “our”, “free”,  “edu” as well as the length of the longest uninterrupted sequence of capital letters are used for splitting. It’s actually quite reasonable, because from our own experience, spam webmails are always advertisements on money related topics or education related topics, and are always filled with words in capital letters, together with exclamation symbols, to draw attention.
+We can see clearly here that criteria concerning the frequency of _“$”, “remove”, “!”,  “hp”, “our”, “free”,  “edu”_ as well as the length of the longest uninterrupted sequence of capital letters are used for splitting. It’s actually quite reasonable, because from our own experience, spam webmails are always advertisements on money related topics or education related topics, and are always filled with words in capital letters, together with exclamation symbols, to draw attention.
 
 Since the process of recursive binary splitting may lead to overfitting, where we obtain a complex tree with a good fit on the training data, but with a poor performance on test data, we introduce the process of tree pruning. Actually, a smaller tree with fewer splits may have a lower variance at the cost of acceptable little bias.
 In order to decide the optimal tuning parameter which leads to both much lower variance and acceptable bias, we use cross-validation to make a selection. In fact, the least cross-validation error implies the least probability of overfitting, as it’s also a train-test process.
 
+
+```{r Task_2_2, comment=NA, out.width='90%' , results='asis'}
+#use cross-validation to select tuning parameter for pruning the tree
+set.seed(0829539)
+cv.out=cv.tree(tree.mod,K=5)
+par(cex=1.4)
+plot(cv.out$size,cv.out$dev,type='b')
+
+```
+
+However, in this specific task, we can see that the cross-validation error is monotonously decreasing, so the optimal fold number is the original fold number. We choose best $size=12$ here such that the pruned tree model here is exactly the same as our complex tree model.
+
+```{r Task_2_3, comment=NA, out.width='90%' , results='asis'}
+
+#prune the tree
+prune.mod=prune.tree(tree.mod,best=12)
+plot(prune.mod)
+text(prune.mod,pretty=0)
+
+```
+Now we validate the accuracy of our classification tree model with the test data. 
+
+```{r Task_2_4, comment=NA}
+#make predictions on training and test set using the unpruned tree
+#pred.train<-predict(tree.mod,newdata=data.train)
+#classif.train<-ifelse(pred.train[,2]>=pred.train[,1],1,0)
+#err(data.train$spam,classif.train)
+```
+
+```{r Task_2_4_, comment=NA}
+#pred.test<-predict(tree.mod,newdata=data.test)
+#classif.test<-ifelse(1*pred.test[,2]>=pred.test[,1],1,0)
+#err(data.test$spam,classif.test)
+```
+
+```{r Task_2_5, comment=NA'}
+#make predictions on training and test set using the pruned tree
+#pred.train<-predict(prune.mod,newdata=data.train)
+#classif.train<-ifelse(pred.train[,2]>=pred.train[,1],1,0)
+#err(data.train$spam,classif.train)
+#pred.test<-predict(prune.mod,newdata=data.test)
+#classif.test<-ifelse(1*pred.test[,2]>=pred.test[,1],1,0)
+#err(data.test$spam,classif.test)
+```
+
+We can conclude that our classification model performs very well. since the complex tree is the same as pruned tree here, we can see that the test error is just very slightly higher than the train error. There is not much overfitting here.
+
+### Different Classification Models
+  Now for this part, we are going to compare different classification models using two different classification scenarios.
+  
+  Firstly, we consider the scenario where we have different prior probabilities and equal classification costs. We use the entire dataset to figure out the prior probability.
+  
+```{r Task_2_6, comment=NA, out.width='90%' , results='asis'}  
+#(a)Account for different prior probabilities and equal classification costs 
+# (1) linear discriminant analysis
+set.seed(0829539)
+ldaS.out<-lda(spam~.,data=spamdata)
+print(ldaS.out)
+```
+
+So, we take $P (is spam)=0.394$, $P (not spam)=0.606$ as our prior probability, and we can verify that their sum equals 1.
+
+The four classification models we are going to compare is *1)* _Linear Discriminant Analysis_, *2)* _Bagging_, *3)* _Random Forests_ and *4)* _Gradient Boosting_. Since the dimension here is very high and the mathematical assumption of our dataset is very weak, we do not suppose that Linear Discriminant Analysis without Principal Component analysis here will have very good performance. We just take it as a baseline. The three other methods are all methods used to improve the classification tree model, as tree models are always with high variance, thus high probability to cause overfitting.
+The results are listed as below:
+
+#### 1) Linear Discriminant Analysis
+
+```{r Task_2_7, comment=NA, out.width='90%' , results='asis'}  
+lda.out<-lda(spam~.,prior=c(0.606,0.394),data=data.train)
+print(lda.out)
+```
+
+Here we can see that the three attributes highly correlated with spam webmails—the frequency of “$”, “!” and “remove”, are exactly the same as what we have got from our classification tree model. What is interesting here is we can also see that the frequency of “table”, “;” and “parenthesis” shows strong negative correlation with spam webmails.
+
+```{r Task_2_8, comment=NA, out.width='90%' , results='asis'}  
+pred.train<-predict(lda.out,data.train)
+err(data.train$spam,pred.train$class)
+```
+
+```{r Task_2_9, comment=NA, out.width='90%' , results='asis'}  
+pred.test<-predict(lda.out,data.test)
+err(data.test$spam,pred.test$class)
+```
+
+#### 2)	Bagging
+
+```{r Task_2_10, comment=NA, out.width='90%' , results='asis'}  
+# (2) bagging
+set.seed(0829539)
+bag.mod=randomForest(spam~.,data=data.train,classwt=c(0.606,0.394),mtry=57,ntree=5000,importance=TRUE)
+bag.mod
+```
+
+
+```{r Task_2_11, comment=NA, out.width='90%' , results='asis'}  
+#plot oob error
+par(cex=1.2)
+plot(1:3500,bag.mod$err.rate[1:3500,1], xlab="Number of iterations", 
+     ylab="OOB error", ylim=c(0.08,0.2), 
+     pch='', main="OOB error")
+lines(1:3500,bag.mod$err.rate[1:3500,1],col="red")
+
+#plot variable importance
+importance(bag.mod,plot=TRUE)
+varImpPlot(bag.mod,type=2,cex=1.2)
+```
+
+
+```{r Task_2_12, comment=NA, out.width='90%' , results='asis'}  
+pred.train<-predict(bag.mod,newdata=data.train)
+err(data.train$spam,pred.train)
+
+pred.test<-predict(bag.mod,newdata=data.test)
+err(data.test$spam,pred.test)
+
+```
+
+Actually, with the MeanDecreaseGini graph we can see that the frequency of “$”, “!” and “remove” made evidently the most contribution. This is the same conclusion we have drawn from our classification tree model and Linear Discriminant Analysis. Here Out Of Bag error rate is 6.76%, which is acceptable.
+
+#### 3)	Random Forests
+
+```{r Task_2_13, comment=NA, out.width='90%' , results='asis'} 
+
+# (3) random forests
+set.seed(0829539)
+rf.mod=randomForest(spam~.,data=data.train,classwt=c(0.606,0.394),mtry=5,ntree=5000,importance=TRUE)
+rf.mod
+```
+
+
+```{r Task_2_14, comment=NA, out.width='90%' , results='asis'} 
+pred.train<-predict(rf.mod,newdata=data.train)
+err(data.train$spam,pred.train)
+
+pred.test<-predict(rf.mod,newdata=data.test)
+err(data.test$spam,pred.test)
+
+```
+
+```{r Task_2_15, comment=NA, out.width='90%' , results='asis'} 
+#variable importance plot
+#two measures are reported: 
+#increase in MSE computed on OOB samples when removing variable
+#decrease in node impurity (or increase in node purity) resulting from splits on the variable
+importance(rf.mod)
+varImpPlot(rf.mod)
+
+```
+
+Random Forests Model is also based on the idea of decorrelating trees. Here we choose m=5 for the size of our predictor set. can see that although there is slightly difference, “$”, “!” and “remove” still stand for spam webmails, as well as the length of the longest uninterrupted sequence of capital letters. 
+
+
+#### 4)	Gradient Boosting
+
+Different from Bagging and Random Forests, the number of trees for Gradient Boosting is not expected to be as large as possible, since using too many trees may cause overfitting for Gradient Boosting. We start with deciding the optimal number of trees by cross-validation, for the same reason explained before.
+
+Note that since we are going to suppose Bernoulli distribution in our gbm function, we should firstly make sure that our variable for classification is numeric type.
+
+
+```{r Task_2_16, comment=NA, out.width='90%' , results='asis'}
+# (4) gradient boosting
+set.seed(0829539)
+data.train$spam<-ifelse(data.train$spam=="1_yes",1,0)
+data.test$spam<-ifelse(data.test$spam=="1_yes",1,0)
+spamdata$spam<-ifelse(spamdata$spam=="1_yes",1,0)
+
+#use distribution="bernoulli" for binary target
+#interaction.depth=4, means that we fit a tree that uses 4 splits 
+#(and that includes at most a 4-th order interaction)
+boost.mod=gbm(spam~.,data=data.train,distribution="bernoulli",n.trees=20000,interaction.depth=4,shrinkage=0.001,cv.folds=5)
+gbm.perf(boost.mod,method="cv")
+legend("topright",c("train error","CV error"),col=c("green","black"),lty=c(1,1))
+
+#relative influence plot
+par(cex=1.2)
+summary(boost.mod,n.trees=19932)
+
+pred.train<-predict(boost.mod,n.trees=19932,newdata=data.train,type="response")
+classif.train<-ifelse(pred.train>=1-pred.train,1,0)
+err(data.train$spam,classif.train)
+pred.test<-predict(boost.mod,n.trees=19932,newdata=data.test,type="response")
+classif.test<-ifelse(pred.test>=1-pred.test,1,0)
+err(data.test$spam,classif.test)
+
+#(b)Account for different prior probabilities and unequal classification costs: C(spam|email)=10*C(email|spam)
+# (1) linear discriminant analysis
+set.seed(0829539)
+data.train$spam<-factor(ifelse(data.train$spam==1,"1_yes","0_no"))
+data.test$spam<-factor(ifelse(data.test$spam==1,"1_yes","0_no"))
+spamdata$spam<-factor(ifelse(spamdata$spam==1,"1_yes","0_no"))
+
+lda.out<-lda(spam~.,prior=c(0.606,0.394),data=data.train)
+print(lda.out)
+
+pred.train<-predict(lda.out,data.train)
+classif.train<-ifelse(1*pred.train$posterior[,2]>=10*pred.train$posterior[,1],1,0)
+err(data.train$spam, classif.train)
+
+pred.test<-predict(lda.out,data.test)
+classif.test<-ifelse(1*pred.test$posterior[,2]>=10*pred.test$posterior[,1],1,0)
+err(data.test$spam,classif.test)
+
+# (2) bagging
+set.seed(0829539)
+bag.mod=randomForest(spam~.,data=data.train,mtry=57,ntree=5000,classwt=c(0.606,0.394),importance=TRUE)
+bag.mod
+
+#plot oob error
+par(cex=1.2)
+plot(1:3500,bag.mod$err.rate[1:3500,1],xlab="Number of iterations",ylab="OOB error",ylim=c(0.08,0.2),pch='',main="OOB error")
+lines(1:3500,bag.mod$err.rate[1:3500,1],col="red")
+#plot variable importance
+importance(bag.mod,plot=TRUE)
+varImpPlot(bag.mod,type=2,cex=1.2)
+
+pred.train<-predict(bag.mod,type="prob",newdata=data.train)
+classif.train<-ifelse(1*pred.train[,2]>=10*pred.train[,1],1,0)
+err(data.train$spam,classif.train)
+pred.test<-predict(bag.mod,type="prob",newdata=data.test)
+classif.test<-ifelse(1*pred.test[,2]>=10*pred.test[,1],1,0)
+err(data.test$spam,classif.test)
+
+# (3) random forests
+set.seed(0829539)
+rf.mod=randomForest(spam~.,data=data.train,mtry=5,ntree=5000,classwt=c(0.606,0.394),importance=TRUE)
+rf.mod
+
+pred.train<-predict(rf.mod,type="prob",newdata=data.train)
+classif.train<-ifelse(1*pred.train[,2]>=10*pred.train[,1],1,0)
+err(data.train$spam,classif.train)
+pred.test<-predict(rf.mod,type="prob",newdata=data.test)
+classif.test<-ifelse(1*pred.test[,2]>=10*pred.test[,1],1,0)
+err(data.test$spam,classif.test)
+
+#variable importance plot
+#two measures are reported: 
+#increase in MSE computed on OOB samples when removing variable
+#decrease in node impurity (or increase in node purity) resulting from splits on the variable
+importance(rf.mod)
+varImpPlot(rf.mod)
+
+# (4) gradient boosting
+set.seed(0829539)
+data.train$spam<-ifelse(data.train$spam=="1_yes",1,0)
+data.test$spam<-ifelse(data.test$spam=="1_yes",1,0)
+spamdata$spam<-ifelse(spamdata$spam=="1_yes",1,0)
+
+#use distribution="bernoulli" for binary target
+#interaction.depth=4, means that we fit a tree that uses 4 splits 
+#(and that includes at most a 4-th order interaction)
+boost.mod=gbm(spam~.,data=data.train,distribution="bernoulli",n.trees=20000,interaction.depth=4,shrinkage=0.001,cv.folds=5)
+gbm.perf(boost.mod,method="cv")
+legend("topright",c("train error","CV error"),col=c("green","black"),lty=c(1,1))
+
+#relative influence plot
+par(cex=1.2)
+summary(boost.mod,n.trees=19932)
+
+pred.train<-predict(boost.mod,n.trees=19932,newdata=data.train,type="response")
+classif.train<-ifelse(1*pred.train>=10*(1-pred.train),1,0)
+err(data.train$spam,classif.train)
+pred.test<-predict(boost.mod,n.trees=19932,newdata=data.test,type="response")
+classif.test<-ifelse(1*pred.test>=10*(1-pred.test),1,0)
+err(data.test$spam,classif.test)
+```

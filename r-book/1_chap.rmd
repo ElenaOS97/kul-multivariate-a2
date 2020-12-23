@@ -1,6 +1,5 @@
 ---
 title: "Task 1 "
-date: "12/21/2020"
 output: 
   pdf_document: 
     latex_engine: xelatex
@@ -44,10 +43,10 @@ The 7 factors related to the 32 variables are:
 1. **Rights**, that it’s related to homosexuality, prostitution, abortion, divorce, sex before marriage, suicide;
 2. **Steal**, that it’s related to claiming benefits, avoiding fare, stealing property, cheating taxes, accept a bribe;
 3. **Crime**, that it’s related to robberies, alcohol, police-military, racist behavior, drug sale;
-4. **Religion**, that it’s related to: attend religious services, pray, the importance of God;
+4. **Religion**, that it’s related to attend religious services, pray, the importance of God;
 5. **Realize self**, that it’s related to creative, rich, spoil oneself, be successful, exciting life;
 6. **Do good**, that it’s related to security, do good, behave properly, protect environment, tradition;
-7. **Violence**, that it’s related to beat wife, parents beating children, violence;
+7. **Violence**, that it’s related to beat wife, parents beating children, violenc.
 
 
 ## Methodology
@@ -205,7 +204,7 @@ lines(c(1:knnmax),err[,2],col="blue")
 
 ```
 
-  We can see that with $K=1$ the model is flexible and we have by definition training hit rate _(red line)_ of $0$ but the *LOOCV* hit rate _(blue line)_ it’s higher, while with model lex flexible as with $k=98$ the two errors are similar. 
+  We can see that with $K=1$ the model is flexible and we have by definition training hit rate _(red line)_ of $0$ but the *LOOCV* hit rate _(blue line)_ it’s higher, while with model flexible as with $k=98$ the two errors are similar. 
   Since as increasing the parameter $K$ both the errors increase, probably the model that better describes the dataset is with $K=30$ or $K=66$.
   
   
