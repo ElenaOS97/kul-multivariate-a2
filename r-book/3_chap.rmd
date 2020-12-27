@@ -11,7 +11,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Task 1 
+# Task 3
 ```{r Task_3_setup, include=FALSE}
 base_url <- '~/GitHub/kul-multivariate-a2/src/'
 library("MASS")
@@ -37,20 +37,6 @@ err<-function(observed,predicted){
   return(err)
 }
 
-```
-
-
-```{r Task_3_setup, include=FALSE}
-
-## standardize variables
-shopping<-scale(shopping,center=TRUE,scale=TRUE)
-
-#create train and test set
-set.seed(0829539)
-sel<-sample(1:487,size=250,replace=FALSE)
-train<-shopping[sel,]
-valid<-shopping[-sel,]
-
 # function classify new points to nearest cluster centroid
 clusters <- function(x, centers) {
   # compute squared euclidean distance from each sample to each cluster center
@@ -59,18 +45,87 @@ clusters <- function(x, centers) {
                                   function(v) sum((x[i, ]-v)^2)))
   max.col(-t(tmp))  # find index of min distance
 }
+```
+
+## 1. Introduction
+For task 3, we are going to deal with a dataset containing the shopping behavior of 487 different customers. We have 11 statements here and the corresponding variables measuring to what extent they agree with these statements, namely: 
+  1) organising_trip: It is very important for me to organize the shopping well.
+  2) knowing_buy: When I leave to go shopping, I know exactly what I am going to buy.
+  3) duty_responsability: By doing the shopping, I fullfil my duty and take my responsibility.
+  4) shopping_fun: I enjoy doing the shopping.
+  5) take_at_ease: I do the shopping at a leisurely pace.
+  6) enjoy: I enjoy the atmosphere while shopping.
+  7) shopping_drag: Doing the shopping is a drag.
+  8) minimise_shoppingtime: I try to keep the time that I spend doing the shopping to a minimum.
+  9) shopping_list: I usually take a list with me when I go to do the shopping.
+  10) shopping_with_family: I like shopping with the whole family.
+  11) have_stock: I like having a stock of products on hand at home.
+The variables vary from 1 to 7, where 1 means totally disagree and 7 means totally agree.
+
+Our task is to cluster the customers basing on the 11 items of shopping mentioned above and try to interpret the results we will get. What’s more, we are also going to test the stability of the cluster solutions deduced by different methods.
+
+## 2. Methodology
+We will try to do the clustering with *(1)* hierarchical clustering with _Ward’s method_ on squared _Euclidean distances_ followed by _k-means_ with the centroid of the hierarchical clustering as starting point, *(2)* model-based clustering with _hddc()_, and *(3)* model-based clustering using _Mclust()_. In order to test the stability of our cluster solutions, we are going to split our dataset randomly into a train set and a test set. The cluster methods will be firstly applied on the train set, and then on test set. After that, we will also form a cluster solution on the test set by assigning the points to the cluster centroid of the training sample that is closest. Finally, by comparing our two cluster solutions on the test set, we can evaluate the stability of our methods.
+
+## 3. Result
+Firstly, in order to make our cluster solution more reasonable, we are going to standardize our data first.
+
+```{r Task_3_0, comment=NA}
+
+## standardize variables
+shopping<-scale(shopping,center=TRUE,scale=TRUE)
+
+```
+
+Then, we form our train set and test set randomly for the validation work.
+
+```{r Task_3_1, comment=NA}
+#create train and test set
+set.seed(0829539)
+sel<-sample(1:487,size=250,replace=FALSE)
+train<-shopping[sel,]
+valid<-shopping[-sel,]
+```
+
+  Before applying our cluster methods on our dataset, we first try to do an exploratory factor analysis to summarize our 11 attributes, as we are going to make use of it for the interpretation of our cluster solutions.
+  
+  We start with a principal component analysis.
+
+#eval = FALSE
+
+```{r Task_3_2, include=FALSE}
 
 prcomp.out<-prcomp(shopping)
 #plot eigenvalues
 plot(prcomp.out$sd^2,type="b")
+```
+
+
+```{r Task_3_3, include=FALSE}
 #compute variance accounted for by each component
 round(prcomp.out$sd^2/sum(prcomp.out$sd^2),3)
 comp<-as.matrix(shopping)%*%prcomp.out$rotation
 
+```
+
+  As is shown here, only the first two components accounts for more than 10% of the variances, and they account for 54.8% of the variances in total. 
+We then continue to conduct the exploratory factor analysis with 2 factors.
+
+```{r Task_3_4, include=FALSE}
 #exploratory factor analysis
 faO<-fa(shopping,2,rotate="oblimin", fm="mle");
 print(faO,cutoff=0);
+```
 
+According to the result shown above, we can define two factors here.
+  _*Enjoy*_: The extent to which someone enjoys shopping, summarizing the attributes “shopping_fun”, “take_at_ease”, “enjoy”, “shopping_drag”, “minimise_shoppingtime” and “shopping_with_family”. Here we can see that the loadings for “shopping_drag” and “minimise_shoppingtime” is negative, and the others are positive, which is quite reasonable. 
+  _*Organized*_: The extent to which someone is organized when doing shopping, summarizing the attributes “organising_trip”, “knowing_buy”, “duty_responsability”, “shopping_list” and “have_stock”.
+So, we can use these two factors to classify our customers as “enjoy shopping and organized”, “enjoy shopping and not organized”, “dislike shopping and organized”, or “dislike shopping and not organized”.
+
+  We denote the principal components as comp for future use, as we are going to visualize our cluster solution in the space of the first two principal components.
+
+
+```{r Task_3_4, include=FALSE}
 # compute Euclidean distances
 distEuc<-dist(shopping, method = "euclidean", diag = FALSE, upper = FALSE)
 
@@ -820,12 +875,25 @@ print(mat)
 percent2=sum(diag(mat))/sum(mat)
 
 rand2<-adjustedRandIndex(cl1,cl2)
+```
 
+   We can see that here the match rate is $73%$ and the _ARI index_ is $0.66$, which are both acceptable. If we again continue to test the stability for this method with 1 up to 6 clusters, and obtain the curve for match rate as well as ARI index, we can see that:
+
+#### match rate
+```{r Task_3_F, include=FALSE}
 #plot
 plot(c(2:6), c(percent2,percent3,percent4,percent5,percent6))
 lines(c(2:6), c(percent2,percent3,percent4,percent5,percent6))
+```
 
+#### ARI index
+```{r Task_3_F1, include=FALSE}
 #plot
 plot(c(2:6), c(rand2,rand3,rand4,rand5,rand6))
 lines(c(2:6), c(rand2,rand3,rand4,rand5,rand6))
 ```
+
+## Conclusion
+As conclusion, we end up choosing 4 clusters for all these three methods and obtained the same interpretation with our two principal components _“enjoy”_ and _“organized”_.
+With analysis for all these three methods, we can conclude that, _Mclust()_ method here performs better than _hddc()_ method in stability, but the boundaries of the clusters obtained by _hddc()_ method are clearer. The hierarchical clustering with Ward’s method on squared Euclidean distances followed by _k-means_ with the centroid of the hierarchical clustering as starting point is the most stable method here for this task.
+

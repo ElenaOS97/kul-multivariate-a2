@@ -1,0 +1,75 @@
+---
+title: "Task 2"
+output:
+  pdf_document:
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+base_url <- '~/GitHub/kul-multivariate-a2/src/'
+load(paste0(base_url,"spamdata.Rdata"))
+library("MASS")
+library(tree)
+library(randomForest)
+library(gbm)
+library(pdp)
+library(heplots)
+library(candisc)
+library(ggplot2) # avx
+library(ape)
+#library(rpart.plot)
+##### FUNCTIONS #####
+#error function
+err<-function(observed,predicted){
+  tab<-table(observed,predicted)
+  print(tab)
+  err<-1-sum(diag(tab))/sum(tab)
+  return(err)
+}
+
+```
+
+# Introduction
+
+  For task 2, we are going to deal with a dataset containing information about $4601$ webmails. We have $48$ variables describing the frequency of some specific words like _“remove”_ in each observation, $6$ variables describing the frequency of some specific chars like _“$”_ in one observation, and three variables, _capital_run_length_longest_, _capital_run_length_average_ and _capital_run_length_total_, describing the length of the longest uninterrupted sequence of capital letters, the average length of uninterrupted sequences of capital letters, and the total number of capital letters in each observation respectively. We also have a variable called _spam_, which indicates whether this webmail is a spam with $0$ and $1$, where $1$ for spam, and $0$ for not spam. Here all our variables are numeric type.
+Our task is to use these $57$ attribute variables to classify whether a webmail is spam.
+
+
+
+# Methodology
+In order to validate the accuracy of our methods, we firstly divide our dataset into a train set, which contains 2500 observations, and a test set, which contains 2101 observations. We use the train set to train our models, and then apply it to the test set to validate its accuracy.
+
+
+# Results
+## Classification Trees
+In this part, we are going to discuss the results obtained by complex tree model and pruned tree model.
+We begin with construct a complex tree model by dividing our observation into small non-overlapping regions according to some numerical criteria. Here we split our dataset until each leaf of our classification tree contains only less then 2 observations. The method used here is recursive binary splitting.
+
+
+```{r Task_2_0_N, include=FALSE}
+#create train and test set
+set.seed(0829539)
+trainsize<-2500
+train = sample(nrow(spamdata), trainsize)
+data.train<-spamdata[train,]
+data.test<-spamdata[-train,]
+
+```
+
+
+```{r Task_2_0_Y,  comment=NA, background=c(0,.5,0)}
+#grow complex tree using deviance as criterion
+tree.mod = tree(factor(spam) ~ . ,data.train, 
+                control = tree.control(nobs = 2500, minsize = 2, mincut = 1),
+                split = "deviance")
+
+#tree.mod = rpart(spam ~ . ,data.train, 
+#                control = tree.control(nobs = 2500, minsize = 2, mincut = 1))
+
+summary(tree.mod)
+```

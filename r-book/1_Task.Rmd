@@ -1,0 +1,370 @@
+---
+title: "Task 1 "
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Task_1_setup, include=FALSE}
+base_url <- '~/GitHub/kul-multivariate-a2/src/'
+library(equatiomatic)
+library(candisc)
+library(car)
+library(HDclassif)
+library(dplyr)
+library(lemon)
+library(Rcmdr)
+library(MASS)
+library(class)
+library(heplots) #covEllipses, cqplot
+library(kableExtra)
+library(car) #Manova
+library(VGAM) # for vglm function
+library(nnet) # for multinom function
+load(paste0(base_url,"dwvs.Rdata"))
+
+```
+
+
+# Introduction 
+  In the present part of the report, we will investigate to what extent we will be able to classify respondents in their country, and then we will compare the performance of different classifiers.
+
+# Data 
+  The data have been obtained from the $6^{th}$ Wave of the World Value Survey, which was carried out between 2010 and 2013. The data include the standardized scores of 3929 respondents of 3 countries on 32 variables, that have been summarized with 7 factors obtained using exploratory factor analysis with oblique rotation. 
+The 7 factors related to the 32 variables are: 
+
+
+1. **Rights**, that it’s related to homosexuality, prostitution, abortion, divorce, sex before marriage, suicide;
+2. **Steal**, that it’s related to claiming benefits, avoiding fare, stealing property, cheating taxes, accept a bribe;
+3. **Crime**, that it’s related to robberies, alcohol, police-military, racist behavior, drug sale;
+4. **Religion**, that it’s related to attend religious services, pray, the importance of God;
+5. **Realize self**, that it’s related to creative, rich, spoil oneself, be successful, exciting life;
+6. **Do good**, that it’s related to security, do good, behave properly, protect environment, tradition;
+7. **Violence**, that it’s related to beat wife, parents beating children, violenc.
+
+
+# Methodology
+
+  To investigate the possibility to classify the respondents in their country based on the $7$ factors we have used the canonical discriminant analysis. We have applied the linear regression function with $7$ predictors and $1$ dependent variable, the Country. Then to the output, we have applied the Canonical Discriminant Analysis.
+
+
+```{r Task_1_1, comment=NA}
+
+lm.out<-lm(cbind(F_rights, F_steal, F_crime,F_religion,F_realizeself,F_dogood,
+                 F_violence)~as.factor(country), data=dwvs)
+candisc.out<-candisc(lm.out)
+print(candisc.out)
+
+```
+
+  As we can see both the Square Canonical Correlation are significant, but the discriminating power to separate between the groups is higher for the first than for the second discriminant function: $0.81$ and $0.38$ respectively.
+The LR test indicates that the discriminant analysis is meaningful. The first test’s null hypothesis is $H_{0}: λ_{1}=λ_{2}=0$ and this hypothesis as we can see from the _p-value_ is rejected. The $null$ hypothesis of the first test it’s equivalent to the test for $H_{0}: μNetherlands = μNigeria = μPhilippines$.
+
+  The second LR test indicates that $H_{0}:λ_{2}=0$, and also this null hypothesis is rejected. So even if the second discriminant function has less discriminant power cannot be omitted and it’s statistically meaningful. 
+  
+  On our analysis, we have also applied two different tests for centroids and to test the equal covariance. 
+
+  To see if the three-country has different centroids and confirm the results of the canonical discriminant analysis we have applied on the linear 
+regression the function _Manova_:
+
+
+```{r Task_1_2, comment=NA}
+res_t1_2 <- summary(Manova(lm.out), test="Wilks")
+
+summary.default(Manova(lm.out), test="Wilks")
+
+```
+
+The _p-value_ is small, and the test confirms that the analysis is meaningful and that at least there is a pair of centroids that differs significantly. The function _Manova_ in r doing the _Wilks Lambda test_ uses the Rao approximation. 
+To test the assumption on equal population covariance we have applied to the linear regression the function _boxM_: 
+
+
+```{r Task_1_3, comment=NA}
+boxM(lm.out)
+```
+The test of Box indicates that $H_{0}$ of equal covariance matrices across groups is not supported by data. 
+
+\newpage
+## Plot
+
+To complete the Canonical Discriminant analysis, we have plotted the three countries and the $7$ variables. 
+```{r Task_1_4, echo=FALSE, fig.height=5, fig.width=8, comment=NA, paged.print=TRUE}
+plot(candisc.out,col=c("red","green","black"),pch=c(1,2,3),cex=1.2)
+
+```
+
+
+  We can see that the group of individuals in *red* are Netherlands citizens, the group of individuals in *green* are Nigerians citizens and the group of individuals in *black* are Philippines citizens. In blue we can see the $7$ explanatory variables. The plot shows a clear separation between Netherlands and the other two countries on the first discriminant function while the second discriminant function could help to separate Nigeria and the Philippines. 
+The first discriminant function especially correlates with the factors: rights, religion, realize self, and do good; whereas the second discriminant function correlates with the factors: steal and realize self. The two-factor crime and violence have a lower correlation on the two factors and so has in this analysis lower importance on separate the $3$ countries.
+
+
+## Compare the performance of different classifiers
+  We are going now to compare the performance of different classifiers to classify respondents in their country based on the $7$ factors. To be able to do that we are going to compute the training error and the leave-one-out cross-validation error. 
+The classification method that we are going to compare are: 
+  -	Linear discriminant analysis;
+  -	Quadratic discriminant analysis; 
+  -	K-nearest neighbors with k ranging from _1 to 100_; 
+  -	High Dimensional Discriminant Analysis; 
+
+## Linear discriminant analysis
+  This method aims to separate in the clearest possible way different groups using the linear combination of observed independent variables. The linear discriminant analysis method assumes that the covariance structure of the independent variable is the same across groups. In our analysis, we know from the Box test previously computed that this assumption is not supported by the data. It will be an interesting test if in this case the Quadratic discriminant analysis, where the assumption on the equality of covariance matrix is relaxed, will perform better.
+In the linear discriminant analysis, we have applied the method of Fisher correcting for the different prior probability. 
+
+```{r Task_1_5, comment=NA}
+lda.out3<-lda(country ~ F_rights + F_steal + F_crime + F_religion + F_realizeself +
+                F_dogood + F_violence, data=dwvs)
+#print(lda.out3)
+pred.train3 <- predict(lda.out3,dwvs, prior=c(1,1,1)/3)
+```
+
+```{r Task_1_6, comment=NA}
+tab3 <- table(dwvs$country,pred.train3$class)
+#print(tab3)
+kbl(tab3)
+#training hit rate
+kbl(sum(diag(tab3))/sum(tab3))
+```
+
+
+```{r Task_1_7, comment=NA}
+#classify test observations using LDA
+pred.loocv4<-lda(country~F_rights+F_steal+F_crime+F_religion+F_realizeself+F_dogood+F_violence,data=dwvs, prior=c(1,1,1)/3, CV=TRUE)
+tab4<-table(dwvs$country,pred.loocv4$class)
+print(tab4)
+#LOOCV hit rate
+kbl(sum(diag(tab4))/sum(tab4))
+
+
+```
+
+We can see that in that case, the difference between the performance for training error and LOOCV error is really small, so there is no evidence for overfitting. 
+
+
+## Quadratic discriminant analysis
+
+  The second method that we have applied is Quadratic discriminant analysis. It should perform better considering the difference in the covariance matrix for the different groups. QDA even if has a lower bias with a different covariance matrix, has a larger variance, and as in our case with a small dataset can be problematic. 
+
+Even in this case, we have applied the method of Fisher correcting for prior probabilities.
+
+```{r Task_1_8, comment=NA}
+qda.out7<-qda(country ~ F_rights + F_steal + F_crime + F_religion + F_realizeself + 
+                F_dogood + F_violence, data = dwvs) 
+
+pred.train7<-predict(qda.out7,dwvs, prior=c(1,1,1)/3)
+
+tab7<-table(dwvs$country,pred.train7$class)
+#print(tab7)
+#training hit rate
+kbl(sum(diag(tab7))/sum(tab7))
+```
+
+
+```{r Task_1_9, comment=NA}
+#classify test observations 
+#use equal population sizes classes
+pred.test8 <- qda(country ~ F_rights + F_steal + F_crime + F_religion + F_realizeself + 
+                    F_dogood + F_violence, data=dwvs,prior=c(1,1,1)/3,CV=TRUE)
+tab8<-table(dwvs$country,pred.test8$class)
+#LOOCV hit rate
+kbl(sum(diag(tab8))/sum(tab8))
+```
+
+In that case there is also no evidence of overfitting. We can see from the results that the QDA performs better than the LDA but not with a significant improvement. 
+
+## K-nearest Neighbors
+
+The third model that we had analyzed is the K-nearest Neighbors. We have computed the model using all the 3926 observations, and to choose which is the correct number k of parameters to use, we have compared the training error with the Leave one out cross-validation error.
+
+
+```{r Task_1_10, comment=NA}
+#str(dwvs)
+table(dwvs$country)
+set.seed(9850)   # -> random number generator
+gp<-runif(nrow(dwvs))
+dwvs2<-dwvs[order(gp),]
+#str(dwvs)
+#str(dwvs2)
+#head(dwvs)
+#head(dwvs2)
+
+hitratknn<-function(observed,predicted){
+  tab<-table(observed,predicted)
+  hitratknn<-sum(diag(tab))/sum(tab)
+  return(hitratknn)
+}
+
+knnmax<-100
+err<-matrix(rep(0,knnmax*2), nrow=knnmax)
+
+for(j in 1:knnmax) {
+  predknn.train<-knn(dwvs2[,2:8], dwvs2[,2:8], dwvs2$country, k=j)
+  err[j,1]<-hitratknn(dwvs2$country,predknn.train)
+}
+
+for(j in 1:knnmax) {
+  predknn.train<-knn.cv(dwvs2[,2:8], dwvs2$country, k=j)
+  err [j,2]<-hitratknn(dwvs2$country,predknn.train)
+}
+
+plot(-10, 10,xlim=c(1,knnmax),ylim=c(0,1))
+lines(c(1:knnmax),err[,1],col="red") # -> training error
+lines(c(1:knnmax),err[,2],col="blue")
+
+```
+
+We can see that with K=1 the model is flexible and by definition, we have training hit rate (red line) of 0, but the LOOCV hit rate (blue line) is higher in this case, while with model less flexible, as with k=98, the two errors are similar. 
+Since both the errors increase if we increase the parameter K, probably the model that describes the dataset better is the model with K=30 or K=66. 
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{}
+    \label{tab:}
+    \begin{tabular}{c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{K} & \textbf{TRAINING HIT RATE} & \textbf{LOOCV HIT RATE}\\
+      %\ \alpha$ & $\beta$ & $\gamma$ \\ 
+      \hline
+      1 & 1 & 0.8601630\\
+      30 & 0.8886908 & 0.8833418\\
+      66 & 0.8728986 & 0.8683138\\
+      100 & 0.8642384 & 0.8614366\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+## High Dimensional Discriminant Analysis
+The fourth method that we have used to discriminate between different groups is the HDDA method. This method could be useful while the number of parameters is high compared to the number of data. 
+
+
+```{r Task_1_11, comment=NA, include=TRUE}
+w <- dwvs[,-1]
+cls <- dwvs[,1]
+#HDDA on the learning dataset:
+hdda.out11 <- hdda(w, cls, scaling=TRUE, model="all", d="BIC",graph=TRUE,show=TRUE) 
+
+plot(hdda.out11)
+
+```
+
+  The model used from the HDDA analysis applying the BIC criterion is model $7(A_{kj} K_{j} B_{k} Q_{k} d)$. The decision following the _BIC_ criteria is to choose the model with the lowest value, in that case, the reference system is negative, so the lowest value is for model $7$. 
+
+```{r Task_1_12, comment=NA}
+plot(hdda.out11,method="BIC")
+
+```
+
+  The dimension choose for the model is $3$. The model chosen by the _BIC_ criteria has the same number of principal components for all the three different classes.
+  
+  
+```{r Task_1_13, comment=NA}  
+pred.train11<-predict(hdda.out11,w,cls)
+tab11<-table(dwvs$country,pred.train11$class)
+#print(tab11)
+#training hit rate
+kbl(sum(diag(tab11))/sum(tab11))
+
+```
+
+```{r Task_1_14, comment=NA}  
+pred.loocv12 <- hdda(w, cls,scaling=TRUE, d="BIC", LOO=TRUE)
+tab12<-table(cls,pred.loocv12$class)
+#print(tab12)
+kbl(tab12)
+#LOOCV hit rate
+kbl(sum(diag(tab12))/sum(tab12))
+```
+
+
+Also with the _HDDA_ model, there is rather small evidence of overfitting, but the HDDA model does not perform better than the other models. 
+
+
+## Error comparison for the different models
+
+We have computed for all 4 models the hit rate, for the comparison in the table we will present the training and LOOCV errors computing $1-*hit$ rate:
+  
+\begin{table}[h!]
+  \begin{center}
+  \caption{}
+    \begin{tabular}{c|c|c} 
+      \textbf{MODEL} & \textbf{TRAINING ERROR} & \textbf{LOOCV ERROR}\\
+      \hline
+        LDA & 0.1535914 & 0.154865\\
+        QDA & 0.1449312 & 0.1474783\\
+        KNN (K=30) & 0.1113092 & 0.1166582\\
+        HDDA & 0.1469689 & 0.1507896\\
+      \end{tabular}
+    \end{center}
+\end{table}
+
+In all the present models there is little evidence of overfitting, the two errors computed are in all the cases similar. The K-nearest Neighbors is a good model to compare the others and we can see that even if it performs betters it has not a huge difference. The model that performs better between the other $3$ is the Quadratic discriminant analysis, it is the most complex one with the highest number of parameters used. 
+
+Confronting the results, we can say that even if there is a difference between the models, no one of the computed ones has outstanding results. 
+
+Table of _QDA LOOCV_ rate:
+  
+\begin{table}[h!]
+  \begin{center}
+    \caption{}
+      \begin{tabular}{c|c|c|c} 
+      \textbf{ - } & \textbf{Netherlands} & \textbf{Nigeria} & \textbf{Philippines}\\
+      \hline
+        Netherlands & 1210 & 21 & 29\\
+        Nigeria & 40 & 1315 & 223\\
+        Philippines & 43 & 223 & 822\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+As we were expecting in the analysis of the canonical discriminant analysis, the model has a high ability to differentiate between Netherlands and the two other countries, when it has a high error rate discriminating between Nigeria and the Philippines. 
+
+## Multinomial logistic regression model
+
+```{r Task_1_15, comment=NA}  
+m1<- multinom(country~F_rights+F_steal+F_crime+F_religion+F_realizeself+F_dogood +F_violence, family=multinomial, data=dwvs, maxit=3926, hess=TRUE)
+t1_15_result <- summary (m1)
+t1_15_result
+```
+
+
+  We can see that there are 2 different regression model estimates: the first one compares the probability of Nigeria to the probability of the Netherlands, the second model compares the probability of the Philippines to the probability of the Netherlands. 
+All the parameters are significant except _F_dogood_ for Nigeria, which’s not significantly different from 0. 
+The sign of the parameters is the same for all the parameters in both the regressions, except for _F_dogood_ where the Nigeria coefficient is not significant. This could be explained because have we analyzed previously Netherlands strongly differs from the other two countries, while Nigeria and the Philippines have not a clear separation. 
+
+
+```{r Task_1_16, comment=NA}  
+#### compute hitrate training data####
+train.pred<-predict(m1,newdata=dwvs)
+tab<-table(dwvs$country, train.pred)
+kbl(sum(diag(tab))/sum(tab))
+
+```
+
+Error rate: 0.1428935
+
+```{r Task_1_17, comment=NA, eval=FALSE}  
+########compute LOOCV
+nobs<- 3926
+hit<-rep(0,nobs)
+for (i in 1:nobs){
+  train<-c(1:nobs)
+  mod<- multinom(country ~ F_rights + F_steal + F_crime + F_religion + 
+                   F_realizeself + F_dogood + F_violence, data=dwvs, 
+                 subset=train[-i], print= FALSE,maxit=3926)
+  pred<- predict(mod, newdata=dwvs[i,])
+  hit[i]<-ifelse(pred==dwvs$country[i],1,0)
+}
+
+```
+```{r Task_1_18, comment=NA, eval=FALSE}  
+
+#hitrate
+mean(hit)  #### LOOCV
+```
+Error rate: 0.1444218
+
+The Multinomial logistic regression model has slightly better error values than the other models, except for KNN.
