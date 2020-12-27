@@ -1,5 +1,5 @@
 ---
-title: "Task 1 "
+title: "Task 1"
 output: 
   pdf_document: 
     latex_engine: xelatex
