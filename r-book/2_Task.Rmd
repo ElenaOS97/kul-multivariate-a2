@@ -238,16 +238,19 @@ Actually, with the _MeanDecreaseGini_ graph we can see that the frequency of _â€
 ### 3)	Random Forests
   just some text.
   
-```{r Task_2_13, comment=NA, warning=FALSE} 
+```{r Task_2_13Y, comment=NA, warning=FALSE, eval=FALSE}
 # (3) random forests
 set.seed(0829539)
-rf.mod=randomForest(spam~.,data=data.train,classwt=c(0.606,0.394),mtry=5,ntree=nrotree,importance=TRUE)
+rf.mod=randomForest(spam ~ .,data=data.train, classwt=c(0.606,0.394), mtry=5, 
+                    ntree=nrotree, importance=TRUE)
 rf.mod
 ```
 
 
 ```{r Task_2_14, comment=NA, out.width='90%' , results='hide'} 
-pred.train<-predict(rf.mod,newdata=data.train)
+load(paste0(base_url,"T2/T2_ranfor_2.Rdata"))
+
+pred.train<-predict(T2_ranfor_2,newdata=data.train)
 err(data.train$spam,pred.train)
 
 pred.test<-predict(rf.mod,newdata=data.test)

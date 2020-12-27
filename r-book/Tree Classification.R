@@ -82,7 +82,7 @@ bag.mod=randomForest(spam~.,data=data.train,classwt=c(0.606,0.394),mtry=57,ntree
 t2_bagging_1 <- bag.mod
 
 save(t2_bagging_1,file = paste0(base_url,"T2/T2_1_bagging.Rdata"))
-################################################################
+###########################################################################################################################################
 
 
 #plot oob error
@@ -106,7 +106,7 @@ rf.mod=randomForest(spam~.,data=data.train,classwt=c(0.606,0.394),mtry=5,ntree=5
 t2_ranfor_2 <- rf.mod
 
 save(t2_ranfor_2,file = paste0(base_url,"T2/T2_ranfor_2.Rdata"))
-###############################################################
+###########################################################################################################################################
 
 pred.train<-predict(rf.mod,newdata=data.train)
 err(data.train$spam,pred.train)
@@ -133,7 +133,7 @@ spamdata$spam<-ifelse(spamdata$spam=="1_yes",1,0)
 boost.mod=gbm(spam~.,data=data.train,distribution="bernoulli",n.trees=20000,interaction.depth=4,shrinkage=0.001,cv.folds=5)
 t2_gbm_3 <- boost.mod
 save(t2_gbm_3,file = paste0(base_url,"T2/T2_gbm_3.Rdata"))
-#########################################################
+###########################################################################################################################################
 
 gbm.perf(boost.mod,method="cv")
 legend("topright",c("train error","CV error"),col=c("green","black"),lty=c(1,1))
@@ -157,6 +157,9 @@ data.test$spam<-factor(ifelse(data.test$spam==1,"1_yes","0_no"))
 spamdata$spam<-factor(ifelse(spamdata$spam==1,"1_yes","0_no"))
 ########
 lda.out<-lda(spam~.,prior=c(0.606,0.394),data=data.train)
+save(t2_ldaout_7,file = paste0(base_url,"T2/T2_ldaout_7.Rdata"))
+###########################################################################################################################################
+
 print(lda.out)
 
 pred.train<-predict(lda.out,data.train)
@@ -172,7 +175,7 @@ set.seed(0829539)
 bag.mod=randomForest(spam~.,data=data.train,mtry=57,ntree=5000,classwt=c(0.606,0.394),importance=TRUE)
 t2_bagmod_4 <- bag.mod
 save(t2_bagmod_4,file = paste0(base_url,"T2/T2_bagmod_4.Rdata"))
-################################################################
+###########################################################################################################################################
 
 
 
@@ -197,7 +200,7 @@ set.seed(0829539)
 rf.mod=randomForest(spam~.,data=data.train,mtry=5,ntree=5000,classwt=c(0.606,0.394),importance=TRUE)
 t2_rfmod_5 <- rf.mod
 save(t2_rfmod_5,file = paste0(base_url,"T2/T2_rfmod_5.Rdata"))
-################################################################
+###########################################################################################################################################
 
 pred.train<-predict(rf.mod,type="prob",newdata=data.train)
 classif.train<-ifelse(1*pred.train[,2]>=10*pred.train[,1],1,0)
@@ -226,7 +229,7 @@ boost.mod=gbm(spam~.,data=data.train,distribution="bernoulli",n.trees=20000,inte
 t2_boostmod_6 = boost.mod
 #save(boost.mod_save,gbm.perf_save,file = "T2/save_objects.Rdata")
 save(t2_boostmod_6,file = paste0(base_url,"T2/T2_boostmod_6.Rdata"))
-################################################################
+###########################################################################################################################################
 
 gbm.perf_save = gbm.perf(boost.mod,method="cv")
 legend("topright",c("train error","CV error"),col=c("green","black"),lty=c(1,1))
