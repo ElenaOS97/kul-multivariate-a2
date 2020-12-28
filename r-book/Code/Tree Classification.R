@@ -157,6 +157,7 @@ data.test$spam<-factor(ifelse(data.test$spam==1,"1_yes","0_no"))
 spamdata$spam<-factor(ifelse(spamdata$spam==1,"1_yes","0_no"))
 ########
 lda.out<-lda(spam~.,prior=c(0.606,0.394),data=data.train)
+t2_ldaout_7 <- lda.out
 save(t2_ldaout_7,file = paste0(base_url,"T2/T2_ldaout_7.Rdata"))
 ###########################################################################################################################################
 
