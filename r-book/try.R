@@ -5,7 +5,7 @@ library(qdapRegex)
 library(stringr)
 
 headers <- c('signal','alph', 'nchar', 'dots', 'lines', 's_dot', 's_line')
-alphabet <- c(letters,1:9,0)
+
 
 v_signal <- colnames(confusion)
 v_signal <- str_replace(v_signal, " ", "")
@@ -13,6 +13,7 @@ v_signal <- str_replace(v_signal, "- -", "--")
 v_signal <- str_replace(v_signal, "· -", "·-")
 v_signal <- str_replace(v_signal, "· ·", "··")
 v_signal <- str_replace(v_signal, "- ·", "-·")
+
 
 another_matrix <- data.frame(v_signal) %>% mutate(alph = alphabet, 
                                                   size = nchar(trimws(v_signal)),
@@ -26,3 +27,6 @@ another_matrix <- data.frame(v_signal) %>% mutate(alph = alphabet,
                                                   dots_s_length = (str_count(v_signal, "·") * 0.05),
                                                   lines_s_length = (str_count(v_signal, "-") * 0.15) 
                                                   ) %>% print()
+
+
+

@@ -7,7 +7,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
+```{r setup5, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -17,27 +17,51 @@ base_url <- '~/GitHub/kul-multivariate-a2/src/'
 load(paste0(base_url,"confusion.Rdata"))
 #install.packages("smacof")
 library(smacof)
-library(limma)
+library(dplyr)
+library(qdapRegex)
+library(stringr)
+library(kableExtra)
+#write.csv(confusion,"~/GitHub/kul-multivariate-a2/src/cnf.csv", row.names = FALSE)
+alphabet <- c(letters,1:9,0)
+translate <- confusion
+colnames(translate) <-alphabet
+rownames(translate) <-alphabet
 
-write.csv(confusion,"~/GitHub/kul-multivariate-a2/src/cnf.csv", row.names = FALSE)
+sim <- (confusion+t(confusion))/2 #similarity
+dissim <- 100-sim #dissimilarity
+for (i in 1:36){
+  dissim[i,i]<-0   #diagonal 0
+} 
+
+tsim <- (translate+t(translate))/2 #similarity
+tdissim <- 100-tsim #dissimilarity
+for (i in 1:36){
+  tdissim[i,i]<-0   #diagonal 0
+} 
+
 ```
 
-# Introduction
+## Introduction
 
   In a study on Morse code signals Rothkopf (1957) asked 598 subjects to indicate for each pair of signals (acoustically presented after each other) whether the two signals were equal.
   Note that each signal consists of a sequence of short beeps (0.05 sec) and long beeps (0.15 sec) separated by a silence (0.05 sec).
   The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
   The value in cell (i,j) of the matrix represents the percentage of subjects who indicated that signal i was equal to signal j, when signal j was presented after signal i.
  
-# Methodology
+ 
+## Methodology
+
+  First of all and in order to observe dissimilarities, smacofSym() will be used to conduct a MDS with 2 dimensions. 
+  
+  After 
+
   We compute a symmetric matrix of similarities by taking the average of corresponding elements in the confusion matrix above and below the diagonal, 
 next we convert the matrix of similarities into a matrix of dissimilarities, and finally we put all diagonal elements of the dissimilarity matrix equal to 0:
 ..................
-# Results
+## Results
   ..................
 
 ```{r Task_5_0, include=FALSE}
-
 sim <- (confusion+t(confusion))/2 #similarity
 dissim <- 100-sim #dissimilarity
 for (i in 1:36){
@@ -47,89 +71,139 @@ for (i in 1:36){
 str(sim) 
 ```
 
-## Question 1 
+### Question 1
 1. Use *smacofSym()* to conduct MDS with 2 dimensions and assuming different measurement levels (i.e., _ratio, interval, mspline, ordinal_) for the observed dissimilarities.
 
-1.1 ratio
-```{r Task_5_1, include=TRUE}
+#### 1.1 Getting information from dissimilarity matrix. 
+  Here ratio, interval, mspline and ordinal values are obtained.
+    
+```{r Task_5_1N, include=FALSE, eval=TRUE}
+#ratio
+tm1 <- smacofSym(delta=tdissim, ndim=2, type="ratio", init="torgerson")
+#interval
+tm2 <- smacofSym(delta=tdissim, ndim=2, type="interval", init="torgerson")
+#mspline
+tm3 <- smacofSym(delta=tdissim, ndim=2, type="mspline", spline.degree =4, 
+                spline.intKnots = 4, init="torgerson")
+#ordinal
+tm4 <- smacofSym(delta=tdissim, ndim=2, type="ordinal", init="torgerson")
+```
+```{r Task_5_1Y1, include=TRUE, eval=TRUE}
+#ratio
 m1 <- smacofSym(delta=dissim, ndim=2, type="ratio", init="torgerson")
-
-```
-1.2 interval 
-```{r Task_5_2, include=TRUE}
+#interval
 m2 <- smacofSym(delta=dissim, ndim=2, type="interval", init="torgerson")
-```
-
-1.3 mspline
-```{r Task_5_3, include=TRUE}
-m3<-smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4, spline.intKnots = 4, init="torgerson")
-```
-
-1.4 ordinal
-```{r Task_5_4, include=TRUE}
+#mspline
+m3 <- smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4, 
+                spline.intKnots = 4, init="torgerson")
+#ordinal
 m4 <- smacofSym(delta=dissim, ndim=2, type="ordinal", init="torgerson")
 ```
+```{r Task_5_1Y2, include=TRUE, eval=TRUE}
+#ratio
+mmmm1 <- smacofIndDiff(tdissim, type= "ratio", constraint = "indscal", ties="primary")
+#interval
+m2 <- smacofSym(delta=dissim, ndim=2, type="interval", init="torgerson")
+#mspline
+m3 <- smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4, 
+                spline.intKnots = 4, init="torgerson")
+#ordinal
+m4 <- smacofSym(delta=dissim, ndim=2, type="ordinal", init="torgerson")
+```
+```{r Task_5_2, include=FALSE, eval=TRUE}
+## jUST df creation to be used in kable
+dt <- data.frame(
+  "m1" = round(c(m1$stress),3),
+  "m2" = round(c(m2$stress),3),
+  "m3" = round(c(m3$stress),3),
+  "m4" = round(c(m4$stress),3)
+)
+```
+```{r Task_5_2n, include=FALSE, eval=TRUE}
+## jUST df creation to be used in kable
+tdt <- data.frame(
+  "tm1" = round(c(tm1$stress),3),
+  "tm2" = round(c(tm2$stress),3),
+  "tm3" = round(c(tm3$stress),3),
+  "tm4" = round(c(tm4$stress),3)
+)
+```
 
-```{r Task_5_5, include=TRUE}
 
-round(c(m1$stress,m2$stress,m3$stress,m4$stress),3)
+```{r Task_5_4, include=TRUE, echo=FALSE}
+dt %>%
+  kbl(caption = "Stress-1  table values") %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+
+```
+
+```{r Task_5_4n, include=FALSE, echo=FALSE}
+tdt %>%
+  kbl(caption = "Stress-1  table values") %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+
+```
+```{r Task_5_5N, include=TRUE, echo=FALSE}
 
 par(mfrow=c(2,2))
+plot(tm3,plot.type="resplot",main="residual plot ordinal MDS")
+plot(tm3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
+plot(tm4,plot.type="resplot",main="residual plot spline MDS")
+plot(tm4,plot.type="Shepard",main="Shepard diagram spline MDS")
+#configuration ordinal MDS
 
+```
+```{r Task_5_5, include=TRUE, echo=FALSE}
+
+par(mfrow=c(2,2))
 plot(m3,plot.type="resplot",main="residual plot ordinal MDS")
 plot(m3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
-
 plot(m4,plot.type="resplot",main="residual plot spline MDS")
 plot(m4,plot.type="Shepard",main="Shepard diagram spline MDS")
 #configuration ordinal MDS
 
 ```
-
+```{r Task_5_6n,include=TRUE,  include=TRUE}
+plot(tm3,plot.type="conf")
+```
 ```{r Task_5_6, include=TRUE}
 plot(m3,plot.type="conf")
 ```
 
-
-## Question 2
+### Question 2
 2. Evaluate the goodness of fit of solutions with different measurement levels using _stress-1_, and by computing stress norms with the functions _randomstress()_ and _permutation()_. Discuss which solution you would select. Investigate the stability of the selected solution using the _Jackknife_.
 
-```{r Task_5_7, include=TRUE}
-
+```{r Task_5_7, include=FALSE, eval=FALSE}
 #stress norm
-set.seed(1)
-rstress<-randomstress(n=36,ndim=2,nrep=500,type="ordinal")
+#set.seed(1)
+#rstress<-randomstress(n=36,ndim=2,nrep=500,type="ordinal")
 #distribution of stress for random data
-mean(rstress)-2*sd(rstress)
+#mean(rstress)-2*sd(rstress)
 #permutation test
-set.seed(1)
-perm.car<-permtest(m3,nrep=500)
+#set.seed(1)
+#perm.car<-permtest(m3,nrep=500)
 #plot distribution stress
-par(mfrow=c(1,2),pty="s")
-hist(rstress,main="stress random data")
-hist(perm.car$stressvec,main="stress permuted data")
+#par(mfrow=c(1,2),pty="s")
+#hist(rstress,main="stress random data")
+#hist(perm.car$stressvec,main="stress permuted data")
 #stability of solution using jackknife
-jack.car<-jackmds(m3)
-plot(jack.car,xlim=c(-1.2,1.2),ylim=c(-1,1))
+#jack.car<-jackmds(m3)
+#plot(jack.car,xlim=c(-1.2,1.2),ylim=c(-1,1))
 ```
 
-## Question 3
+### Question 3
 
 3. Construct a data set of external variables that describe the signals (e.g. length of the signal, proportion of short beeps in the signal, etc.). Use an _MDS biplot_ to project the external variables in the configuration plot of the selected solution, and interpret the results of the analysis. 
 
 ```{r Task_5_8N, include=TRUE}
-library(dplyr)
-library(qdapRegex)
-library(stringr)
-
 v_signal <- colnames(confusion)
 v_signal <- str_replace(v_signal, " ", "")
 v_signal <- str_replace(v_signal, "- -", "--")
 v_signal <- str_replace(v_signal, "· -", "·-")
 v_signal <- str_replace(v_signal, "· ·", "··")
 v_signal <- str_replace(v_signal, "- ·", "-·")
-
-another_matrix <- data.frame(v_signal) %>% 
-  mutate(alph = alphabet, 
+alphabet <- c(letters,1:9,0)
+another_matrix <- data.frame(v_signal) %>% mutate(alph = alphabet, 
          size = nchar(trimws(v_signal)), 
          ndots =  str_count(v_signal, "·"),
          nlines = str_count(v_signal, "-"),
@@ -140,38 +214,36 @@ another_matrix <- data.frame(v_signal) %>%
          dots_s_length = (str_count(v_signal,"·")*0.05),
          lines_s_length = (str_count(v_signal,"-")*0.15)) %>% print()
 ```
-
-
 ```{r Task_5_8Y, include=TRUE}
 
-bimorse <- biplotmds(sim, another_matrix)
+#bimorse <- biplotmds(sim, another_matrix)
 
-plotMDS(dissim)
+#plotMDS(dissim)
 
 #fit two-dimensional indscal model assuming different measurement levels
-m1<-smacofIndDiff(dissim, type="ratio", constraint="indscal",ties="primary")
-m2<-smacofIndDiff(dissim, type="interval", constraint="indscal",ties="primary")
-m3<-smacofIndDiff(dissim, type="ordinal", constraint="indscal",ties="primary")
-round(c(m1$stress,m2$stress,m3$stress),3)
+#m1<-smacofIndDiff(dissim, type="ratio", constraint="indscal",ties="primary")
+#m2<-smacofIndDiff(dissim, type="interval", constraint="indscal",ties="primary")
+#m3<-smacofIndDiff(dissim, type="ordinal", constraint="indscal",ties="primary")
+#round(c(m1$stress,m2$stress,m3$stress),3)
 
-res <- mds(dissim)
-fitbi <- biplotmds(res, morsescales[,2:3])
-plot(fitbi, main = "MDS Biplot", vecscale = 0.5)
-alphabet <- c(letters,1:9,0)
+#res <- mds(dissim)
+#fitbi <- biplotmds(res, morsescales[,2:3])
+#plot(fitbi, main = "MDS Biplot", vecscale = 0.5)
+#alphabet <- c(letters,1:9,0)
 
-confusion2 <- confusion
-colnames(confusion2) <- paste(colnames(confusion), "=", c(letters,1:9,0)) 
-rownames(confusion)
+#confusion2 <- confusion
+#colnames(confusion2) <- paste(colnames(confusion), "=", c(letters,1:9,0)) 
+#rownames(confusion)
 
 #compute MDS biplot: run multivariate linear regression of
 #external variables on configuration
 
-fitFace <- mds(dissim, type = "ordinal")
+#fitFace <- mds(dissim, type = "ordinal")
 
-biFace <- biplotmds(fitFace, another_matrix[,-c(1:2)])
+#biFace <- biplotmds(fitFace, another_matrix[,-c(1:2)])
 
-plot(biFace, main = "Biplot Vector Representation", 
-     vecscale = 0.8, xlim = c(-1.5, 1.5), 
-     vec.conf = list(col = "brown"), pch = 20, cex = 0.5)
+#plot(biFace, main = "Biplot Vector Representation", 
+#     vecscale = 0.8, xlim = c(-1.5, 1.5), 
+#     vec.conf = list(col = "brown"), pch = 20, cex = 0.5)
 
 ```
