@@ -1,0 +1,2802 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Times New Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Task 1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=normal,up,justification=justified,singlelinecheck=false]{caption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Task 1}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{task-1}{%
+\section{Task 1}\label{task-1}}
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+In the present part of the report, we will investigate to what extent we will be able to classify respondents in their country, and then we will compare the performance of different classifiers.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+The data have been obtained from the \(6^{th}\) Wave of the World Value Survey, which was carried out between 2010 and 2013. The data include the standardized scores of 3929 respondents of 3 countries on 32 variables, that have been summarized with 7 factors obtained using exploratory factor analysis with oblique rotation.
+The 7 factors related to the 32 variables are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Rights}, that it's related to homosexuality, prostitution, abortion, divorce, sex before marriage, suicide;
+\item
+  \textbf{Steal}, that it's related to claiming benefits, avoiding fare, stealing property, cheating taxes, accept a bribe;
+\item
+  \textbf{Crime}, that it's related to robberies, alcohol, police-military, racist behavior, drug sale;
+\item
+  \textbf{Religion}, that it's related to attend religious services, pray, the importance of God;
+\item
+  \textbf{Realize self}, that it's related to creative, rich, spoil oneself, be successful, exciting life;
+\item
+  \textbf{Do good}, that it's related to security, do good, behave properly, protect environment, tradition;
+\item
+  \textbf{Violence}, that it's related to beat wife, parents beating children, violenc.
+\end{enumerate}
+
+\hypertarget{methodology}{%
+\subsection{Methodology}\label{methodology}}
+
+To investigate the possibility to classify the respondents in their country based on the \(7\) factors we have used the canonical discriminant analysis. We have applied the linear regression function with \(7\) predictors and \(1\) dependent variable, the Country. Then to the output, we have applied the Canonical Discriminant Analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm.out}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(F\_rights, F\_steal, F\_crime,F\_religion,F\_realizeself,F\_dogood,}
+\NormalTok{                 F\_violence)}\SpecialCharTok{\textasciitilde{}}\FunctionTok{as.factor}\NormalTok{(country), }\AttributeTok{data=}\NormalTok{dwvs)}
+\NormalTok{candisc.out}\OtherTok{\textless{}{-}}\FunctionTok{candisc}\NormalTok{(lm.out)}
+\FunctionTok{print}\NormalTok{(candisc.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Canonical Discriminant Analysis for as.factor(country):
+
+   CanRsq Eigenvalue Difference Percent Cumulative
+1 0.80691    4.17882     3.5622  87.142     87.142
+2 0.38142    0.61661     3.5622  12.858    100.000
+
+Test of H0: The canonical correlations in the 
+current row and all that follow are zero
+
+  LR test stat approx F numDF denDF   Pr(> F)    
+1      0.11944  1059.53    14  7834 < 2.2e-16 ***
+2      0.61858   402.65     6  3918 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+As we can see both the Square Canonical Correlation are significant, but the discriminating power to separate between the groups is higher for the first than for the second discriminant function: \(0.81\) and \(0.38\) respectively.
+The LR test indicates that the discriminant analysis is meaningful. The first test's null hypothesis is \(H_{0}: \lambda_{1}=\lambda_{2}=0\) and this hypothesis as we can see from the \emph{p-value} is rejected. The \(null\) hypothesis of the first test it's equivalent to the test for \(H_{0}: \mu Netherlands = \mu Nigeria = \mu Philippines\).
+
+The second LR test indicates that \(H_{0}:\lambda_{2}=0\), and also this null hypothesis is rejected. So even if the second discriminant function has less discriminant power cannot be omitted and it's statistically meaningful.
+
+On our analysis, we have also applied two different tests for centroids and to test the equal covariance.
+
+To see if the three-country has different centroids and confirm the results of the canonical discriminant analysis we have applied on the linear
+regression the function \emph{Manova}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res\_t1\_2 }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{Manova}\NormalTok{(lm.out), }\AttributeTok{test=}\StringTok{"Wilks"}\NormalTok{)}
+
+\FunctionTok{summary.default}\NormalTok{(}\FunctionTok{Manova}\NormalTok{(lm.out), }\AttributeTok{test=}\StringTok{"Wilks"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Length Class  Mode     
+SSP       1     -none- list     
+SSPE     49     -none- numeric  
+df        1     -none- numeric  
+error.df  1     -none- numeric  
+terms     1     -none- character
+repeated  1     -none- logical  
+type      1     -none- character
+test      1     -none- character
+\end{verbatim}
+
+The \emph{p-value} is small, and the test confirms that the analysis is meaningful and that at least there is a pair of centroids that differs significantly. The function \emph{Manova} in r doing the \emph{Wilks Lambda test} uses the Rao approximation.
+To test the assumption on equal population covariance we have applied to the linear regression the function \emph{boxM}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxM}\NormalTok{(lm.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Box's M-test for Homogeneity of Covariance Matrices
+
+data:  Y
+Chi-Sq (approx.) = 5479.2, df = 56, p-value < 2.2e-16
+\end{verbatim}
+
+The test of Box indicates that \(H_{0}\) of equal covariance matrices across groups is not supported by data.
+
+\newpage
+
+\hypertarget{plot}{%
+\subsubsection{Plot}\label{plot}}
+
+To complete the Canonical Discriminant analysis, we have plotted the three countries and the \(7\) variables.
+
+\begin{verbatim}
+Vector scale factor set to 7.827
+\end{verbatim}
+
+\includegraphics{report_files/figure-latex/Task_1_4-1.pdf}
+
+We can see that the group of individuals in \emph{red} are Netherlands citizens, the group of individuals in \emph{green} are Nigerians citizens and the group of individuals in \emph{black} are Philippines citizens. In blue we can see the \(7\) explanatory variables. The plot shows a clear separation between Netherlands and the other two countries on the first discriminant function while the second discriminant function could help to separate Nigeria and the Philippines.
+The first discriminant function especially correlates with the factors: rights, religion, realize self, and do good; whereas the second discriminant function correlates with the factors: steal and realize self. The two-factor crime and violence have a lower correlation on the two factors and so has in this analysis lower importance on separate the \(3\) countries.
+
+\hypertarget{compare-the-performance-of-different-classifiers}{%
+\subsubsection{Compare the performance of different classifiers}\label{compare-the-performance-of-different-classifiers}}
+
+We are going now to compare the performance of different classifiers to classify respondents in their country based on the \(7\) factors. To be able to do that we are going to compute the training error and the leave-one-out cross-validation error.
+The classification method that we are going to compare are:
+- Linear discriminant analysis;
+- Quadratic discriminant analysis;
+- K-nearest neighbors with k ranging from \emph{1 to 100};
+- High Dimensional Discriminant Analysis;
+
+\hypertarget{linear-discriminant-analysis}{%
+\subsubsection{Linear discriminant analysis}\label{linear-discriminant-analysis}}
+
+This method aims to separate in the clearest possible way different groups using the linear combination of observed independent variables. The linear discriminant analysis method assumes that the covariance structure of the independent variable is the same across groups. In our analysis, we know from the Box test previously computed that this assumption is not supported by the data. It will be an interesting test if in this case the Quadratic discriminant analysis, where the assumption on the equality of covariance matrix is relaxed, will perform better.
+In the linear discriminant analysis, we have applied the method of Fisher correcting for the different prior probability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lda.out1}\OtherTok{\textless{}{-}}\FunctionTok{lda}\NormalTok{(country }\SpecialCharTok{\textasciitilde{}}\NormalTok{ F\_rights }\SpecialCharTok{+}\NormalTok{ F\_steal }\SpecialCharTok{+}\NormalTok{ F\_crime }\SpecialCharTok{+}\NormalTok{ F\_religion }\SpecialCharTok{+}\NormalTok{ F\_realizeself }\SpecialCharTok{+}
+\NormalTok{                F\_dogood }\SpecialCharTok{+}\NormalTok{ F\_violence, }\AttributeTok{data=}\NormalTok{dwvs)}
+\CommentTok{\#print(lda.out1)}
+\NormalTok{pred.train1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(lda.out1,dwvs, }\AttributeTok{prior=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tab1 }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country,pred.train1}\SpecialCharTok{$}\NormalTok{class)}
+\CommentTok{\#print(tab1)}
+\FunctionTok{kbl}\NormalTok{(tab1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r|r}
+\hline
+  & Netherlands & Nigeria & Philippines\\
+\hline
+Netherlands & 1145 & 39 & 76\\
+\hline
+Nigeria & 10 & 1327 & 241\\
+\hline
+Philippines & 17 & 220 & 851\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#training hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab1))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8464086\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#classify test observations using LDA}
+\NormalTok{pred.loocv2}\OtherTok{\textless{}{-}}\FunctionTok{lda}\NormalTok{(country}\SpecialCharTok{\textasciitilde{}}\NormalTok{F\_rights}\SpecialCharTok{+}\NormalTok{F\_steal}\SpecialCharTok{+}\NormalTok{F\_crime}\SpecialCharTok{+}\NormalTok{F\_religion}\SpecialCharTok{+}\NormalTok{F\_realizeself}\SpecialCharTok{+}\NormalTok{F\_dogood}\SpecialCharTok{+}
+\NormalTok{                   F\_violence,}\AttributeTok{data=}\NormalTok{dwvs, }\AttributeTok{prior=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\AttributeTok{CV=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tab2}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country,pred.loocv2}\SpecialCharTok{$}\NormalTok{class)}
+\FunctionTok{print}\NormalTok{(tab2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             
+              Netherlands Nigeria Philippines
+  Netherlands        1145      39          76
+  Nigeria              11    1326         241
+  Philippines          17     224         847
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#LOOCV hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab2))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.845135\\
+\hline
+\end{tabular}
+
+We can see that in that case, the difference between the performance for training error and LOOCV error is really small, so there is no evidence for overfitting.
+
+\hypertarget{quadratic-discriminant-analysis}{%
+\subsubsection{Quadratic discriminant analysis}\label{quadratic-discriminant-analysis}}
+
+The second method that we have applied is Quadratic discriminant analysis. It should perform better considering the difference in the covariance matrix for the different groups. QDA even if has a lower bias with a different covariance matrix, has a larger variance, and as in our case with a small dataset can be problematic.
+
+Even in this case, we have applied the method of Fisher correcting for prior probabilities.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qda.out3}\OtherTok{\textless{}{-}}\FunctionTok{qda}\NormalTok{(country }\SpecialCharTok{\textasciitilde{}}\NormalTok{ F\_rights }\SpecialCharTok{+}\NormalTok{ F\_steal }\SpecialCharTok{+}\NormalTok{ F\_crime }\SpecialCharTok{+}\NormalTok{ F\_religion }\SpecialCharTok{+}\NormalTok{ F\_realizeself }\SpecialCharTok{+} 
+\NormalTok{                F\_dogood }\SpecialCharTok{+}\NormalTok{ F\_violence, }\AttributeTok{data =}\NormalTok{ dwvs) }
+
+\NormalTok{pred.train3}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(qda.out3,dwvs, }\AttributeTok{prior=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{)}
+
+\NormalTok{tab3}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country,pred.train3}\SpecialCharTok{$}\NormalTok{class)}
+\CommentTok{\#print(tab3)}
+\FunctionTok{kbl}\NormalTok{(tab3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r|r}
+\hline
+  & Netherlands & Nigeria & Philippines\\
+\hline
+Netherlands & 1210 & 21 & 29\\
+\hline
+Nigeria & 40 & 1319 & 219\\
+\hline
+Philippines & 41 & 219 & 828\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#training hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab3))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab3))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8550688\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#classify test observations using QDA}
+\NormalTok{pred.test4 }\OtherTok{\textless{}{-}} \FunctionTok{qda}\NormalTok{(country }\SpecialCharTok{\textasciitilde{}}\NormalTok{ F\_rights }\SpecialCharTok{+}\NormalTok{ F\_steal }\SpecialCharTok{+}\NormalTok{ F\_crime }\SpecialCharTok{+}\NormalTok{ F\_religion }\SpecialCharTok{+}\NormalTok{ F\_realizeself }\SpecialCharTok{+} 
+\NormalTok{                    F\_dogood }\SpecialCharTok{+}\NormalTok{ F\_violence, }\AttributeTok{data=}\NormalTok{dwvs,}\AttributeTok{prior=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{,}\AttributeTok{CV=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tab4}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country,pred.test4}\SpecialCharTok{$}\NormalTok{class)}
+\CommentTok{\#print(tab4)}
+\FunctionTok{kbl}\NormalTok{(tab4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r|r}
+\hline
+  & Netherlands & Nigeria & Philippines\\
+\hline
+Netherlands & 1210 & 21 & 29\\
+\hline
+Nigeria & 40 & 1315 & 223\\
+\hline
+Philippines & 43 & 223 & 822\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#LOOCV hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab4))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab4))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8525217\\
+\hline
+\end{tabular}
+
+In that case there is also no evidence of overfitting. We can see from the results that the QDA performs better than the LDA but not with a significant improvement.
+
+\hypertarget{k-nearest-neighbors}{%
+\subsubsection{K-nearest Neighbors}\label{k-nearest-neighbors}}
+
+The third model that we had analyzed is the K-nearest Neighbors. We have computed the model using all the 3926 observations, and to choose which is the correct number k of parameters to use, we have compared the training error with the Leave one out cross-validation error.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#str(dwvs)}
+\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Netherlands     Nigeria Philippines 
+       1260        1578        1088 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{9850}\NormalTok{)   }\CommentTok{\# {-}\textgreater{} random number generator}
+\NormalTok{gp}\OtherTok{\textless{}{-}}\FunctionTok{runif}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(dwvs))}
+\NormalTok{dwvs2}\OtherTok{\textless{}{-}}\NormalTok{dwvs[}\FunctionTok{order}\NormalTok{(gp),]}
+\CommentTok{\#str(dwvs)}
+\CommentTok{\#str(dwvs2)}
+\CommentTok{\#head(dwvs)}
+\CommentTok{\#head(dwvs2)}
+
+\NormalTok{hitratknn}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(observed,predicted)\{}
+\NormalTok{  tab}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(observed,predicted)}
+\NormalTok{  hitratknn}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab)}
+  \FunctionTok{return}\NormalTok{(hitratknn)}
+\NormalTok{\}}
+
+\NormalTok{knnmax}\OtherTok{\textless{}{-}}\DecValTok{100}
+\NormalTok{err}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,knnmax}\SpecialCharTok{*}\DecValTok{2}\NormalTok{), }\AttributeTok{nrow=}\NormalTok{knnmax)}
+
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{knnmax) \{}
+\NormalTok{  predknn.train}\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(dwvs2[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], dwvs2[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], dwvs2}\SpecialCharTok{$}\NormalTok{country, }\AttributeTok{k=}\NormalTok{j)}
+\NormalTok{  err[j,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\FunctionTok{hitratknn}\NormalTok{(dwvs2}\SpecialCharTok{$}\NormalTok{country,predknn.train)}
+\NormalTok{\}}
+
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{knnmax) \{}
+\NormalTok{  predknn.train}\OtherTok{\textless{}{-}}\FunctionTok{knn.cv}\NormalTok{(dwvs2[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], dwvs2}\SpecialCharTok{$}\NormalTok{country, }\AttributeTok{k=}\NormalTok{j)}
+\NormalTok{  err [j,}\DecValTok{2}\NormalTok{]}\OtherTok{\textless{}{-}}\FunctionTok{hitratknn}\NormalTok{(dwvs2}\SpecialCharTok{$}\NormalTok{country,predknn.train)}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(}\StringTok{\textquotesingle{}K\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hit rate\textquotesingle{}}\NormalTok{,}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,knnmax),}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion
+
+Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{knnmax),err[,}\DecValTok{1}\NormalTok{],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{) }\CommentTok{\# {-}\textgreater{} training error}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{knnmax),err[,}\DecValTok{2}\NormalTok{],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_1_10-1.pdf}
+
+We can see that with K=1 the model is flexible and by definition, we have training hit rate (red line) of 0, but the LOOCV hit rate (blue line) is higher in this case, while with model less flexible, as with k=98, the two errors are similar.
+Since both the errors increase if we increase the parameter K, probably the model that describes the dataset better is the model with K=30 or K=66.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{}
+    \label{tab:}
+    \begin{tabular}{c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{K} & \textbf{TRAINING HIT RATE} & \textbf{LOOCV HIT RATE}\\
+      %\ \alpha$ & $\beta$ & $\gamma$ \\ 
+      \hline
+      1 & 1 & 0.8601630\\
+      30 & 0.8886908 & 0.8833418\\
+      66 & 0.8728986 & 0.8683138\\
+      100 & 0.8642384 & 0.8614366\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\hypertarget{high-dimensional-discriminant-analysis}{%
+\subsubsection{High Dimensional Discriminant Analysis}\label{high-dimensional-discriminant-analysis}}
+
+The fourth method that we have used to discriminate between different groups is the HDDA method. This method could be useful while the number of parameters is high compared to the number of data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w }\OtherTok{\textless{}{-}}\NormalTok{ dwvs[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{cls }\OtherTok{\textless{}{-}}\NormalTok{ dwvs[,}\DecValTok{1}\NormalTok{]}
+\CommentTok{\#HDDA on the learning dataset:}
+\NormalTok{hdda.out7 }\OtherTok{\textless{}{-}} \FunctionTok{hdda}\NormalTok{(w, cls, }\AttributeTok{scaling=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{model=}\StringTok{"all"}\NormalTok{, }\AttributeTok{d=}\StringTok{"BIC"}\NormalTok{,}\AttributeTok{graph=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{show=}\ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ # :     Model     BIC
+ 1 :     AKJBKQKDK   -67912.32  
+ 2 :     AKBKQKDK    -68249.76  
+ 3 :     ABKQKDK     -69185.72  
+ 4 :     AKJBQKDK    -69646.01  
+ 5 :     AKBQKDK     -69983.46  
+ 6 :     ABQKDK      -70919.41  
+ 7 :     AKJBKQKD    -67492.38  
+ 8 :     AKBKQKD     -68372.73  
+ 9 :     ABKQKD      -68803.13  
+10 :     AKJBQKD     -68044.89  
+11 :     AKBQKD      -68925.24  
+12 :     ABQKD       -69355.63  
+13 :     AJBQD       -71078.02  
+14 :     ABQD        -71609.34  
+
+SELECTED: Model AKJBKQKD, BIC=-67492.38.
+\end{verbatim}
+
+\includegraphics{report_files/figure-latex/Task_1_11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(hdda.out7)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_1_11-2.pdf}
+
+The model used from the HDDA analysis applying the BIC criterion is model \(7(A_{kj} K_{j} B_{k} Q_{k} d)\). The decision following the \emph{BIC} criteria is to choose the model with the lowest value, in that case, the reference system is negative, so the lowest value is for model \(7\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(hdda.out7,}\AttributeTok{method=}\StringTok{"BIC"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_1_12-1.pdf}
+
+The dimension choose for the model is \(3\). The model chosen by the \emph{BIC} criteria has the same number of principal components for all the three different classes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train7}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(hdda.out7,w,cls)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Correct classification rate: 0.8530311.
+               Initial class
+Predicted class Netherlands Nigeria Philippines
+    Netherlands        1196      20          40
+    Nigeria              26    1356         251
+    Philippines          38     202         797
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#print(tab7)}
+\NormalTok{tab7}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country,pred.train7}\SpecialCharTok{$}\NormalTok{class)}
+\CommentTok{\#training hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab7))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab7))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8530311\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.loocv8 }\OtherTok{\textless{}{-}} \FunctionTok{hdda}\NormalTok{(w, cls,}\AttributeTok{scaling=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{d=}\StringTok{"BIC"}\NormalTok{, }\AttributeTok{LOO=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tab8}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(cls,pred.loocv8}\SpecialCharTok{$}\NormalTok{class)}
+\CommentTok{\#print(tab8)}
+\FunctionTok{kbl}\NormalTok{(tab8)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r|r}
+\hline
+  & Netherlands & Nigeria & Philippines\\
+\hline
+Netherlands & 1197 & 26 & 37\\
+\hline
+Nigeria & 22 & 1378 & 178\\
+\hline
+Philippines & 44 & 285 & 759\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#LOOCV hit rate}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab8))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab8))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8492104\\
+\hline
+\end{tabular}
+
+Also with the \emph{HDDA} model, there is rather small evidence of overfitting, but the HDDA model does not perform better than the other models.
+
+\hypertarget{error-comparison-for-the-different-models}{%
+\subsubsection{Error comparison for the different models}\label{error-comparison-for-the-different-models}}
+
+We have computed for all 4 models the hit rate, for the comparison in the table we will present the training and LOOCV errors computing \(1-*hit\) rate:
+
+\begin{table}[h!]
+  \begin{center}
+  \caption{}
+    \begin{tabular}{c|c|c} 
+      \textbf{MODEL} & \textbf{TRAINING ERROR} & \textbf{LOOCV ERROR}\\
+      \hline
+        LDA & 0.1535914 & 0.154865\\
+        QDA & 0.1449312 & 0.1474783\\
+        KNN (K=30) & 0.1113092 & 0.1166582\\
+        HDDA & 0.1469689 & 0.1507896\\
+      \end{tabular}
+    \end{center}
+\end{table}
+
+In all the present models there is little evidence of overfitting, the two errors computed are in all the cases similar. The K-nearest Neighbors is a good model to compare the others and we can see that even if it performs betters it has not a huge difference. The model that performs better between the other \(3\) is the Quadratic discriminant analysis, it is the most complex one with the highest number of parameters used.
+
+Confronting the results, we can say that even if there is a difference between the models, no one of the computed ones has outstanding results.
+
+Table of \emph{QDA LOOCV} rate:
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{}
+      \begin{tabular}{c|c|c|c} 
+      \textbf{ - } & \textbf{Netherlands} & \textbf{Nigeria} & \textbf{Philippines}\\
+      \hline
+        Netherlands & 1210 & 21 & 29\\
+        Nigeria & 40 & 1315 & 223\\
+        Philippines & 43 & 223 & 822\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+As we were expecting in the analysis of the canonical discriminant analysis, the model has a high ability to differentiate between Netherlands and the two other countries, while it has a high error rate discriminating between Nigeria and the Philippines.
+
+\hypertarget{multinomial-logistic-regression-model}{%
+\subsubsection{Multinomial logistic regression model}\label{multinomial-logistic-regression-model}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m1}\OtherTok{\textless{}{-}} \FunctionTok{multinom}\NormalTok{(country}\SpecialCharTok{\textasciitilde{}}\NormalTok{F\_rights}\SpecialCharTok{+}\NormalTok{F\_steal}\SpecialCharTok{+}\NormalTok{F\_crime}\SpecialCharTok{+}\NormalTok{F\_religion}\SpecialCharTok{+}\NormalTok{F\_realizeself}\SpecialCharTok{+}\NormalTok{F\_dogood }\SpecialCharTok{+}
+\NormalTok{                F\_violence, }\AttributeTok{family=}\NormalTok{multinomial, }\AttributeTok{data=}\NormalTok{dwvs, }\AttributeTok{maxit=}\DecValTok{3926}\NormalTok{, }\AttributeTok{hess=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# weights:  27 (16 variable)
+initial  value 4313.151845 
+iter  10 value 1376.724330
+iter  20 value 1352.584896
+final  value 1346.617148 
+converged
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t1\_15\_result }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{ (m1)}
+\NormalTok{t1\_15\_result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+multinom(formula = country ~ F_rights + F_steal + F_crime + F_religion + 
+    F_realizeself + F_dogood + F_violence, data = dwvs, family = multinomial, 
+    maxit = 3926, hess = TRUE)
+
+Coefficients:
+            (Intercept)  F_rights   F_steal   F_crime F_religion F_realizeself
+Nigeria       0.6472240 -2.122889 0.5537755 0.5976742   2.887712     2.8922393
+Philippines   0.9959826 -1.466848 1.5556448 1.0662700   1.932117     0.9680894
+               F_dogood F_violence
+Nigeria     -0.01110756  1.2844737
+Philippines  1.16765772  0.7560728
+
+Std. Errors:
+            (Intercept)  F_rights   F_steal   F_crime F_religion F_realizeself
+Nigeria       0.1612100 0.1642741 0.1735127 0.1334749  0.2143403     0.1695936
+Philippines   0.1510987 0.1475679 0.1685630 0.1296852  0.1866007     0.1556415
+             F_dogood F_violence
+Nigeria     0.1218099  0.1534901
+Philippines 0.1197516  0.1470007
+
+Residual Deviance: 2693.234 
+AIC: 2725.234 
+\end{verbatim}
+
+We can see that there are 2 different regression model estimates: the first one compares the probability of Nigeria to the probability of the Netherlands, the second model compares the probability of the Philippines to the probability of the Netherlands.
+All the parameters are significant except \emph{F\_dogood} for Nigeria, which's not significantly different from 0.
+The sign of the parameters is the same for all the parameters in both the regressions, except for \emph{F\_dogood} where the Nigeria coefficient is not significant. This could be explained because have we analyzed previously Netherlands strongly differs from the other two countries, while Nigeria and the Philippines have not a clear separation.
+This analysis shows that sample data is more likely to belong to Nigeria and the Philippines than to the Netherlands when it has a higher positive value in the parameters of steal, crime, violence, religion, and a lower negative value in rights
+These coefficients could be probably well explained from the fact that the Netherlands is one of the most developed countries in all the world, the statistics of the Human Development Index published by the United Nations Development Programme places it in the 8th place in the world, while Nigeria and the Philippines are both considered developing states (161 and 107 respectively in the HDI ranking).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# compute hitrate training data\#\#\#\#}
+\NormalTok{train.pred}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(m1,}\AttributeTok{newdata=}\NormalTok{dwvs)}
+\NormalTok{tab}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dwvs}\SpecialCharTok{$}\NormalTok{country, train.pred)}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(tab))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tab))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.8571065\\
+\hline
+\end{tabular}
+
+Error rate: 0.1428935
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\#\#\#\#\#compute LOOCV}
+\NormalTok{nobs}\OtherTok{\textless{}{-}} \DecValTok{3926}
+\NormalTok{hit}\OtherTok{\textless{}{-}}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,nobs)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nobs)\{}
+\NormalTok{  train}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nobs)}
+\NormalTok{  mod}\OtherTok{\textless{}{-}} \FunctionTok{multinom}\NormalTok{(country }\SpecialCharTok{\textasciitilde{}}\NormalTok{ F\_rights }\SpecialCharTok{+}\NormalTok{ F\_steal }\SpecialCharTok{+}\NormalTok{ F\_crime }\SpecialCharTok{+}\NormalTok{ F\_religion }\SpecialCharTok{+} 
+\NormalTok{                   F\_realizeself }\SpecialCharTok{+}\NormalTok{ F\_dogood }\SpecialCharTok{+}\NormalTok{ F\_violence, }\AttributeTok{data=}\NormalTok{dwvs, }
+                 \AttributeTok{subset=}\NormalTok{train[}\SpecialCharTok{{-}}\NormalTok{i], }\AttributeTok{print=} \ConstantTok{FALSE}\NormalTok{,}\AttributeTok{maxit=}\DecValTok{3926}\NormalTok{)}
+\NormalTok{  pred}\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(mod, }\AttributeTok{newdata=}\NormalTok{dwvs[i,])}
+\NormalTok{  hit[i]}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(pred}\SpecialCharTok{==}\NormalTok{dwvs}\SpecialCharTok{$}\NormalTok{country[i],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#hitrate}
+\FunctionTok{mean}\NormalTok{(hit)  }\DocumentationTok{\#\#\#\# LOOCV}
+\end{Highlighting}
+\end{Shaded}
+
+Error rate: 0.1444218
+
+The Multinomial logistic regression model has slightly better error values than the other models, except for KNN.
+
+\hypertarget{task-2}{%
+\section{Task 2}\label{task-2}}
+
+\hypertarget{introduction-1}{%
+\subsection{Introduction}\label{introduction-1}}
+
+For task 2, we are going to deal with a dataset containing information about \(4601\) webmails. We have \(48\) variables describing the frequency of some specific words like \emph{``remove''} in each observation, \(6\) variables describing the frequency of some specific chars like \emph{``\$''} in one observation, and three variables, \emph{capital\_run\_length\_longest}, \emph{capital\_run\_length\_average} and \emph{capital\_run\_length\_total}, describing the length of the longest uninterrupted sequence of capital letters, the average length of uninterrupted sequences of capital letters, and the total number of capital letters in each observation respectively. We also have a variable called \emph{spam}, which indicates whether this webmail is a spam with \(0\) and \(1\), where \(1\) for spam, and \(0\) for not spam. Here all our variables are numeric type.
+Our task is to use these \(57\) attribute variables to classify whether a webmail is spam.
+
+\hypertarget{methodology-1}{%
+\subsection{Methodology}\label{methodology-1}}
+
+In order to validate the accuracy of our methods, we firstly divide our dataset into a train set, which contains 2500 observations, and a test set, which contains 2101 observations. We use the train set to train our models, and then apply it to the test set to validate its accuracy.
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+\hypertarget{classification-trees}{%
+\subsubsection{1. Classification Trees}\label{classification-trees}}
+
+In this part, we are going to discuss the results obtained by complex tree model and pruned tree model.
+We begin with construct a complex tree model by dividing our observation into small non-overlapping regions according to some numerical criteria. Here we split our dataset until each leaf of our classification tree contains only less then 2 observations. The method used here is recursive binary splitting.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#grow complex tree using deviance as criterion}
+\NormalTok{tree.mod }\OtherTok{=} \FunctionTok{tree}\NormalTok{(}\FunctionTok{factor}\NormalTok{(spam) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . ,data.train, }
+                \AttributeTok{control =} \FunctionTok{tree.control}\NormalTok{(}\AttributeTok{nobs =} \DecValTok{2500}\NormalTok{, }\AttributeTok{minsize =} \DecValTok{2}\NormalTok{, }\AttributeTok{mincut =} \DecValTok{1}\NormalTok{),}
+                \AttributeTok{split =} \StringTok{"deviance"}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(tree.mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Classification tree:
+tree(formula = factor(spam) ~ ., data = data.train, control = tree.control(nobs = 2500, 
+    minsize = 2, mincut = 1), split = "deviance")
+Variables actually used in tree construction:
+[1] "char_freq_dollar"           "word_freq_remove"          
+[3] "char_freq_exclmark"         "word_freq_hp"              
+[5] "word_freq_our"              "capital_run_length_longest"
+[7] "word_freq_free"             "word_freq_edu"             
+Number of terminal nodes:  12 
+Residual mean deviance:  0.4883 = 1215 / 2488 
+Misclassification error rate: 0.084 = 210 / 2500 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot tree}
+\FunctionTok{plot}\NormalTok{(tree.mod)}
+\FunctionTok{text}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\FunctionTok{expression}\NormalTok{(}\FunctionTok{bar}\NormalTok{(x) }\SpecialCharTok{==} \FunctionTok{sum}\NormalTok{(}\FunctionTok{frac}\NormalTok{(x[i], n), i}\SpecialCharTok{==}\DecValTok{1}\NormalTok{, n)))}
+\CommentTok{\#rpart.plot(tree.mod)}
+\FunctionTok{text}\NormalTok{(tree.mod,}\AttributeTok{pretty=}\DecValTok{10}\NormalTok{,}\AttributeTok{cex=}\FloatTok{0.65}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_2_3-1.pdf}
+
+We can see clearly here that criteria concerning the frequency of ``\$'', ``remove'', ``!'', ``hp'', ``our'', ``free'', ``edu'' as well as the length of the longest uninterrupted sequence of capital letters are used for splitting. It's actually quite reasonable, because from our own experience, spam webmails are always advertisements on money related topics or education related topics, and are always filled with words in capital letters, together with exclamation symbols, to draw attention.
+
+Since the process of recursive binary splitting may lead to overfitting, where we obtain a complex tree with a good fit on the training data, but with a poor performance on test data, we introduce the process of tree pruning. Actually, a smaller tree with fewer splits may have a lower variance at the cost of acceptable little bias.
+In order to decide the optimal tuning parameter which leads to both much lower variance and acceptable bias, we use cross-validation to make a selection. In fact, the least cross-validation error implies the least probability of overfitting, as it's also a train-test process.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#use cross{-}validation to select tuning parameter for pruning the tree}
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{  cv.out}\OtherTok{=}\FunctionTok{cv.tree}\NormalTok{(tree.mod,}\AttributeTok{K=}\DecValTok{5}\NormalTok{)}
+  \FunctionTok{par}\NormalTok{(}\AttributeTok{cex=}\FloatTok{1.4}\NormalTok{)}
+  \FunctionTok{plot}\NormalTok{(cv.out}\SpecialCharTok{$}\NormalTok{size,cv.out}\SpecialCharTok{$}\NormalTok{dev,}\AttributeTok{type=}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.9\linewidth]{report_files/figure-latex/Task_2_4-1}
+
+However, in this specific task, we can see that the cross-validation error is monotonously decreasing, so the optimal fold number is the original fold number. We choose best size=12 here such that the pruned tree model here is exactly the same as our complex tree model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#prune the tree}
+\NormalTok{prune.mod}\OtherTok{=}\FunctionTok{prune.tree}\NormalTok{(tree.mod,}\AttributeTok{best=}\DecValTok{12}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(prune.mod)}
+\FunctionTok{text}\NormalTok{(prune.mod,}\AttributeTok{pretty=}\DecValTok{10}\NormalTok{, }\AttributeTok{cex=}\FloatTok{0.65}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_2_5-1.pdf}
+
+Now we validate the accuracy of our classification tree model with the test data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#make predictions on training and test set using the unpruned tree}
+\NormalTok{pred.train}\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(tree.mod,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(pred.train[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\NormalTok{pred.train[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t26 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\FunctionTok{kbl}\NormalTok{(t26}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1460 & 67\\
+\hline
+1 & 143 & 830\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#make predictions on training and test set using the unpruned tree}
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(tree.mod,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\NormalTok{pred.test[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t27 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\FunctionTok{kbl}\NormalTok{(t27}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1209 & 52\\
+\hline
+1 & 153 & 687\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#make predictions on training and test set using the pruned tree}
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(prune.mod,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(pred.train[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\NormalTok{pred.train[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t28 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\FunctionTok{kbl}\NormalTok{(t28}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1460 & 67\\
+\hline
+1 & 143 & 830\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#make predictions on training and test set using the pruned tree}
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(prune.mod,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\NormalTok{pred.test[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t29 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\FunctionTok{kbl}\NormalTok{(t29}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1209 & 52\\
+\hline
+1 & 153 & 687\\
+\hline
+\end{tabular}
+
+We can conclude that our classification model performs very well. since the complex tree is the same as pruned tree here, we can see that the test error is just very slightly higher than the train error. There is not much overfitting here.
+
+\hypertarget{different-classification-models}{%
+\subsubsection{2. Different Classification Models}\label{different-classification-models}}
+
+Now for this part, we are going to compare different classification models using two different classification scenarios.
+
+Firstly, we consider the scenario where we have different prior probabilities and equal classification costs. We use the entire dataset to figure out the prior probability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#(a)Account for different prior probabilities and equal classification costs }
+\CommentTok{\# (1) linear discriminant analysis}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{ldaS.out}\OtherTok{\textless{}{-}}\FunctionTok{lda}\NormalTok{(spam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ .,}\AttributeTok{data =}\NormalTok{ spamdata)}
+\FunctionTok{print}\NormalTok{(ldaS.out}\SpecialCharTok{$}\NormalTok{prior)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        0         1 
+0.6059552 0.3940448 
+\end{verbatim}
+
+So, we take \(P\) (is spam)=0.394, P (not spam) =0.606 as our prior probability, and we can verify that their sum equals 1.
+
+The four classification models we are going to compare is 1) Linear Discriminant Analysis, 2) Bagging, 3) Random Forests and 4) Gradient Boosting. Since the dimension here is very high and the mathematical assumption of our dataset is very weak, we do not suppose that Linear Discriminant Analysis without Principal Component analysis here will have very good performance. We just take it as a baseline. The three other methods are all methods used to improve the classification tree model, as tree models are always with high variance, thus high probability to cause overfitting.
+
+The results are listed as below:
+
+\hypertarget{linear-discriminant-analysis-1}{%
+\paragraph{1) Linear Discriminant Analysis}\label{linear-discriminant-analysis-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lda.out}\OtherTok{\textless{}{-}}\FunctionTok{lda}\NormalTok{(spam}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,}\AttributeTok{prior=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.606}\NormalTok{,}\FloatTok{0.394}\NormalTok{),}\AttributeTok{data=}\NormalTok{data.train)}
+
+\NormalTok{scaling }\OtherTok{\textless{}{-}}\NormalTok{ lda.out}\SpecialCharTok{$}\NormalTok{scaling }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{name =} \FunctionTok{rownames}\NormalTok{(lda.out}\SpecialCharTok{$}\NormalTok{scaling))}
+\NormalTok{scaling }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"char\_freq\_dollar"}\NormalTok{, }\StringTok{"word\_freq\_remove"}\NormalTok{, }\StringTok{"word\_freq\_table"}\NormalTok{,}
+                               \StringTok{"word\_freq\_conference"}\NormalTok{, }\StringTok{"char\_freq\_dotcomma"}\NormalTok{, }
+                               \StringTok{"char\_freq\_parenthesis"}\NormalTok{, }\StringTok{"char\_freq\_bracket"}\NormalTok{, }\StringTok{"char\_freq\_exclmark"}\NormalTok{ ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         LD1                  name
+1  0.8727936      word_freq_remove
+2 -0.7164016       word_freq_table
+3 -0.2623494  word_freq_conference
+4 -0.6216711    char_freq_dotcomma
+5 -0.3637729 char_freq_parenthesis
+6 -0.2686609     char_freq_bracket
+7  0.3970286    char_freq_exclmark
+8  0.8798683      char_freq_dollar
+\end{verbatim}
+
+Here we can see that the three attributes highly correlated with spam webmails the frequency of ``\$'', ``!'' and ``remove'', are exactly the same as what we have got from our classification tree model. What is interesting here is we can also see that the frequency of ``table'', ``;'' and ``parenthesis'' shows strong negative correlation with spam webmails.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(lda.out,data.train)}
+\NormalTok{t212 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,pred.train}\SpecialCharTok{$}\NormalTok{class)}
+\FunctionTok{kbl}\NormalTok{(t212}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1460 & 67\\
+\hline
+1 & 202 & 771\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(lda.out,data.test)}
+\NormalTok{t213 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,pred.test}\SpecialCharTok{$}\NormalTok{class)}
+\FunctionTok{kbl}\NormalTok{(t213}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0 & 1\\
+\hline
+0 & 1205 & 56\\
+\hline
+1 & 195 & 645\\
+\hline
+\end{tabular}
+
+\hypertarget{bagging}{%
+\paragraph{2) Bagging}\label{bagging}}
+
+just some text
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#(2) Bagging}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{bag.mod}\OtherTok{=}\FunctionTok{randomForest}\NormalTok{(spam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ data.train, }
+                     \AttributeTok{classwt=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.606}\NormalTok{,}\FloatTok{0.394}\NormalTok{),}
+                     \AttributeTok{mtry=}\DecValTok{57}\NormalTok{, }\AttributeTok{ntree=}\NormalTok{nrotree, }\AttributeTok{importance=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{bag.mod}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+ randomForest(formula = spam ~ ., data = data.train, classwt = c(0.606,      0.394), mtry = 57, ntree = 5000, importance = TRUE) 
+               Type of random forest: classification
+                     Number of trees: 5000
+No. of variables tried at each split: 57
+
+        OOB estimate of  error rate: 6.76%
+Confusion matrix:
+      0_no 1_yes class.error
+0_no  1463    64  0.04191225
+1_yes  105   868  0.10791367
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#importance(bag.mod,plot=TRUE)}
+\FunctionTok{varImpPlot}\NormalTok{(bag.mod, }\AttributeTok{type =} \DecValTok{2}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_2_16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(bag.mod,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{t218 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,pred.train)}
+\FunctionTok{kbl}\NormalTok{(t218}\SpecialCharTok{$}\NormalTok{tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{l|r|r}
+\hline
+  & 0\_no & 1\_yes\\
+\hline
+0 & 1527 & 0\\
+\hline
+1 & 0 & 973\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(bag.mod,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{t219 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,pred.test)}
+\CommentTok{\#kbl(t219$tab)}
+\end{Highlighting}
+\end{Shaded}
+
+Actually, with the MeanDecreaseGini graph we can see that the frequency of ``\$'', ``!'' and ``remove'' made evidently the most contribution. This is the same conclusion we have drawn from our classification tree model and Linear Discriminant Analysis. Here Out Of Bag error rate is 6.76\%, which is acceptable.
+
+\hypertarget{random-forests}{%
+\paragraph{3) Random Forests}\label{random-forests}}
+
+just some text.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# (3) random forests}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{rf.mod}\OtherTok{=}\FunctionTok{randomForest}\NormalTok{(spam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ data.train, }
+                    \AttributeTok{classwt=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.606}\NormalTok{,}\FloatTok{0.394}\NormalTok{), }\AttributeTok{mtry=}\DecValTok{5}\NormalTok{, }
+                    \AttributeTok{ntree=}\DecValTok{5000}\NormalTok{, }\AttributeTok{importance=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{rf.mod}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call:
+ randomForest(formula = spam ~ ., data = data.train, classwt = c(0.606,      0.394), mtry = 5, ntree = 5000, importance = TRUE) 
+               Type of random forest: classification
+                     Number of trees: 5000
+No. of variables tried at each split: 5
+
+        OOB estimate of  error rate: 5.12%
+Confusion matrix:
+      0_no 1_yes class.error
+0_no  1484    43  0.02815979
+1_yes   85   888  0.08735868
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(rf.mod,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{t2\_21Y1 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,pred.train)}
+\NormalTok{t2\_21Y1}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed 0_no 1_yes
+       0 1527     0
+       1    9   964
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(rf.mod,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{t2\_21Y2 }\OtherTok{\textless{}{-}}\FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,pred.test)}
+\NormalTok{t2\_21Y2}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed 0_no 1_yes
+       0 1227    34
+       1   72   768
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{varImpPlot}\NormalTok{(rf.mod, }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_2_22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#varImpPlot(bag.mod, type = 2, cex = 0.6)}
+\end{Highlighting}
+\end{Shaded}
+
+Random Forests Model is also based on the idea of decorrelating trees. Here we choose m=5 for the size of our predictor set. can see that although there is slightly difference, ``\$'', ``!'' and ``remove'' still stand for spam webmails, as well as the length of the longest uninterrupted sequence of capital letters.
+
+\hypertarget{gradient-boosting}{%
+\paragraph{4) Gradient Boosting}\label{gradient-boosting}}
+
+Different from Bagging and Random Forests, the number of trees for Gradient Boosting is not expected to be as large as possible, since using too many trees may cause overfitting for Gradient Boosting. We start with deciding the optimal number of trees by cross-validation, for the same reason explained before.
+
+Note that since we are going to suppose Bernoulli distribution in our gbm function, we should firstly make sure that our variable for classification is numeric type.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# (4) gradient boosting}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{data.train}\SpecialCharTok{$}\NormalTok{spam}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam}\SpecialCharTok{==}\StringTok{"1\_yes"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{data.test}\SpecialCharTok{$}\NormalTok{spam}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam}\SpecialCharTok{==}\StringTok{"1\_yes"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{spamdata}\SpecialCharTok{$}\NormalTok{spam}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(spamdata}\SpecialCharTok{$}\NormalTok{spam}\SpecialCharTok{==}\StringTok{"1\_yes"}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(base\_url,}\StringTok{"T2/T2\_gbm\_3.Rdata"}\NormalTok{))}
+\NormalTok{boost.mod}\OtherTok{\textless{}{-}}\NormalTok{t2\_gbm\_3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#use distribution="bernoulli" for binary target}
+\CommentTok{\#interaction.depth=4, means that we fit a tree that uses 4 splits }
+\CommentTok{\#(and that includes at most a 4{-}th order interaction)}
+\NormalTok{boost.mod}\OtherTok{=}\FunctionTok{gbm}\NormalTok{(spam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . ,}\AttributeTok{data =}\NormalTok{ data.train, }\AttributeTok{distribution =} \StringTok{"bernoulli"}\NormalTok{, }
+              \AttributeTok{n.trees =} \DecValTok{20000}\NormalTok{, }\AttributeTok{interaction.depth =} \DecValTok{4}\NormalTok{, }\AttributeTok{shrinkage =} \FloatTok{0.001}\NormalTok{, }\AttributeTok{cv.folds =} \DecValTok{5}\NormalTok{)}
+\FunctionTok{gbm.perf}\NormalTok{(boost.mod,}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\StringTok{"train error"}\NormalTok{,}\StringTok{"CV error"}\NormalTok{),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{,}\StringTok{"black"}\NormalTok{),}\AttributeTok{lty=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 19932
+\end{verbatim}
+
+\includegraphics{report_files/figure-latex/Task_2_23Y3-1.pdf}
+
+So here we get that the optimal number of trees is 19932. We use this parameter to continue our analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#relative influence plot}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{cex=}\FloatTok{1.2}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(boost.mod,}\AttributeTok{n.trees=}\DecValTok{19932}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_2_24-1.pdf}
+
+\begin{verbatim}
+                                                  var      rel.inf
+char_freq_dollar                     char_freq_dollar 2.285917e+01
+char_freq_exclmark                 char_freq_exclmark 1.965558e+01
+word_freq_remove                     word_freq_remove 9.933912e+00
+word_freq_hp                             word_freq_hp 6.371358e+00
+word_freq_your                         word_freq_your 6.075841e+00
+word_freq_free                         word_freq_free 5.428856e+00
+capital_run_length_longest capital_run_length_longest 4.344714e+00
+capital_run_length_average capital_run_length_average 3.937332e+00
+capital_run_length_total     capital_run_length_total 3.391273e+00
+word_freq_george                     word_freq_george 2.866851e+00
+word_freq_edu                           word_freq_edu 2.308666e+00
+word_freq_our                           word_freq_our 1.976375e+00
+word_freq_money                       word_freq_money 1.743456e+00
+word_freq_000                           word_freq_000 1.559673e+00
+word_freq_you                           word_freq_you 1.013728e+00
+word_freq_meeting                   word_freq_meeting 7.223353e-01
+word_freq_re                             word_freq_re 6.227953e-01
+word_freq_internet                 word_freq_internet 5.493848e-01
+word_freq_1999                         word_freq_1999 4.530588e-01
+word_freq_business                 word_freq_business 4.244831e-01
+word_freq_over                         word_freq_over 3.985102e-01
+word_freq_email                       word_freq_email 3.710928e-01
+word_freq_receive                   word_freq_receive 3.484809e-01
+word_freq_will                         word_freq_will 3.377431e-01
+char_freq_dotcomma                 char_freq_dotcomma 3.321253e-01
+char_freq_parenthesis           char_freq_parenthesis 2.853891e-01
+word_freq_report                     word_freq_report 2.587867e-01
+word_freq_technology             word_freq_technology 2.084485e-01
+word_freq_mail                         word_freq_mail 1.903978e-01
+word_freq_hpl                           word_freq_hpl 1.677002e-01
+word_freq_650                           word_freq_650 1.504262e-01
+word_freq_3d                             word_freq_3d 1.131915e-01
+word_freq_all                           word_freq_all 1.063984e-01
+word_freq_font                         word_freq_font 8.440753e-02
+word_freq_project                   word_freq_project 7.595445e-02
+word_freq_make                         word_freq_make 6.275894e-02
+word_freq_pm                             word_freq_pm 4.042293e-02
+word_freq_address                   word_freq_address 3.613297e-02
+word_freq_order                       word_freq_order 3.496306e-02
+word_freq_parts                       word_freq_parts 2.876464e-02
+word_freq_conference             word_freq_conference 2.842824e-02
+word_freq_credit                     word_freq_credit 2.467152e-02
+word_freq_people                     word_freq_people 2.197801e-02
+word_freq_85                             word_freq_85 1.685307e-02
+char_freq_pound                       char_freq_pound 1.468910e-02
+word_freq_data                         word_freq_data 1.128843e-02
+word_freq_labs                         word_freq_labs 4.584238e-03
+char_freq_bracket                   char_freq_bracket 3.254895e-03
+word_freq_direct                     word_freq_direct 2.550972e-03
+word_freq_lab                           word_freq_lab 4.378566e-04
+word_freq_original                 word_freq_original 1.606371e-04
+word_freq_addresses               word_freq_addresses 9.088811e-05
+word_freq_table                       word_freq_table 7.843543e-05
+word_freq_telnet                     word_freq_telnet 0.000000e+00
+word_freq_857                           word_freq_857 0.000000e+00
+word_freq_415                           word_freq_415 0.000000e+00
+word_freq_cs                             word_freq_cs 0.000000e+00
+\end{verbatim}
+
+We can actually get nearly the same result as we obtained from all the former models concerning the variable most correlated to spam webmails here, that the frequency of ``\$'', ``!'' and ``remove'' come top.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(boost.mod,}\AttributeTok{n.trees=}\DecValTok{19932}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.train,}\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(pred.train}\SpecialCharTok{\textgreater{}=}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pred.train,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t225 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\NormalTok{t225}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+       0 1547  953
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(boost.mod,}\AttributeTok{n.trees=}\DecValTok{19932}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.test,}\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(pred.test}\SpecialCharTok{\textgreater{}=}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pred.test,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t226 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\NormalTok{t226}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+       0 1287  814
+\end{verbatim}
+
+Then, we consider the scenario where we have different prior probabilities and unequal classification costs: C(spam\textbar email)=10*C(email\textbar spam). Actually, the models here remain the same, and we just need to do some reclassification based on the posterior probabilities obtained from our built models and a criterion taking the classification costs as weights for posterior probabilities.
+
+\hypertarget{linear-discriminant-analysis-2}{%
+\subparagraph{1) Linear Discriminant Analysis}\label{linear-discriminant-analysis-2}}
+
+\textbf{some text here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(lda.out,data.train)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.train}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.train}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t227Y2 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam, classif.train)}
+\NormalTok{t227Y2}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1878  622
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(lda.out,data.test)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.test}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t227Y3 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\NormalTok{t227Y3}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1601  500
+\end{verbatim}
+
+\hypertarget{bagging-1}{%
+\subparagraph{2) bagging}\label{bagging-1}}
+
+\textbf{some text here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(bag.mod,}\AttributeTok{type=}\StringTok{"prob"}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.train[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.train[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t228Y1 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\NormalTok{t228Y1}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1702  798
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(bag.mod,}\AttributeTok{type=}\StringTok{"prob"}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t228Y2 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\NormalTok{t228Y2}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1512  589
+\end{verbatim}
+
+\hypertarget{random-forests-1}{%
+\subparagraph{3) Random Forests}\label{random-forests-1}}
+
+\textbf{some text here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(rf.mod,}\AttributeTok{type=}\StringTok{"prob"}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.train)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.train[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.train[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t229Y1 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\NormalTok{t229Y1}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1745  755
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(rf.mod,}\AttributeTok{type=}\StringTok{"prob"}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.test)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{pred.test[,}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t229Y2 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\NormalTok{t229Y2}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1645  456
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Gradient Boosting
+  \textbf{some text here}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.train}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(boost.mod,}\AttributeTok{n.trees=}\DecValTok{19932}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.train,}\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{classif.train}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.train}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pred.train),}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t230Y1 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.train}\SpecialCharTok{$}\NormalTok{spam,classif.train)}
+\NormalTok{t230Y1}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1693  807
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.test}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(boost.mod,}\AttributeTok{n.trees=}\DecValTok{19932}\NormalTok{,}\AttributeTok{newdata=}\NormalTok{data.test,}\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{classif.test}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(}\DecValTok{1}\SpecialCharTok{*}\NormalTok{pred.test}\SpecialCharTok{\textgreater{}=}\DecValTok{10}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pred.test),}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{t230Y2 }\OtherTok{\textless{}{-}} \FunctionTok{err}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{spam,classif.test)}
+\NormalTok{t230Y2}\SpecialCharTok{$}\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        predicted
+observed    0    1
+    0_no 1467  634
+\end{verbatim}
+
+We arrange all the training errors and test errors into a whole table below, and calculate the sensitivities as well as the false positive rates for the test set, using the probability tables we printed out:
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{}
+    \label{tab:}
+    \begin{tabular}{c|c|c|c|c}
+      \textbf{ - } & \textbf{training error} & \textbf{test error} & \textbf{sensitivity} & \textbf{false positive rate}\\
+      \hline
+        a)LDC&0.1076&0.1195&0.7679&0.0444\\
+        a)Bagging&0&0.0643&0.8869&0.0317\\
+        a)Random Forests&0.0036&0.0505&0.9143&0.0270\\
+        a)Gradient Boosting&0.0216&0.0571&0.9131&0.0373\\
+        b)LDC&0.2128&0.2285&0.4452&0.0111\\
+        b)Bagging&0.07&0.1290&0.6893&0.0008\\
+        b)Random Forests&0.0872&0.1856&0.5393&0.0002\\
+        b)Gradient Boosting&0.068&0.1066&0.7440&0.0007\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+We can see that as we claimed at the beginning, Linear Discriminant Analysis performs the worst in both scenarios, Random Forests performs the best in scenario a), where we have different prior probabilities but equal classification costs, and Gradient Boosting performs the best in scenario b), where we have different prior probabilities and unequal classification costs. Generally, for scenario a), the performance of Random Forests and Gradient Boosting is equally good, and Bagging also performs good, just with slightly higher test error than Random Forests and Gradient Boosting. However, for scenario b), the accuracy of Random Forests decreases much faster than Bagging.
+
+What's more, as is expected, in scenario b), since misclassifying a not spam webmail into spam ones costs much more than misclassifying a spam webmail into not spam ones, our models all tend to classify more cases as not spam ones to minimize the cost. As a result, the false positive rate is very low for all models, but the accuracy and sensitivity decrease significantly for all models, since a number of real positive cases are classified as not spam webmails. Gradient Boosting and Bagging are relatively more stable here compared with the other two models.
+
+\hypertarget{task-3}{%
+\section{Task 3}\label{task-3}}
+
+\hypertarget{introduction-2}{%
+\subsection{1. Introduction}\label{introduction-2}}
+
+For task 3, we are going to deal with a dataset containing the shopping behavior of 487 different customers. We have 11 statements here and the corresponding variables measuring to what extent they agree with these statements, namely:
+1) organising\_trip: It is very important for me to organize the shopping well.
+2) knowing\_buy: When I leave to go shopping, I know exactly what I am going to buy.
+3) duty\_responsability: By doing the shopping, I fulfill my duty and take my responsibility.
+4) shopping\_fun: I enjoy doing the shopping.
+5) take\_at\_ease: I do the shopping at a leisurely pace.
+6) enjoy: I enjoy the atmosphere while shopping.
+7) shopping\_drag: Doing the shopping is a drag.
+8) minimise\_shoppingtime: I try to keep the time that I spend doing the shopping to a minimum.
+9) shopping\_list: I usually take a list with me when I go to do the shopping.
+10) shopping\_with\_family: I like shopping with the whole family.
+11) have\_stock: I like having a stock of products on hand at home.
+
+The variables vary from 1 to 7, where 1 means totally disagree and 7 means totally agree.
+Our task is to cluster the customers basing on the 11 items of shopping mentioned above and try to interpret the results we will get. What's more, we are also going to test the stability of the cluster solutions deduced by different methods.
+
+\hypertarget{methodology-2}{%
+\subsection{2. Methodology}\label{methodology-2}}
+
+We will try to do the clustering with (1) hierarchical clustering with Ward's method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point, (2) model-based clustering with hddc(), and (3) model-based clustering using Mclust(). In order to test the stability of our cluster solutions, we are going to split our dataset randomly into a train set and a test set. The cluster methods will be firstly applied on the train set, and then on test set. After that, we will also form a cluster solution on the test set by assigning the points to the cluster centroid of the training sample that is closest. Finally, by comparing our two cluster solutions on the test set, we can evaluate the stability of our methods.
+
+\hypertarget{result}{%
+\subsection{3. Result}\label{result}}
+
+Firstly, in order to make our cluster solution more reasonable, we are going to standardize our data first.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# standardize variables}
+\NormalTok{shopping}\OtherTok{\textless{}{-}}\FunctionTok{scale}\NormalTok{(shopping,}\AttributeTok{center=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{scale=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we form our train set and test set randomly for the validation work.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#create train and test set}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{sel}\OtherTok{\textless{}{-}}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{487}\NormalTok{,}\AttributeTok{size=}\DecValTok{250}\NormalTok{,}\AttributeTok{replace=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train}\OtherTok{\textless{}{-}}\NormalTok{shopping[sel,]}
+\NormalTok{valid}\OtherTok{\textless{}{-}}\NormalTok{shopping[}\SpecialCharTok{{-}}\NormalTok{sel,]}
+\end{Highlighting}
+\end{Shaded}
+
+Before applying our cluster methods on our dataset, we first try to do an exploratory factor analysis to summarize our 11 attributes, as we are going to make use of it for the interpretation of our cluster solutions.
+We start with a principal component analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#compute variance accounted for by each component}
+\FunctionTok{kbl}\NormalTok{(}\FunctionTok{round}\NormalTok{(prcomp.out}\SpecialCharTok{$}\NormalTok{sd}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(prcomp.out}\SpecialCharTok{$}\NormalTok{sd}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.341\\
+\hline
+0.207\\
+\hline
+0.090\\
+\hline
+0.079\\
+\hline
+0.070\\
+\hline
+0.056\\
+\hline
+0.045\\
+\hline
+0.036\\
+\hline
+0.034\\
+\hline
+0.026\\
+\hline
+0.016\\
+\hline
+\end{tabular}
+
+As is shown here, only the first two components accounts for more than 10\% of the variances, and they account for 54.8\% of the variances in total.
+We then continue to conduct the exploratory factor analysis with 2 factors.
+
+According to the result shown above, we can define two factors here.
+Enjoy: The extent to which someone enjoys shopping, summarizing the attributes ``shopping\_fun'', ``take\_at\_ease'', ``enjoy'', ``shopping\_drag'', ``minimise\_shoppingtime'' and ``shopping\_with\_family''. Here we can see that the loadings for ``shopping\_drag'' and ``minimise\_shoppingtime'' is negative, and the others are positive, which is quite reasonable.
+Organized: The extent to which someone is organized when doing shopping, summarizing the attributes ``organising\_trip'', ``knowing\_buy'', ``duty\_responsability'', ``shopping\_list'' and ``have\_stock''.
+So, we can use these two factors to classify our customers as ``enjoy shopping and organized'', ``enjoy shopping and not organized'', ``dislike shopping and organized'', or ``dislike shopping and not organized''.
+We denote the principal components as comp for future use, as we are going to visualize our cluster solution in the space of the first two principal components.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comp}\OtherTok{\textless{}{-}}\FunctionTok{as.matrix}\NormalTok{(shopping)}\SpecialCharTok{\%*\%}\NormalTok{prcomp.out}\SpecialCharTok{$}\NormalTok{rotation}
+\end{Highlighting}
+\end{Shaded}
+
+We also define the ``clusters'' function here for classifying new points to the nearest cluster centroid. We are going to use this function for the validation of our cluster methods.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function classify new points to nearest cluster centroid}
+\NormalTok{clusters }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, centers) \{}
+  \CommentTok{\# compute squared euclidean distance from each sample to each cluster center}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(x)),}
+                \ControlFlowTok{function}\NormalTok{(i) }\FunctionTok{apply}\NormalTok{(centers, }\DecValTok{1}\NormalTok{,}
+                                  \ControlFlowTok{function}\NormalTok{(v) }\FunctionTok{sum}\NormalTok{((x[i, ]}\SpecialCharTok{{-}}\NormalTok{v)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)))}
+  \FunctionTok{max.col}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{t}\NormalTok{(tmp))  }\CommentTok{\# find index of min distance}
+\end{Highlighting}
+\end{Shaded}
+
+Now we are going to apply our three different cluster methods on our dataset separately, and then interpret the results. For each method, we are going to compute the solution with 1 up to 6 solutions and choose the most reasonable solution.
+
+\hypertarget{i-hierarchical-clustering-with-wards-method-on-squared-euclidean-distances-followed-by-k-means-with-the-centroid-of-the-hierarchical-clustering-as-starting-point}{%
+\subsubsection{I) Hierarchical clustering with Ward's method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point}\label{i-hierarchical-clustering-with-wards-method-on-squared-euclidean-distances-followed-by-k-means-with-the-centroid-of-the-hierarchical-clustering-as-starting-point}}
+
+Firstly, we apply Hierarchical clustering with Ward's method on squared Euclidean distances and draw the dendrogram to observe the structure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compute Euclidean distances}
+\NormalTok{distEuc}\OtherTok{\textless{}{-}}\FunctionTok{dist}\NormalTok{(shopping, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{, }\AttributeTok{diag =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{upper =} \ConstantTok{FALSE}\NormalTok{)}
+
+\DocumentationTok{\#\#  hierarchical clustering method of Ward on squared Euclidean distance}
+\NormalTok{hiclust\_ward}\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(distEuc, }\StringTok{"ward.D2"}\NormalTok{)}
+
+\DocumentationTok{\#\# plot dendrogram}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{pty=}\StringTok{"s"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(hiclust\_ward,}\AttributeTok{hang=}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_6-1.pdf}
+
+We can see from the dendrogram that cutting the tree at the height around 20, which means selecting 4 clusters, is quite reasonable.
+Then we continue with k-means method using the centroid of the hierarchical clustering as starting point, and compute solutions with 1 up to 6 clusters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# classification of students for solutions with 1{-}6 clusters}
+\NormalTok{clustvar}\OtherTok{\textless{}{-}}\FunctionTok{cutree}\NormalTok{(hiclust\_ward, }\AttributeTok{k=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-1-cluster}{%
+\paragraph{a) 1 cluster}\label{a-1-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 1 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{1}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean1}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean1}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1               0           0                   0            0            0
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1     0             0                     0             0                    0
+  have_stock
+1          0
+\end{verbatim}
+
+\hypertarget{b-2-cluster}{%
+\paragraph{b) 2 cluster}\label{b-2-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 2 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{2}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean2}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean2}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1           -0.07       -0.05                0.06         0.65         0.56
+2            0.11        0.08               -0.10        -1.04        -0.90
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1  0.61         -0.66                 -0.54         -0.04                 0.28
+2 -0.97          1.06                  0.87          0.07                -0.44
+  have_stock
+1       0.04
+2      -0.06
+\end{verbatim}
+
+\hypertarget{c-3-cluster}{%
+\paragraph{c) 3 cluster}\label{c-3-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 3 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{3}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean3}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean3}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1            0.36        0.40                0.28         0.69         0.56
+2           -1.29       -1.26               -0.53         0.45         0.55
+3            0.19        0.12               -0.08        -1.05        -0.94
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1  0.68         -0.65                 -0.43          0.33                 0.41
+2  0.30         -0.60                 -0.73         -1.08                -0.09
+3 -0.97          1.07                  0.87          0.11                -0.45
+  have_stock
+1       0.17
+2      -0.33
+3      -0.05
+\end{verbatim}
+
+\hypertarget{d-4-cluster}{%
+\paragraph{d) 4 cluster}\label{d-4-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 4 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{4}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean4}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean4}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1            0.37        0.42                0.29         0.69         0.57
+2           -1.16       -1.20               -0.51         0.55         0.52
+3            0.45        0.36                0.04        -1.03        -0.96
+4           -1.00       -0.84               -0.56        -1.07        -0.67
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1  0.69         -0.65                 -0.41          0.34                 0.44
+2  0.39         -0.69                 -0.87         -1.00                -0.14
+3 -0.97          1.07                  0.87          0.44                -0.40
+4 -0.98          1.02                  0.86         -1.15                -0.57
+  have_stock
+1       0.18
+2      -0.31
+3       0.24
+4      -1.05
+\end{verbatim}
+
+\hypertarget{e-5-cluster}{%
+\paragraph{e) 5 cluster}\label{e-5-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 5 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{5}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean5}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean5}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1            0.52        0.45                0.80         0.86         0.66
+2            0.20        0.26               -0.30         0.51         0.44
+3           -1.33       -1.25               -0.46         0.55         0.59
+4            0.45        0.36                0.04        -1.03        -0.96
+5           -1.00       -0.84               -0.56        -1.07        -0.67
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1  0.87         -0.65                 -0.45          0.28                 0.99
+2  0.44         -0.63                 -0.47          0.41                -0.15
+3  0.48         -0.73                 -0.79         -1.20                -0.13
+4 -0.97          1.07                  0.87          0.44                -0.40
+5 -0.98          1.02                  0.86         -1.15                -0.57
+  have_stock
+1       0.47
+2      -0.18
+3      -0.25
+4       0.24
+5      -1.05
+\end{verbatim}
+
+\hypertarget{f-6-cluster}{%
+\paragraph{f) 6 cluster}\label{f-6-cluster}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# k{-}means with 6 clusters using centroid of Ward as starting point}
+\NormalTok{nclust}\OtherTok{\textless{}{-}}\DecValTok{6}
+\NormalTok{stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(shopping,clustvar[,nclust],}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+\FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(shopping))}
+\NormalTok{kmean6}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(shopping,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+
+\FunctionTok{round}\NormalTok{(kmean6}\SpecialCharTok{$}\NormalTok{centers,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  organising_trip knowing_buy duty_responsability shopping_fun take_at_ease
+1            0.54        0.41                0.83         0.83         0.64
+2            0.27        0.33                0.68         0.82         0.83
+3            0.08        0.17               -0.49         0.49         0.33
+4           -1.49       -1.40               -0.73         0.47         0.52
+5            0.46        0.36                0.03        -1.04        -0.97
+6           -1.00       -0.84               -0.56        -1.07        -0.67
+  enjoy shopping_drag minimise_shoppingtime shopping_list shopping_with_family
+1  0.88         -0.59                 -0.42          0.82                 0.87
+2  0.81         -0.81                 -0.44         -1.17                 0.44
+3  0.37         -0.61                 -0.53          0.61                -0.02
+4  0.37         -0.67                 -0.81         -1.15                -0.22
+5 -0.97          1.08                  0.87          0.45                -0.42
+6 -0.98          1.02                  0.86         -1.15                -0.57
+  have_stock
+1       0.42
+2       0.12
+3      -0.06
+4      -0.40
+5       0.23
+6      -1.05
+\end{verbatim}
+
+We also list the sizes and the proportions of explained variance for all the solutions here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#number of observations per cluster}
+\NormalTok{kmean1}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 487
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmean2}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 300 187
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmean3}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 219  87 181
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmean4}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 214  86 143  44
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmean5}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 110 115  75 143  44
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmean6}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  84  61  95  61 142  44
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# proportion of explained variance}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{),}\FunctionTok{c}\NormalTok{(kmean1}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean1}\SpecialCharTok{$}\NormalTok{totss,kmean2}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean2}\SpecialCharTok{$}\NormalTok{totss,}
+\NormalTok{              kmean3}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean3}\SpecialCharTok{$}\NormalTok{totss,kmean4}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean4}\SpecialCharTok{$}\NormalTok{totss,}
+\NormalTok{              kmean5}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean5}\SpecialCharTok{$}\NormalTok{totss,kmean6}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean6}\SpecialCharTok{$}\NormalTok{totss))}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{),}\FunctionTok{c}\NormalTok{(kmean1}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean1}\SpecialCharTok{$}\NormalTok{totss,kmean2}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean2}\SpecialCharTok{$}\NormalTok{totss,}
+\NormalTok{               kmean3}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean3}\SpecialCharTok{$}\NormalTok{totss,kmean4}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean4}\SpecialCharTok{$}\NormalTok{totss,}
+\NormalTok{               kmean5}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean5}\SpecialCharTok{$}\NormalTok{totss,kmean6}\SpecialCharTok{$}\NormalTok{betweenss}\SpecialCharTok{/}\NormalTok{kmean6}\SpecialCharTok{$}\NormalTok{totss))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_88-1.pdf}
+
+We can see here that the more clusters we select, the larger the proportion of explained variance is. However, the proportion grows lower and lower while we increase the number of clusters.
+When we take 6 clusters, the size of each cluster seems relatively small, but not too small, so we still decide to take 6 clusters now, in order to get maximum explained variance.
+Then we visualize our cluster solution in the space of the first two principal components.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{5}\NormalTok{,],}\AttributeTok{col=}\StringTok{"yellow"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean6}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{6}\NormalTok{,],}\AttributeTok{col=}\StringTok{"purple"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_89-1.pdf}
+
+We can see that the green part and the red part seem to be totally mixed up with each other, while our principal component 1, the ``enjoy'' factor, still separates the clusters well into positive ones and negative ones, namely, those who enjoy shopping and those who dislike shopping. As the result corresponding to our principal component 2, the ``organized'' factor, seems really too hard to interpret, we decide to try to use 5 clusters, as this won't make a great decrease in the explained variance.
+We visualize our solution with 5 clusters as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean5}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean5}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean5}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean5}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[kmean5}\SpecialCharTok{$}\NormalTok{cluster}\SpecialCharTok{==}\DecValTok{5}\NormalTok{,],}\AttributeTok{col=}\StringTok{"yellow"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_90-1.pdf}
+
+Here the borders become much clearer. We can interpret the cluster solutions as:
+The blue part: Positive for the ``organized'' factor but negative for the ``enjoy'' factor. The customers who dislike shopping but are organized.
+The yellow part: Negative for the ``organized'' factor and negative for the ``enjoy'' factor. The customers who dislike shopping and are not organized.
+The green part: Negative for the ``organized'' factor but positive for the ``enjoy'' factor. The customers who enjoy shopping but are not organized.
+The red part: Around 0 for the ``organized'' factor and positive for the ``enjoy'' factor. The customers who enjoy shopping and are moderately organized.
+The black part: Positive for the ``organized'' factor and positive for the ``enjoy'' factor. The customers who enjoy shopping and are organized.
+This interpretation seems to make sense, so we continue with the validation work. We first conduct the cluster method on our train dataset to get several clusters, and the cluster our validation dataset with the same method. After that, we cluster our validation data set again according to the clusters we've got from our train dataset. By comparing the difference between the two results we get from our validation dataset, we can measure the stability of our cluster method. The measurement of difference here is always ARI index, which has zero expected value in the case of a random partition and is bounded above by 1 in the case of perfect agreement between two partitions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# cluster train data Ward + kmeans}
+\NormalTok{  disttrain}\OtherTok{\textless{}{-}}\FunctionTok{dist}\NormalTok{(train, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{, }\AttributeTok{diag =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{upper =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{  wardtrain}\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(disttrain, }\StringTok{"ward.D2"}\NormalTok{)}
+\NormalTok{  nclust}\OtherTok{\textless{}{-}}\DecValTok{5}
+\NormalTok{  clustvar}\OtherTok{\textless{}{-}}\FunctionTok{cutree}\NormalTok{(wardtrain, }\AttributeTok{k=}\NormalTok{nclust)}
+\NormalTok{  stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(train,clustvar,}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+  \FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+  \FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(train))}
+\NormalTok{  kmeantrain}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(train,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+  
+  \CommentTok{\# cluster validation data Ward + kmeans}
+\NormalTok{  distvalid}\OtherTok{\textless{}{-}}\FunctionTok{dist}\NormalTok{(valid, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{, }\AttributeTok{diag =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{upper =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{  wardvalid}\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(distvalid, }\StringTok{"ward.D2"}\NormalTok{)}
+\NormalTok{  nclust}\OtherTok{\textless{}{-}}\DecValTok{5}
+\NormalTok{  clustvar}\OtherTok{\textless{}{-}}\FunctionTok{cutree}\NormalTok{(wardvalid, }\AttributeTok{k=}\NormalTok{nclust)}
+\NormalTok{  stat}\OtherTok{\textless{}{-}}\FunctionTok{describeBy}\NormalTok{(valid,clustvar,}\AttributeTok{mat=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  hcenter}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(stat[,}\DecValTok{5}\NormalTok{],}\AttributeTok{nrow=}\NormalTok{nclust)}
+  \FunctionTok{rownames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"c\_"}\NormalTok{,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nclust),}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+  \FunctionTok{colnames}\NormalTok{(hcenter)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(valid))}
+\NormalTok{  kmeanvalid}\OtherTok{\textless{}{-}}\FunctionTok{kmeans}\NormalTok{(valid,}\AttributeTok{centers=}\NormalTok{hcenter,}\AttributeTok{iter.max=}\DecValTok{200}\NormalTok{)}
+  
+  
+\NormalTok{  classif1}\OtherTok{\textless{}{-}}\FunctionTok{clusters}\NormalTok{(valid, kmeantrain[[}\StringTok{"centers"}\NormalTok{]])}
+\NormalTok{  classif2}\OtherTok{\textless{}{-}}\NormalTok{kmeanvalid}\SpecialCharTok{$}\NormalTok{cluster}
+  \FunctionTok{table}\NormalTok{(classif1,classif2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        classif2
+classif1  1  2  3  4  5
+       1 12  0  1 43  0
+       2  2 30  0  0  1
+       3  0  0  9  0 20
+       4  0  0 64  0  0
+       5 40  1  0 14  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  cl1}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(classif1)}
+\NormalTok{  cl2}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(classif2,}\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"4"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"1"}\NormalTok{))}
+\NormalTok{  mat}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(cl1,cl2)}
+  \FunctionTok{print}\NormalTok{(mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   cl2
+cl1  4  2  5  3  1
+  1 43  0  0  1 12
+  2  0 30  1  0  2
+  3  0  0 20  9  0
+  4  0  0  0 64  0
+  5 14  1  0  0 40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  percent5}\OtherTok{=}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(mat))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(mat)}
+  \FunctionTok{round}\NormalTok{(percent5,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.83
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  rand5}\OtherTok{\textless{}{-}}\FunctionTok{adjustedRandIndex}\NormalTok{(cl1,cl2)}
+  \FunctionTok{round}\NormalTok{(rand5,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.65
+\end{verbatim}
+
+We get an 83\% here for the match rate, and 0.65 here for ARI index, which is acceptable. Further, we test the stability for this method with 1 up to 6 clusters, and obtain the curve for match rate as well as ARI index below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#match rate ARI Index}
+\end{Highlighting}
+\end{Shaded}
+
+We can see that both the match rate and the ARI index, which also reveal the stability of the method, decrease monotonously as the number of clusters increases, and a rapid decrease occurs at 5. So, in order to increase the stability of our method, we turn to select 4 clusters as our final decision, and this still won't cause great loss in explained variance.
+The visualized result for 4 clusters case is as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#4 clusters}
+\end{Highlighting}
+\end{Shaded}
+
+We have 4 very clear clusters here:
+The green part: Positive for the ``organized'' factor but negative for the ``enjoy'' factor. The customers who dislike shopping but are organized.
+The blue part: Negative for the ``organized'' factor and negative for the ``enjoy'' factor. The customers who dislike shopping and are not organized.
+The red part: Negative for the ``organized'' factor but positive for the ``enjoy'' factor. The customers who enjoy shopping but are not organized.
+The black part: Positive for the ``organized'' factor and positive for the ``enjoy'' factor. The customers who enjoy shopping and are organized.
+
+This is also consistent with our initial guess from the dendrogram.
+
+\hypertarget{ii-model-based-clustering-with-hddc}{%
+\subsubsection{II) Model-based clustering with hddc()}\label{ii-model-based-clustering-with-hddc}}
+
+Firstly, we let the hddc() function itself to select the optimal number of clusters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#number of clusters chosen by hddc}
+\CommentTok{\#use BIC to select the number of dimensions}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc1.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc1.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: ABQD
+  Posterior probabilities of groups
+       1      2     3     4     5
+   0.155 0.0637 0.194 0.315 0.272
+      Intrinsic dimensions of the classes:
+       1 2 3 4 5
+  dim: 2 2 2 2 2
+       
+A: 1.09
+        
+B: 0.434
+BIC:  -13426.7 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(hddc1.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_94-1.pdf}
+
+We can see that the hddc() function has chosen 5 clusters, and the optimal dimension to get the highest BIC value here is 2, which is consistent with our previous results from principal component analysis.
+Then we continue to get the solutions with 1 up to 6 clusters.
+
+Then we continue to get the solutions with 1 up to 6 clusters.
+
+\hypertarget{a-1-cluster-1}{%
+\paragraph{a) 1 cluster}\label{a-1-cluster-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with K=1}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc1.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{1}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc1.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: AKJBKQKDK
+  Posterior probabilities of groups
+   1
+   1
+      Intrinsic dimensions of the classes:
+       1
+  dim: 2
+     
+Class   a1   a2
+    1 3.75 2.27
+        1
+Bk: 0.551
+BIC:  -13842.64 
+\end{verbatim}
+
+\hypertarget{b-2-clusters}{%
+\paragraph{b) 2 clusters}\label{b-2-clusters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with K=2}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc2.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{2}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc2.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: ABKQKD
+  Posterior probabilities of groups
+       1     2
+   0.297 0.703
+      Intrinsic dimensions of the classes:
+       1 2
+  dim: 2 2
+       
+A: 2.69
+        1     2
+Bk: 0.626 0.398
+BIC:  -13630.49 
+\end{verbatim}
+
+\hypertarget{c-3-clusters}{%
+\paragraph{c) 3 clusters}\label{c-3-clusters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with K=3}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc3.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{3}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc3.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: AKBKQKD
+  Posterior probabilities of groups
+       1     2     3
+   0.159 0.449 0.392
+      Intrinsic dimensions of the classes:
+       1 2 3
+  dim: 2 2 2
+       1    2    3
+Ak: 1.71 1.17 1.74
+        1     2     3
+Bk: 0.456 0.375 0.518
+BIC:  -13521.93 
+\end{verbatim}
+
+\hypertarget{d-4-clusters}{%
+\paragraph{d) 4 clusters}\label{d-4-clusters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with K=4}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc4.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{4}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc4.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: AJBQD
+  Posterior probabilities of groups
+       1      2     3     4
+   0.463 0.0641 0.156 0.317
+      Intrinsic dimensions of the classes:
+       1 2 3 4
+  dim: 2 2 2 2
+      a1   a2
+Aj: 1.26 0.98
+        
+B: 0.458
+BIC:  -13429.53 
+\end{verbatim}
+
+\hypertarget{e-5-clusters}{%
+\paragraph{e) 5 clusters}\label{e-5-clusters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with K=5}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc5.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{5}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc5.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: ABQD
+  Posterior probabilities of groups
+       1      2     3     4     5
+   0.155 0.0639 0.244 0.222 0.315
+      Intrinsic dimensions of the classes:
+       1 2 3 4 5
+  dim: 2 2 2 2 2
+       
+A: 1.09
+        
+B: 0.435
+BIC:  -13426.96 
+\end{verbatim}
+
+\hypertarget{f-6-clusters}{%
+\paragraph{f) 6 clusters}\label{f-6-clusters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddc6.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(shopping,}\AttributeTok{K=}\DecValTok{6}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddc6.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: AJBQD
+  Posterior probabilities of groups
+        1     2     3    4     5     6
+   0.0516 0.146 0.058 0.14 0.167 0.437
+      Intrinsic dimensions of the classes:
+       1 2 3 4 5 6
+  dim: 2 2 2 2 2 2
+      a1    a2
+Aj: 1.22 0.875
+        
+B: 0.425
+BIC:  -13395.17 
+\end{verbatim}
+
+Reasonably, we believe in the hddc() function and choose 5 clusters here as our initial solution. We visualize it in the space of the first two principal components as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc5.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc5.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc5.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc5.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc5.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{5}\NormalTok{,],}\AttributeTok{col=}\StringTok{"yellow"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_101-1.pdf}
+
+Hopefully, we can interpret in the same way as we have done for the kmeans method with 5 clusters, but here the green part and the blue part are almost overlapped, which is not very good for the interpretation. We hold on and test the stability of hddc() method with 5 clusters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# cluster train data hddc}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddcT.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(train,}\AttributeTok{K=}\DecValTok{5}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddcT.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: ABQD
+  Posterior probabilities of groups
+        1     2      3     4     5
+   0.0723 0.454 0.0836 0.287 0.104
+      Intrinsic dimensions of the classes:
+       1 2 3 4 5
+  dim: 2 2 2 2 2
+       
+A: 1.06
+        
+B: 0.447
+BIC:  -7088.109 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# cluster validation data hddc}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{hddcV.out}\OtherTok{\textless{}{-}}\FunctionTok{hddc}\NormalTok{(valid,}\AttributeTok{K=}\DecValTok{5}\NormalTok{,}\AttributeTok{model=}\StringTok{"all"}\NormalTok{)}
+\NormalTok{hddcV.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+HIGH DIMENSIONAL DATA CLUSTERING
+MODEL: ABQD
+  Posterior probabilities of groups
+       1     2     3     4     5
+   0.309 0.092 0.134 0.277 0.188
+      Intrinsic dimensions of the classes:
+       1 2 3 4 5
+  dim: 2 2 2 2 2
+        
+A: 0.989
+        
+B: 0.447
+BIC:  -6742.602 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classif1}\OtherTok{\textless{}{-}}\FunctionTok{clusters}\NormalTok{(valid, hddcT.out[[}\StringTok{"mu"}\NormalTok{]])}
+\NormalTok{classif2}\OtherTok{\textless{}{-}}\NormalTok{hddcV.out}\SpecialCharTok{$}\NormalTok{class}
+\FunctionTok{table}\NormalTok{(classif1,classif2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        classif2
+classif1  1  2  3  4  5
+       1  7 18  0  0  0
+       2  0  0  1 66 41
+       3  0  2 15  0  2
+       4 66  1  0  0  0
+       5  0  1 16  1  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cl1}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(classif1)}
+\NormalTok{cl2}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(classif2,}\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"2"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"1"}\NormalTok{,}\StringTok{"3"}\NormalTok{))}
+\NormalTok{mat}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(cl1,cl2)}
+\CommentTok{\#print(mat)}
+\FunctionTok{kbl}\NormalTok{(mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}[t]{r|r|r|r|r}
+\hline
+2 & 4 & 5 & 1 & 3\\
+\hline
+18 & 0 & 0 & 7 & 0\\
+\hline
+0 & 66 & 41 & 0 & 1\\
+\hline
+2 & 0 & 2 & 0 & 15\\
+\hline
+1 & 0 & 0 & 66 & 0\\
+\hline
+1 & 1 & 0 & 0 & 16\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{percent5}\OtherTok{=}\FunctionTok{sum}\NormalTok{(}\FunctionTok{diag}\NormalTok{(mat))}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(mat)}
+\FunctionTok{round}\NormalTok{(percent5,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.71
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rand5}\OtherTok{\textless{}{-}}\FunctionTok{adjustedRandIndex}\NormalTok{(cl1,cl2)}
+\FunctionTok{round}\NormalTok{(rand5,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.63
+\end{verbatim}
+
+The match rate here is 71\% and the ARI index here is 0.63, which are not quite good but still acceptable. However, if we continue to test the stability for this method with 1 up to 6 clusters, and obtain the curve for match rate as well as ARI index, we can see that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ari match}
+\end{Highlighting}
+\end{Shaded}
+
+A sharp decrease occurs at 5, for both match rate and ARI index, and at 4 we get the maximal value for both match rate and ARI index, thus the most stable. We take a look at the solution with 4 clusters to check if we can get a result easy to interpret.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[hddc4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_104-1.pdf}
+
+The borders are clear now and we can give an explicit interpretation for this figure. The customers are classified into four clusters according to our two principal components as below:
+The blue part: Positive for the ``organized'' factor but negative for the ``enjoy'' factor. The customers who dislike shopping but are organized.
+The red part: Negative for the ``organized'' factor and negative for the ``enjoy'' factor. The customers who dislike shopping and are not organized.
+The green part: Negative for the ``organized'' factor but positive for the ``enjoy'' factor. The customers who enjoy shopping but are not organized.
+The black part: Positive for the ``organized'' factor and positive for the ``enjoy'' factor. The customers who enjoy shopping and are organized.
+So finally, we take 4 clusters as our final decision.
+
+\hypertarget{iii-model-based-clustering-using-mclust}{%
+\subsubsection{III) Model-based clustering using Mclust()}\label{iii-model-based-clustering-using-mclust}}
+
+Like hddc(), we firstly let the function Mclust() itself to choose an optimal number of clusters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#number of clusters chosen by Mclust}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust1.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust1.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust VVE (ellipsoidal, equal orientation) model with 4 components: 
+
+ log-likelihood   n  df       BIC       ICL
+      -5996.532 487 146 -12896.55 -12942.22
+
+Clustering table:
+  1   2   3   4 
+ 79 115 160 133 
+\end{verbatim}
+
+Here Mclust() has chosen 4 as the optimal number of clusters. Now we continue to obtain the solutions with 1 up to 6 clusters.
+
+\hypertarget{a-1-cluster-2}{%
+\paragraph{a) 1 cluster}\label{a-1-cluster-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=1}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust1.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust1.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust XXX (ellipsoidal multivariate normal) model with 1 component: 
+
+ log-likelihood   n df       BIC       ICL
+       -6532.38 487 77 -13541.26 -13541.26
+
+Clustering table:
+  1 
+487 
+\end{verbatim}
+
+\hypertarget{b-2-clusters-1}{%
+\paragraph{b) 2 clusters}\label{b-2-clusters-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=2}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust2.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust2.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust EVE (ellipsoidal, equal volume and orientation) model with 2 components: 
+
+ log-likelihood   n df       BIC       ICL
+      -6376.903 487 99 -13366.44 -13392.97
+
+Clustering table:
+  1   2 
+321 166 
+\end{verbatim}
+
+\hypertarget{c-3-clusters-1}{%
+\paragraph{c) 3 clusters}\label{c-3-clusters-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=3}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust3.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{3}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust3.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust VVE (ellipsoidal, equal orientation) model with 3 components: 
+
+ log-likelihood   n  df       BIC       ICL
+      -6152.089 487 123 -13065.33 -13093.78
+
+Clustering table:
+  1   2   3 
+190 160 137 
+\end{verbatim}
+
+\hypertarget{d-4-clusters-1}{%
+\paragraph{d) 4 clusters}\label{d-4-clusters-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=4}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust4.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{4}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust4.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust VVE (ellipsoidal, equal orientation) model with 4 components: 
+
+ log-likelihood   n  df       BIC       ICL
+      -5996.532 487 146 -12896.55 -12942.22
+
+Clustering table:
+  1   2   3   4 
+ 79 115 160 133 
+\end{verbatim}
+
+\hypertarget{e-5-clusters-1}{%
+\paragraph{e) 5 clusters}\label{e-5-clusters-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=5}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust5.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{5}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust5.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust VVE (ellipsoidal, equal orientation) model with 5 components: 
+
+ log-likelihood   n  df       BIC       ICL
+      -5936.425 487 169 -12918.67 -12968.95
+
+Clustering table:
+  1   2   3   4   5 
+ 72  55 155  73 132 
+\end{verbatim}
+
+\hypertarget{f-6-clusters-1}{%
+\paragraph{f) 6 clusters}\label{f-6-clusters-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#fit all models with G=6}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\NormalTok{mclust6.out}\OtherTok{\textless{}{-}}\FunctionTok{Mclust}\NormalTok{(shopping,}\AttributeTok{G=}\DecValTok{6}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mclust6.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------- 
+Gaussian finite mixture model fitted by EM algorithm 
+---------------------------------------------------- 
+
+Mclust VVE (ellipsoidal, equal orientation) model with 6 components: 
+
+ log-likelihood   n  df       BIC       ICL
+      -5895.384 487 192 -12978.92 -13041.74
+
+Clustering table:
+  1   2   3   4   5   6 
+ 71  53 122  68 132  41 
+\end{verbatim}
+
+We start with believing that Mclust() function will give us the optimal number of clusters, and visualize our result for Mclust() method with 4 clusters in the space of the first two principal components as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_112-1.pdf}
+
+Actually, the black points here are very divergent, but its centroid is still located in the left-bottom corner. Actually, if we also take the visualized result with other numbers of clusters, we can see that:
+
+6 clusters
+
+5 clusters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_114-1.pdf}
+
+3 clusters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_115-1.pdf}
+2 clusters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot clusters extracted with HDDC in space of first two principal components}
+\FunctionTok{plot}\NormalTok{(comp,}\AttributeTok{main=}\StringTok{"derived clusters"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{2}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{3}\NormalTok{,],}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(comp[mclust4.out}\SpecialCharTok{$}\NormalTok{class}\SpecialCharTok{==}\DecValTok{4}\NormalTok{,],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{report_files/figure-latex/Task_3_116-1.pdf}
+
+For the cases with 6 clusters and 5 clusters, different parts are totally mixed up with each other, which is too hard to interpret, and for the cases with 3 and even 2 clusters, also we can't avoid the black dots to be divergent. So, 4 clusters seem to be the best choice here, and we can roughly interpret the result as:
+The blue part: Positive for the ``organized'' factor but negative for the ``enjoy'' factor. The customers who dislike shopping but are organized.
+
+The red part: Negative for the ``organized'' factor and negative for the ``enjoy'' factor. The customers who dislike shopping and are not organized.
+The green part: Negative for the ``organized'' factor but positive for the ``enjoy'' factor. The customers who enjoy shopping but are not organized.
+The black part: Positive for the ``organized'' factor and positive for the ``enjoy'' factor. The customers who enjoy shopping and are organized.
+
+Then we take a look at the stability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# cluster validation data Mclust}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{0829539}\NormalTok{)}
+\CommentTok{\#mclustV.out\textless{}{-}Mclust(valid,G=4)}
+\CommentTok{\#summary(mclustV.out)}
+
+
+\CommentTok{\#classif1\textless{}{-}clusters(valid, t(as.matrix(mclustT.out$parameters$mean)))}
+\CommentTok{\#classif2\textless{}{-}mclustV.out$class}
+\CommentTok{\#table(classif1,classif2)}
+
+\CommentTok{\#cl1\textless{}{-}as.factor(classif1)}
+\CommentTok{\#cl2\textless{}{-}factor(classif2,levels=c("3","4","2","1"))}
+\CommentTok{\#mat\textless{}{-}table(cl1,cl2)}
+\CommentTok{\#print(mat)}
+
+\CommentTok{\#percent4=sum(diag(mat))/sum(mat)}
+\CommentTok{\#round(percent4,2)}
+
+\CommentTok{\#rand4\textless{}{-}adjustedRandIndex(cl1,cl2)}
+\CommentTok{\#round(rand4,2)}
+\end{Highlighting}
+\end{Shaded}
+
+We can see that here the match rate is 73\% and the ARI index is 0.66, which are both acceptable. If we again continue to test the stability for this method with 1 up to 6 clusters, and obtain the curve for match rate as well as ARI index, we can see that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot}
+\CommentTok{\#plot(c(2:6), c(percent2,percent3,percent4,percent5,percent6))}
+\CommentTok{\#lines(c(2:6), c(percent2,percent3,percent4,percent5,percent6))}
+
+\CommentTok{\#plot}
+\CommentTok{\#plot(c(2:6), c(rand2,rand3,rand4,rand5,rand6))}
+\CommentTok{\#lines(c(2:6), c(rand2,rand3,rand4,rand5,rand6))}
+\end{Highlighting}
+\end{Shaded}
+
+4 clusters are already the most stable case, and we take it as our final decision.
+
+\hypertarget{conclusion}{%
+\subsection{4. Conclusion}\label{conclusion}}
+
+As conclusion, we end up choosing 4 clusters for all these three methods and obtained the same interpretation with our two principal components ``enjoy'' and ``organized''.
+With analysis for all these three methods, we can conclude that, Mclust() method here performs better than hddc() method in stability, but the boundaries of the clusters obtained by hddc() method are clearer. The hierarchical clustering with Ward's method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point is the most stable method here for this task.
+
+\end{document}

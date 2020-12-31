@@ -1,0 +1,21 @@
+---
+title: "Task 1"
+output:
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: yes
+fontsize: 11pt
+geometry: margin=1in
+mainfont: Times New Roman
+header-includes:
+- \usepackage[font=small,format=plain,labelfont=bf,up,textfont=normal,up,justification=justified,singlelinecheck=false]{caption}
+---
+
+```{r child = '1_Task.Rmd'}
+```
+
+```{r child = '2_Task.Rmd'}
+```
+
+```{r child = '3_Task.Rmd'}
+```

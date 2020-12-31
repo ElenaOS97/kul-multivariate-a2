@@ -1,17 +1,10 @@
----
-title: "Task 3"
-output: 
-  pdf_document: 
-    latex_engine: xelatex
-editor_options: 
-  chunk_output_type: console
----
+# Task 3
 
-```{r setup, include=FALSE}
+```{r setup3, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r Task_1_setup, include=FALSE}
+```{r Task_3_setup, include=FALSE}
 base_url <- '~/GitHub/kul-multivariate-a2/src/'
 load(paste0(base_url,"shopping.Rdata"))
 
@@ -33,7 +26,7 @@ require(graphics)
 ```
 
 
-# 1. Introduction
+## 1. Introduction
   For task 3, we are going to deal with a dataset containing the shopping behavior of 487 different customers. We have 11 statements here and the corresponding variables measuring to what extent they agree with these statements, namely: 
   1) organising_trip: It is very important for me to organize the shopping well.
   2) knowing_buy: When I leave to go shopping, I know exactly what I am going to buy.
@@ -50,10 +43,10 @@ require(graphics)
   The variables vary from 1 to 7, where 1 means totally disagree and 7 means totally agree.
 Our task is to cluster the customers basing on the 11 items of shopping mentioned above and try to interpret the results we will get. What’s more, we are also going to test the stability of the cluster solutions deduced by different methods.
 
-# 2. Methodology
+## 2. Methodology
   We will try to do the clustering with (1) hierarchical clustering with Ward’s method on squared Euclidean distances     followed by k-means with the centroid of the hierarchical clustering as starting point, (2) model-based clustering with hddc(), and (3) model-based clustering using Mclust(). In order to test the stability of our cluster solutions, we are going to split our dataset randomly into a train set and a test set. The cluster methods will be firstly applied on the train set, and then on test set. After that, we will also form a cluster solution on the test set by assigning the points to the cluster centroid of the training sample that is closest. Finally, by comparing our two cluster solutions on the test set, we can evaluate the stability of our methods.
 
-# 3. Result
+## 3. Result
   Firstly, in order to make our cluster solution more reasonable, we are going to standardize our data first.
   
   
@@ -142,7 +135,7 @@ clusters <- function(x, centers) {
 
   Now we are going to apply our three different cluster methods on our dataset separately, and then interpret the results. For each method, we are going to compute the solution with 1 up to 6 solutions and choose the most reasonable solution.
 
-## I) Hierarchical clustering with Ward’s method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point
+### I) Hierarchical clustering with Ward’s method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point
 
   Firstly, we apply Hierarchical clustering with Ward’s method on squared Euclidean distances and draw the dendrogram to observe the structure.
 
@@ -167,7 +160,7 @@ plot(hiclust_ward,hang=-1)
 clustvar<-cutree(hiclust_ward, k=1:6)
 ```
   
-### a) 1 cluster
+#### a) 1 cluster
 
 ```{r Task_3_81, comment=NA, include=TRUE}
 # k-means with 1 clusters using centroid of Ward as starting point
@@ -182,7 +175,7 @@ round(kmean1$centers,2)
 
 ```
 
-### b) 2 cluster
+#### b) 2 cluster
 
 ```{r Task_3_82, comment=NA, include=TRUE}
 # k-means with 2 clusters using centroid of Ward as starting point
@@ -197,7 +190,7 @@ round(kmean2$centers,2)
 
 ```
 
-### c) 3 cluster
+#### c) 3 cluster
 
 ```{r Task_3_83, comment=NA, include=TRUE}
 # k-means with 3 clusters using centroid of Ward as starting point
@@ -212,7 +205,7 @@ round(kmean3$centers,2)
 
 ```
 
-### d) 4 cluster
+#### d) 4 cluster
 
 ```{r Task_3_84, comment=NA, include=TRUE}
 # k-means with 4 clusters using centroid of Ward as starting point
@@ -227,7 +220,7 @@ round(kmean4$centers,2)
 
 ```
 
-### e) 5 cluster
+#### e) 5 cluster
 
 ```{r Task_3_85, comment=NA, include=TRUE}
 # k-means with 5 clusters using centroid of Ward as starting point
@@ -242,7 +235,7 @@ round(kmean5$centers,2)
 
 ```
 
-### f) 6 cluster
+#### f) 6 cluster
 
 ```{r Task_3_86, comment=NA, include=TRUE}
 # k-means with 6 clusters using centroid of Ward as starting point
@@ -383,7 +376,7 @@ The black part: Positive for the “organized” factor and positive for the “
 This is also consistent with our initial guess from the dendrogram.
 
 
-## II) Model-based clustering with hddc()
+### II) Model-based clustering with hddc()
 
   Firstly, we let the hddc() function itself to select the optimal number of clusters.
 
@@ -402,7 +395,7 @@ Then we continue to get the solutions with 1 up to 6 clusters.
 
   Then we continue to get the solutions with 1 up to 6 clusters.
 
-### a) 1 cluster
+#### a) 1 cluster
 ```{r Task_3_95, comment=NA}
 #fit all models with K=1
 set.seed(0829539)
@@ -410,7 +403,7 @@ hddc1.out<-hddc(shopping,K=1,model="all")
 hddc1.out
 ```
 
-### b) 2 clusters
+#### b) 2 clusters
 
 ```{r Task_3_96, comment=NA}
 #fit all models with K=2
@@ -419,7 +412,7 @@ hddc2.out<-hddc(shopping,K=2,model="all")
 hddc2.out
 ```
 
-### c) 3 clusters
+#### c) 3 clusters
 
 ```{r Task_3_97, comment=NA}
 #fit all models with K=3
@@ -428,7 +421,7 @@ hddc3.out<-hddc(shopping,K=3,model="all")
 hddc3.out
 ```
 
-### d) 4 clusters
+#### d) 4 clusters
 
 ```{r Task_3_98, comment=NA}
 #fit all models with K=4
@@ -437,7 +430,7 @@ hddc4.out<-hddc(shopping,K=4,model="all")
 hddc4.out
 ```
 
-### e) 5 clusters
+#### e) 5 clusters
 
 ```{r Task_3_99, comment=NA}
 #fit all models with K=5
@@ -446,7 +439,7 @@ hddc5.out<-hddc(shopping,K=5,model="all")
 hddc5.out
 ```
 
-### f) 6 clusters
+#### f) 6 clusters
 
 ```{r Task_3_100, comment=NA}
 set.seed(0829539)
@@ -520,7 +513,7 @@ The green part: Negative for the “organized” factor but positive for the “
 The black part: Positive for the “organized” factor and positive for the “enjoy” factor. The customers who enjoy shopping and are organized.
 So finally, we take 4 clusters as our final decision.
 
-## III) Model-based clustering using Mclust()
+### III) Model-based clustering using Mclust()
 
   Like hddc(), we firstly let the function Mclust() itself to choose an optimal number of clusters.
   
@@ -533,7 +526,7 @@ summary(mclust1.out)
 
 Here Mclust() has chosen 4 as the optimal number of clusters. Now we continue to obtain the solutions with 1 up to 6 clusters.
 
-### a) 1 cluster
+#### a) 1 cluster
 ```{r Task_3_106, comment=NA}
 #fit all models with G=1
 set.seed(0829539)
@@ -541,7 +534,7 @@ mclust1.out<-Mclust(shopping,G=1)
 summary(mclust1.out)
 ```
 
-### b) 2 clusters
+#### b) 2 clusters
 
 ```{r Task_3_107, comment=NA}
 #fit all models with G=2
@@ -550,7 +543,7 @@ mclust2.out<-Mclust(shopping,G=2)
 summary(mclust2.out)
 ```
 
-### c) 3 clusters
+#### c) 3 clusters
 
 ```{r Task_3_108, comment=NA}
 #fit all models with G=3
@@ -559,7 +552,7 @@ mclust3.out<-Mclust(shopping,G=3)
 summary(mclust3.out)
 ```
 
-### d) 4 clusters
+#### d) 4 clusters
 
 ```{r Task_3_109, comment=NA}
 #fit all models with G=4
@@ -568,7 +561,7 @@ mclust4.out<-Mclust(shopping,G=4)
 summary(mclust4.out)
 ```
 
-### e) 5 clusters
+#### e) 5 clusters
 
 ```{r Task_3_110, comment=NA}
 #fit all models with G=5
@@ -577,7 +570,7 @@ mclust5.out<-Mclust(shopping,G=5)
 summary(mclust5.out)
 ```
 
-### f) 6 clusters
+#### f) 6 clusters
 
 ```{r Task_3_111, comment=NA}
 #fit all models with G=6
@@ -682,6 +675,6 @@ set.seed(0829539)
 4 clusters are already the most stable case, and we take it as our final decision.
 
 
-# 4. Conclusion
+## 4. Conclusion
 As conclusion, we end up choosing 4 clusters for all these three methods and obtained the same interpretation with our two principal components “enjoy” and “organized”.
 With analysis for all these three methods, we can conclude that, Mclust() method here performs better than hddc() method in stability, but the boundaries of the clusters obtained by hddc() method are clearer. The hierarchical clustering with Ward’s method on squared Euclidean distances followed by k-means with the centroid of the hierarchical clustering as starting point is the most stable method here for this task.
