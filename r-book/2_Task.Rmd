@@ -1,3 +1,9 @@
+---
+output:
+  word_document: default
+  html_document: default
+always_allow_html: true
+---
 # Task 2
 
 ```{r setup2, include=FALSE}

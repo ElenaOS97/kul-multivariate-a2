@@ -1,7 +1,14 @@
+---
+output:
+  word_document: default
+  html_document: default
+always_allow_html: true
+---
 
 # Task 1
 ```{r setup1, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.auto_format = FALSE)
 ```
 
 ```{r Task_1_setup, include=FALSE}
