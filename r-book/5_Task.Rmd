@@ -43,6 +43,11 @@ for (i in 1:36){
 
 ## Introduction
 
+
+  In this task, we are going to work with a morse code signal perception. This data set, is indeed compose for morse code in two dimensions (columns and rows) and for every combination or intersection point is populated by the representation of the percentage of subjects who indicated that signal i was equal to signal j, when signal j was presented after signal i.
+  
+  The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
+  
   In a study on Morse code signals Rothkopf (1957) asked 598 subjects to indicate for each pair of signals (acoustically presented after each other) whether the two signals were equal.
   Note that each signal consists of a sequence of short beeps (0.05 sec) and long beeps (0.15 sec) separated by a silence (0.05 sec).
   The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
@@ -50,10 +55,11 @@ for (i in 1:36){
  
  
 ## Methodology
+   In order to observe dissimilarities in this matrix and find a solution, some methods as randomstress() and permutation() will be used. 
 
-  First of all and in order to observe dissimilarities, smacofSym() will be used to conduct a MDS with 2 dimensions. 
-  
-  After 
+
+
+
 
   We compute a symmetric matrix of similarities by taking the average of corresponding elements in the confusion matrix above and below the diagonal, 
 next we convert the matrix of similarities into a matrix of dissimilarities, and finally we put all diagonal elements of the dissimilarity matrix equal to 0:
@@ -117,8 +123,6 @@ tdt <- data.frame(
   "tm4" = round(c(tm4$stress),3)
 )
 ```
-
-
 ```{r Task_5_4, include=TRUE, echo=FALSE}
 dt %>%
   kbl(caption = "Stress-1  table values") %>%
