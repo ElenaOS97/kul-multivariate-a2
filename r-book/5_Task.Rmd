@@ -99,17 +99,6 @@ m3 <- smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4,
 #ordinal
 m4 <- smacofSym(delta=dissim, ndim=2, type="ordinal", init="torgerson")
 ```
-```{r Task_5_1Y2, include=TRUE, eval=TRUE}
-#ratio
-mmmm1 <- smacofIndDiff(tdissim, type= "ratio", constraint = "indscal", ties="primary")
-#interval
-m2 <- smacofSym(delta=dissim, ndim=2, type="interval", init="torgerson")
-#mspline
-m3 <- smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4, 
-                spline.intKnots = 4, init="torgerson")
-#ordinal
-m4 <- smacofSym(delta=dissim, ndim=2, type="ordinal", init="torgerson")
-```
 ```{r Task_5_2, include=FALSE, eval=TRUE}
 ## jUST df creation to be used in kable
 dt <- data.frame(
@@ -136,7 +125,6 @@ dt %>%
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
-
 ```{r Task_5_4n, include=FALSE, echo=FALSE}
 tdt %>%
   kbl(caption = "Stress-1  table values") %>%

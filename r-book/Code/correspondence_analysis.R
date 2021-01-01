@@ -71,9 +71,8 @@ fviz_ca_biplot(ca.out, repel=TRUE,
                labelsize=4, xlim=c(-1.5,0.5))
 
 # SYMBIPLOT
-#ROWPRINCIPAL
 fviz_ca_biplot(ca.out, repel=TRUE, 
                title = "Biplot, Correspondence Analysis",
                arrows=c(TRUE,TRUE), map="symbiplot",
-               labelsize=4, xlim=c(-1.5,0.5))
+               labelsize=4, xlim=c(-1,1))
 

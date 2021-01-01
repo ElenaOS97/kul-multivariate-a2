@@ -1,0 +1,48 @@
+---
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+
+library(ca)
+library(factoextra)
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+```{r loading, include=FALSE}
+#setwd ("C:/Users/Elena/Desktop/LEUVEN/Multivariate/2nd Assignment")
+base_url <- '~/GitHub/kul-multivariate-a2/src/'
+load(paste0(base_url,"datacar.Rdata"))
+
+#load("C:/Users/Elena/Desktop/LEUVEN/Multivariate/2nd Assignment/datacar.Rdata")
+
+```
+
+
+```{r correspondence analysis}
+
+################################################################# 
+# Implement correspondence analysis
+################################################################
+
+ca.out = ca(datacar)
+summary(ca.out)
+```
+```{biplot}
+
+################################################################# 
+# Correspondence Analysis, BIPLOT
+################################################################
+fviz_ca_biplot(ca.out, repel=TRUE, 
+               title = "Biplot, Correspondence Analysis",
+               arrows=c(TRUE,FALSE), map="colprincipal",
+               labelsize=4)
+```
