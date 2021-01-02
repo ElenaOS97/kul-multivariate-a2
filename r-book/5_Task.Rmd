@@ -15,227 +15,234 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r Task_5_setup, include=FALSE}
 base_url <- '~/GitHub/kul-multivariate-a2/src/'
 load(paste0(base_url,"confusion.Rdata"))
-#install.packages("smacof")
 library(smacof)
 library(dplyr)
 library(qdapRegex)
 library(stringr)
 library(kableExtra)
-#write.csv(confusion,"~/GitHub/kul-multivariate-a2/src/cnf.csv", row.names = FALSE)
-alphabet <- c(letters,1:9,0)
-translate <- confusion
-colnames(translate) <-alphabet
-rownames(translate) <-alphabet
-
-sim <- (confusion+t(confusion))/2 #similarity
-dissim <- 100-sim #dissimilarity
-for (i in 1:36){
-  dissim[i,i]<-0   #diagonal 0
-} 
-
-tsim <- (translate+t(translate))/2 #similarity
-tdissim <- 100-tsim #dissimilarity
-for (i in 1:36){
-  tdissim[i,i]<-0   #diagonal 0
-} 
-
 ```
 
 ## Introduction
-
-
-  In this task, we are going to work with a morse code signal perception. This data set, is indeed compose for morse code in two dimensions (columns and rows) and for every combination or intersection point is populated by the representation of the percentage of subjects who indicated that signal i was equal to signal j, when signal j was presented after signal i.
+  In this part of the assignment, we are going to work with a morse code signal perception dataset.
   
-  The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
+  The dataset which contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
   
-  In a study on Morse code signals Rothkopf (1957) asked 598 subjects to indicate for each pair of signals (acoustically presented after each other) whether the two signals were equal.
-  Note that each signal consists of a sequence of short beeps (0.05 sec) and long beeps (0.15 sec) separated by a silence (0.05 sec).
-  The data set confusion.Rdata contains a 36 x 36 matrix of confusion rates for all pairs of signals included in the study. The signals in the subsequent rows of the confusing matrix are the letters of the alphabet A, B, C… in alphabetical order and the numbers 1,2,3,4,5,6,7,8,9,0.
   The value in cell (i,j) of the matrix represents the percentage of subjects who indicated that signal i was equal to signal j, when signal j was presented after signal i.
  
- 
+  Here, we will search similarities and dissimilarities about the perception of the people which participated in this study.
+  
+  Multidimensional Scaling will be use.  
+  
+  Data, looks like this 
+  
+```{r Task_5_00, eval=TRUE, include=TRUE, echo=FALSE}
+looklike <- confusion
+colnames(looklike) <- str_replace_all(colnames(looklike), " ", "")
+rownames(looklike) <- str_replace_all(colnames(looklike), " ", "")
+
+looklike[c(1:8), c(1:8)] %>%
+kbl(caption = "extract of confussion matrix") %>%
+kable_minimal(full_width = T, html_font = "Cambria") %>% 
+kable_styling(latex_options = c("hold_position"))
+```
+
 ## Methodology
-   In order to observe dissimilarities in this matrix and find a solution, some methods as randomstress() and permutation() will be used. 
+   In order to observe dissimilarities and understand them, we are going to work with  in this matrix and find a solution, some methods as _randomstress()_ and permutation() will be used. 
+   
+   This data is "Tree-way two-mode", that means a that multiple persons rate the similarity between all pairs of objects, in this case, that people rate if two signal are similar or not.
+   
+  Firstly, and this one is to simplify the analysis, is transform signals into alphabet and numbers. After that  is transform data to create a new symmetric dissimilarity matrix.
+  
+  Secondly, we will Use MDS to get the optimal staled dissimilarities in order to select the better model to use in the analysis based in the goodness of fit and investigate the stability of the selected solution.
+  
+  And Finally,   Interpret the results  
+   
+   
+\newpage
 
-
-
-
-
-  We compute a symmetric matrix of similarities by taking the average of corresponding elements in the confusion matrix above and below the diagonal, 
-next we convert the matrix of similarities into a matrix of dissimilarities, and finally we put all diagonal elements of the dissimilarity matrix equal to 0:
-..................
 ## Results
-  ..................
 
-```{r Task_5_0, include=FALSE}
-sim <- (confusion+t(confusion))/2 #similarity
-dissim <- 100-sim #dissimilarity
+### Step 1
+
+  Here, we use couple of simple steps to help the interpretation of our analysis.
+
+```{r Task_5_0 , include=TRUE , eval=TRUE}
+#A readable Matrix 
+alphabet <- c(letters,1:9,0)
+translate <- confusion
+colnames(translate) <- alphabet
+rownames(translate) <- alphabet
+```
+
+### Step 2
+
+  After that, a transformation matrix have to be  applied.
+
+```{r Task_5_1 , include=TRUE , eval=TRUE}
+#Looking a dissimilarity Matrix
+#1.Similarity
+t.sim <- (translate+t(translate))/2 
+#2.Dissimilarity
+t.dissim <- 100-t.sim 
 for (i in 1:36){
-  dissim[i,i]<-0   #diagonal 0
+#3.Diagonal 
+  t.dissim[i,i]<-0   
 } 
-
-str(sim) 
 ```
 
-### Question 1
-1. Use *smacofSym()* to conduct MDS with 2 dimensions and assuming different measurement levels (i.e., _ratio, interval, mspline, ordinal_) for the observed dissimilarities.
-
-#### 1.1 Getting information from dissimilarity matrix. 
-  Here ratio, interval, mspline and ordinal values are obtained.
-    
-```{r Task_5_1N, include=FALSE, eval=TRUE}
+### Step 3
+  Using the *smacofSym()* conduct MDS with 2 dimensions in order to "process.." and check different measurement *_levels, ratio, interval, mspline and ordinal_* are going to be use, and avoiding to get stuck about the local minimum, will be use configuration of _torgeson_ as a classical scaling starting solution.
+  
+```{r Task_5_2 , include=TRUE , eval=TRUE}
 #ratio
-tm1 <- smacofSym(delta=tdissim, ndim=2, type="ratio", init="torgerson")
-#interval
-tm2 <- smacofSym(delta=tdissim, ndim=2, type="interval", init="torgerson")
+t.m1 <- smacofSym(delta=t.dissim, ndim=2, type="ratio", init="torgerson")
+#intervalas
+t.m2 <- smacofSym(delta=t.dissim, ndim=2, type="interval", init="torgerson")
 #mspline
-tm3 <- smacofSym(delta=tdissim, ndim=2, type="mspline", spline.degree =4, 
+t.m3 <- smacofSym(delta=t.dissim, ndim=2, type="mspline", spline.degree =4, 
                 spline.intKnots = 4, init="torgerson")
 #ordinal
-tm4 <- smacofSym(delta=tdissim, ndim=2, type="ordinal", init="torgerson")
+t.m4 <- smacofSym(delta=t.dissim, ndim=2, type="ordinal", init="torgerson")
+
 ```
-```{r Task_5_1Y1, include=TRUE, eval=TRUE}
-#ratio
-m1 <- smacofSym(delta=dissim, ndim=2, type="ratio", init="torgerson")
-#interval
-m2 <- smacofSym(delta=dissim, ndim=2, type="interval", init="torgerson")
-#mspline
-m3 <- smacofSym(delta=dissim, ndim=2, type="mspline", spline.degree =4, 
-                spline.intKnots = 4, init="torgerson")
-#ordinal
-m4 <- smacofSym(delta=dissim, ndim=2, type="ordinal", init="torgerson")
-```
-```{r Task_5_2, include=FALSE, eval=TRUE}
+```{r Task_5_3 , include=FALSE, eval=TRUE}
 ## jUST df creation to be used in kable
-dt <- data.frame(
-  "m1" = round(c(m1$stress),3),
-  "m2" = round(c(m2$stress),3),
-  "m3" = round(c(m3$stress),3),
-  "m4" = round(c(m4$stress),3)
+t.dt <- data.frame(
+  "ratio" = round(c(t.m1$stress),3),
+  "interval" = round(c(t.m2$stress),3),
+  "mspline" = round(c(t.m3$stress),3),
+  "ordinal" = round(c(t.m4$stress),3)
 )
 ```
-```{r Task_5_2n, include=FALSE, eval=TRUE}
-## jUST df creation to be used in kable
-tdt <- data.frame(
-  "tm1" = round(c(tm1$stress),3),
-  "tm2" = round(c(tm2$stress),3),
-  "tm3" = round(c(tm3$stress),3),
-  "tm4" = round(c(tm4$stress),3)
-)
-```
-```{r Task_5_4, include=TRUE, echo=FALSE}
-dt %>%
+
+  Once obtain the evaluation of *************** we proceed to apply our first judgment.
+
+```{r Task_5_4, include=TRUE , eval=TRUE, echo=FALSE}
+t.dt %>%
   kbl(caption = "Stress-1  table values") %>%
-  kable_classic(full_width = F, html_font = "Cambria")
-
-```
-```{r Task_5_4n, include=FALSE, echo=FALSE}
-tdt %>%
-  kbl(caption = "Stress-1  table values") %>%
-  kable_classic(full_width = F, html_font = "Cambria")
-
-```
-```{r Task_5_5N, include=TRUE, echo=FALSE}
-
-par(mfrow=c(2,2))
-plot(tm3,plot.type="resplot",main="residual plot ordinal MDS")
-plot(tm3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
-plot(tm4,plot.type="resplot",main="residual plot spline MDS")
-plot(tm4,plot.type="Shepard",main="Shepard diagram spline MDS")
-#configuration ordinal MDS
-
-```
-```{r Task_5_5, include=TRUE, echo=FALSE}
-
-par(mfrow=c(2,2))
-plot(m3,plot.type="resplot",main="residual plot ordinal MDS")
-plot(m3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
-plot(m4,plot.type="resplot",main="residual plot spline MDS")
-plot(m4,plot.type="Shepard",main="Shepard diagram spline MDS")
-#configuration ordinal MDS
-
-```
-```{r Task_5_6n,include=TRUE,  include=TRUE}
-plot(tm3,plot.type="conf")
-```
-```{r Task_5_6, include=TRUE}
-plot(m3,plot.type="conf")
+  kable_classic(full_width = F, html_font = "Cambria") %>% 
+  kable_styling(latex_options = c("hold_position"))
 ```
 
-### Question 2
-2. Evaluate the goodness of fit of solutions with different measurement levels using _stress-1_, and by computing stress norms with the functions _randomstress()_ and _permutation()_. Discuss which solution you would select. Investigate the stability of the selected solution using the _Jackknife_.
+  Following this rule 
+  
+  \begin{table}[h!]
+  \begin{center}
+    \caption{Rule Of thumb}
+      \begin{tabular}{c|c|c|c|c} 
+      \textbf{ Perfect } & \textbf{Perfect} & \textbf{Good} & \textbf{Fair} & \textbf{Poor}\\
+      \hline
+        0 & 0.025 & 0.05 & 0.10 & 0.20 \\ 
+      \end{tabular}
+  \end{center}
+\end{table}
 
-```{r Task_5_7, include=FALSE, eval=FALSE}
-#stress norm
-#set.seed(1)
-#rstress<-randomstress(n=36,ndim=2,nrep=500,type="ordinal")
+  Our first decision is "ordinal" has to be used, because is a better value among those. 
+  
+\newpage
+```{r Task_5_5 , include=TRUE , echo=FALSE}
+par(mfrow=c(3,1))
+plot(t.m3,plot.type="resplot",main="residual plot ordinal MDS")
+plot(t.m3,plot.type="Shepard",main="Shepard diagram ordinal MDS")
+
+```
+
+```{r Task_5_6 , include=TRUE , echo=FALSE}
+plot(t.m3,plot.type="conf")
+```
+
+### Step 4
+
+  Here, we are going to evaluate the goodness of fit of solutions for those  measurement levels using _stress-1_
+      In the previous step, the minor value was the "ordinal", for that reason will be use to evaluate the goodness of fit. 
+
+  In the process evaluate the goodness of fit of solution, we will observe _stress-1_. 
+
+  Randomstress function help to understand our parameter which has to be compared with............********.
+  
+  Seed is setted in $290685$
+
+```{r Task_5_7 , include=TRUE, eval=TRUE, echo=FALSE}
+set.seed(290685)
+rstress<-randomstress(n=36,ndim=2,nrep=500,type="ordinal")
+
 #distribution of stress for random data
-#mean(rstress)-2*sd(rstress)
+dsrd <- mean(rstress)-2*sd(rstress)
+data.frame(dsrd) %>%
+  kbl(caption = "Stress for random data") %>%
+  kable_classic(full_width = F, html_font = "Cambria") %>% 
+  kable_styling(latex_options = c("hold_position"))
+
+```
+  
+  Our first step is use permute test to put our data inside ... 
+
+```{r Task_5_8 , include=TRUE, eval=FALSE}
 #permutation test
-#set.seed(1)
-#perm.car<-permtest(m3,nrep=500)
-#plot distribution stress
-#par(mfrow=c(1,2),pty="s")
-#hist(rstress,main="stress random data")
-#hist(perm.car$stressvec,main="stress permuted data")
-#stability of solution using jackknife
-#jack.car<-jackmds(m3)
-#plot(jack.car,xlim=c(-1.2,1.2),ylim=c(-1,1))
+set.seed(290685)
+t.perm.morse<-permtest(t.m4,nrep=500,verbose = FALSE)
 ```
 
-### Question 3
+  Graphic information related previous two steps.
 
-3. Construct a data set of external variables that describe the signals (e.g. length of the signal, proportion of short beeps in the signal, etc.). Use an _MDS biplot_ to project the external variables in the configuration plot of the selected solution, and interpret the results of the analysis. 
+```{r Task_5_9 , include=TRUE, eval=FALSE}
+#plot distribution stress
+par(mfrow=c(2,1),pty="s")
+hist(rstress,main="stress random data")
+hist(t.perm.morse$stressvec, main="stress permuted data")
+```
+  
+  Considering that our number... was... this fit as a good model.
+  
+```{r Task_5_10, include=TRUE, eval=FALSE}
+#stability of solution using jackknife
+jack.morse<-jackmds(t.m3)
+plot(jack.morse,xlim=c(-1.2,1.2),ylim=c(-1,1))
 
-```{r Task_5_8N, include=TRUE}
+boot.morse.p <- bootmds(t.m3, data = dissim, nrep = 500, method.dat = "pearson")
+plot(boot.morse.p)
+```
+
+### Step 5
+  
+  A external matrix which will help to understand some similarities and dissimilarities is created for this step
+  
+```{r Task_5_11, include=TRUE, eval=TRUE}
 v_signal <- colnames(confusion)
-v_signal <- str_replace(v_signal, " ", "")
-v_signal <- str_replace(v_signal, "- -", "--")
-v_signal <- str_replace(v_signal, "· -", "·-")
-v_signal <- str_replace(v_signal, "· ·", "··")
-v_signal <- str_replace(v_signal, "- ·", "-·")
+v_signal <- str_replace_all(v_signal, " ", "")
+v_signal <- str_replace_all(v_signal, "·", ".")
 alphabet <- c(letters,1:9,0)
 another_matrix <- data.frame(v_signal) %>% mutate(alph = alphabet, 
-         size = nchar(trimws(v_signal)), 
-         ndots =  str_count(v_signal, "·"),
+         size = nchar(v_signal), 
+         ndots =  str_count(v_signal, "\\."),
          nlines = str_count(v_signal, "-"),
-         sig_s_length = (str_count(v_signal, "·")*0.05)+(str_count(v_signal,"-")*0.15),
-         t_s_length = (str_count(v_signal, "·")*0.05) + 
-              (str_count(v_signal,"-")*0.15) +
-           ((nchar(trimws(v_signal))-1 )*0.05), 
-         dots_s_length = (str_count(v_signal,"·")*0.05),
-         lines_s_length = (str_count(v_signal,"-")*0.15)) %>% print()
+         time = (str_count(v_signal, "\\.")*0.05)+(str_count(v_signal,"-")*0.15),
+         t_s_length = (nchar(v_signal) -1 )*0.05, 
+         dots_s_length = (str_count(v_signal,"\\.")*0.05),
+         lines_s_length = (str_count(v_signal,"-")*0.15)) 
 ```
-```{r Task_5_8Y, include=TRUE}
 
-#bimorse <- biplotmds(sim, another_matrix)
+```{r Task_5_12, include=FALSE, eval=TRUE, echo=TRUE}
+another_matrix %>%
+  kbl(caption = "New Matrix") %>%
+  kable_classic(full_width = F, html_font = "Cambria") %>% 
+  kable_styling(latex_options = c("hold_position"))
+```
 
-#plotMDS(dissim)
 
-#fit two-dimensional indscal model assuming different measurement levels
-#m1<-smacofIndDiff(dissim, type="ratio", constraint="indscal",ties="primary")
-#m2<-smacofIndDiff(dissim, type="interval", constraint="indscal",ties="primary")
-#m3<-smacofIndDiff(dissim, type="ordinal", constraint="indscal",ties="primary")
-#round(c(m1$stress,m2$stress,m3$stress),3)
 
-#res <- mds(dissim)
-#fitbi <- biplotmds(res, morsescales[,2:3])
-#plot(fitbi, main = "MDS Biplot", vecscale = 0.5)
-#alphabet <- c(letters,1:9,0)
-
-#confusion2 <- confusion
-#colnames(confusion2) <- paste(colnames(confusion), "=", c(letters,1:9,0)) 
-#rownames(confusion)
-
+```{r Task_5_13, include=TRUE}
+#conduct ordinal MDS analysis
+t.fit <- mds(t.dissim, type = "ordinal")
 #compute MDS biplot: run multivariate linear regression of
 #external variables on configuration
-
-#fitFace <- mds(dissim, type = "ordinal")
-
-#biFace <- biplotmds(fitFace, another_matrix[,-c(1:2)])
-
-#plot(biFace, main = "Biplot Vector Representation", 
-#     vecscale = 0.8, xlim = c(-1.5, 1.5), 
-#     vec.conf = list(col = "brown"), pch = 20, cex = 0.5)
+biFace <- biplotmds(t.fit, another_matrix[,-c(1,2,7,8,9)])
+# project external variables in the MDS solution
+plot(biFace, main = "Biplot Representation", vecscale = 0.8,
+xlim = c(-1.5, 1.5), vec.conf = list(col = "brown"), pch = 20, cex = 0.7)
 
 ```
+
+
+
+3. Construct a data set of external variables that describe the signals (e.g. length of the signal, proportion of short beeps in the signal, etc.). Use an _MDS biplot_ to project the external variables in the configuration plot of the selected solution, and interpret the results of the analysis. 
